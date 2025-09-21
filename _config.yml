@@ -1,3 +1,95 @@
-remote_theme: pages-themes/hacker@v0.2.0
-title: Raquel Alamán | website
-description: Bookmark this to keep an eye on my project updates!
+# Configuración del sitio
+title: "Mi Blog Personal"
+description: "Un blog moderno y responsive creado con GitHub Pages"
+baseurl: ""
+url: ""
+
+# Autor
+author:
+  name: "Tu Nombre"
+  email: "tu@email.com"
+  bio: "Desarrollador y escritor apasionado por la tecnología"
+
+# Configuración de GitHub Pages
+github_username: tu-username
+repository: tu-repositorio
+
+# Configuración de Jekyll
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Configuración de kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: false
+
+# Configuración del tema
+theme_settings:
+  posts_per_page: 6
+  show_excerpts: true
+  show_tags: true
+  show_author: true
+  show_date: true
+
+# Redes sociales (opcional)
+social:
+  github: "https://github.com/tu-username"
+  twitter: "https://twitter.com/tu-usuario"
+  linkedin: "https://linkedin.com/in/tu-perfil"
+
+# Google Analytics (opcional)
+# google_analytics: "UA-XXXXXXXX-X"
+
+# Configuración de SEO
+seo:
+  name: "Mi Blog Personal"
+  description: "Blog sobre desarrollo web, tecnología y programación"
+  image: "/assets/images/og-image.png"
+  type: "website"
+
+# Excluir archivos del build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package.json
+  - package-lock.json
+  - .gitignore
+  - .sass-cache
+  - .jekyll-cache
+
+# Incluir archivos específicos
+include:
+  - _pages
+  - _posts
+
+# Configuración de colecciones
+collections:
+  posts:
+    output: true
+    permalink: /:collection/:title/
+
+# Configuración por defecto
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "Tu Nombre"
+      show_date: true
+      show_tags: true
