@@ -5,7 +5,9 @@ const CONFIG = {
     githubRepo: '', // Se configurará automáticamente
     currentPage: 1,
     totalPosts: 0,
-    allPosts: []
+    allPosts: [],
+    siteName: 'Mi Blog Personal',
+    authorName: 'Tu Nombre'
 };
 
 // Variables globales para el estado de la aplicación
@@ -82,6 +84,10 @@ async function loadPosts() {
         loadExamplePosts();
         displayPosts();
         updatePagination();
+        
+        // Mostrar mensaje de bienvenida en consola
+        console.log('%c¡Bienvenido al blog! 🚀', 'color: #2563eb; font-size: 16px; font-weight: bold;');
+        console.log('%cTema con paleta azul, gris y blanco inspirado en portfolios profesionales', 'color: #3b82f6; font-size: 12px;');
     }
     
     showLoading(false);
@@ -157,7 +163,7 @@ function parseMarkdownPost(content, filename) {
         let title = frontMatter.title;
         if (!title) {
             const titleMatch = markdownContent.match(/^#\s+(.+)/m);
-            title = titleMatch ? titleMatch[1] : filename.replace('.md', '');
+            title = titleMatch ? titleMatch[1] : filename.replace('.md', '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
         }
         
         // Extraer fecha
@@ -189,6 +195,7 @@ function parseMarkdownPost(content, filename) {
             excerpt: excerpt,
             content: markdownContent,
             tags: frontMatter.tags ? frontMatter.tags.split(',').map(tag => tag.trim()) : [],
+            image: frontMatter.image || null,
             filename: filename
         };
     } catch (error) {
@@ -206,6 +213,7 @@ function loadExamplePosts() {
             date: '2024-01-15',
             author: 'Autor del Blog',
             excerpt: 'Este es tu primer post de ejemplo. Aquí puedes escribir sobre cualquier tema que te interese usando formato Markdown.',
+            image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
             content: `# Bienvenido a tu nuevo blog
 
 ¡Felicidades! Has configurado exitosamente tu blog personal usando GitHub Pages.
@@ -257,6 +265,7 @@ console.log(saludar('Mundo'));
             date: '2024-01-10',
             author: 'Autor del Blog',
             excerpt: 'Aprende los elementos básicos de Markdown para escribir posts atractivos y bien formateados.',
+            image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
             content: `# Guía rápida de Markdown
 
 Markdown es un lenguaje de marcado ligero que te permite formatear texto de manera sencilla.
@@ -317,6 +326,7 @@ Markdown es un lenguaje de marcado ligero que te permite formatear texto de mane
             date: '2024-01-05',
             author: 'Autor del Blog',
             excerpt: 'Consejos prácticos para crear contenido de calidad y hacer crecer tu audiencia.',
+            image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
             content: `# Tips para un blog exitoso
 
 Crear un blog exitoso requiere tiempo, dedicación y estrategia. Aquí tienes algunos consejos:
@@ -397,15 +407,21 @@ function createPostCard(post) {
     card.onclick = () => showPost(post);
     
     const formattedDate = formatDate(post.date);
+    const readingTime = calculateReadingTime(post.content);
     const tagsHtml = post.tags.length > 0 
-        ? `<div class="post-tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+        ? `<div class="post-tags" style="margin-top: 1rem;">${post.tags.slice(0, 3).map(tag => `<span style="display: inline-block; background: var(--primary-blue); color: white; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.75rem; margin-right: 0.5rem; font-weight: 500;">${tag}</span>`).join('')}</div>`
+        : '';
+    
+    const imageHtml = post.image 
+        ? `<img src="${post.image}" alt="${post.title}" class="post-image" loading="lazy">` 
         : '';
     
     card.innerHTML = `
+        ${imageHtml}
         <h3>${post.title}</h3>
         <div class="post-meta">
             <span><i class="fas fa-calendar"></i> ${formattedDate}</span>
-            <span><i class="fas fa-user"></i> ${post.author}</span>
+            <span><i class="fas fa-clock"></i> ${readingTime} min</span>
         </div>
         <p class="post-excerpt">${post.excerpt}</p>
         ${tagsHtml}
@@ -422,9 +438,17 @@ function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString('es-ES', {
         year: 'numeric',
-        month: 'long',
+        month: 'short',
         day: 'numeric'
     });
+}
+
+// Calcular tiempo de lectura estimado
+function calculateReadingTime(content) {
+    const wordsPerMinute = 200;
+    const words = content.trim().split(/\s+/).length;
+    const minutes = Math.ceil(words / wordsPerMinute);
+    return Math.max(1, minutes);
 }
 
 // Mostrar post individual
@@ -439,15 +463,21 @@ function showPost(post) {
     
     const formattedDate = formatDate(post.date);
     
+    const postImageHtml = post.image 
+        ? `<img src="${post.image}" alt="${post.title}" class="post-hero-image" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--border-radius-lg); margin-bottom: 2rem;">` 
+        : '';
+    
     postContent.innerHTML = `
         <div class="post-header">
             <h1>${post.title}</h1>
-            <div class="post-meta">
+            <div class="post-meta" style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gray-200);">
                 <span><i class="fas fa-calendar"></i> ${formattedDate}</span>
                 <span><i class="fas fa-user"></i> ${post.author}</span>
-                ${post.tags.length > 0 ? `<span><i class="fas fa-tags"></i> ${post.tags.join(', ')}</span>` : ''}
+                <span><i class="fas fa-clock"></i> ${calculateReadingTime(post.content)} min de lectura</span>
+                ${post.tags.length > 0 ? `<div style="margin-top: 1rem;">${post.tags.map(tag => `<span style="display: inline-block; background: var(--primary-blue); color: white; padding: 0.375rem 1rem; border-radius: 6px; font-size: 0.8rem; margin-right: 0.75rem; margin-bottom: 0.5rem; font-weight: 500;">${tag}</span>`).join('')}</div>` : ''}
             </div>
         </div>
+        ${postImageHtml}
         <div class="post-body">
             ${htmlContent}
         </div>
@@ -603,6 +633,28 @@ function debounce(func, wait) {
 window.addEventListener('error', function(e) {
     console.error('Error global:', e.error);
 });
+
+// Añadir efectos de hover suaves con colores azules
+function addHoverEffects() {
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.matches('.post-card')) {
+            e.target.style.transform = 'translateY(-2px)';
+            e.target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
+        }
+        if (e.target.matches('.tech-tag, .archive-item')) {
+            e.target.style.transform = 'translateY(-1px)';
+        }
+    });
+    
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.matches('.post-card, .tech-tag, .archive-item')) {
+            e.target.style.transform = 'translateY(0)';
+            if (e.target.matches('.post-card')) {
+                e.target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+            }
+        }
+    });
+}
 
 // Evento de redimensionamiento de ventana
 window.addEventListener('resize', debounce(() => {
