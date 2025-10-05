@@ -121,8 +121,7 @@ main {
     max-width: 1200px;
     margin: 3rem auto;
     padding: 0 2rem;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+    display: block;
     gap: 3rem;
 }
 
@@ -135,7 +134,6 @@ main {
 
 .post-card {
     background: var(--white);
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
@@ -222,31 +220,6 @@ main {
 .read-more:hover {
     background: var(--dark-blue);
 }
-
-/* Sidebar */
-.sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.sidebar-widget {
-    background: var(--white);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--medium-gray);
-}
-
-.widget-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: var(--text-dark);
-    border-bottom: 3px solid var(--electric-blue);
-    padding-bottom: 0.5rem;
-}
-
 /* About Widget */
 .about-widget img {
     width: 80px;
