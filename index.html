@@ -3,977 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Blog</title>
+    <title>Code thinking</title>
+    <meta name="description" content="Blog personal">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --electric-blue: #0066ff;
-            --dark-blue: #0052cc;
-            --light-gray: #f8f9fa;
-            --medium-gray: #e9ecef;
-            --dark-gray: #6c757d;
-            --white: #ffffff;
-            --text-dark: #212529;
-            --text-light: #495057;
-            --border-light: #dee2e6;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background: var(--white);
-        }
-
-        /* Header con imagen de fondo */
-        header {
-            background: var(--white) url('assets/images/header.png') center/cover no-repeat;
-            border-bottom: 1px solid var(--border-light);
-            padding: 3rem 0 4rem;
-            position: relative;
-            z-index: 10;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.85);
-            z-index: -1;
-        }
-
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .header-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
-        }
-
-        .header-subtitle {
-            font-size: 1.1rem;
-            color: var(--text-light);
-            font-weight: 400;
-        }
-
-        /* Navigation clean */
-        nav {
-            background: var(--white);
-            padding: 1.5rem 0;
-            border-bottom: 1px solid var(--border-light);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        /* Evitar que main se superponga al header */
-        main {
-            position: relative;
-            z-index: 1;
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--electric-blue);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .nav-links a:hover,
-        .nav-links a.active {
-            color: var(--electric-blue);
-        }
-
-        /* Main layout minimalista */
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 5rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Posts con diseño clean - ocupa 100% del main */
-        .blog-posts {
-            display: flex;
-            flex-direction: column;
-            gap: 4rem;
-            width: 100%;
-        }
-
-        .post-card {
-            background: var(--white);
-            border-radius: 0;
-            border-bottom: 1px solid var(--border-light);
-            padding-bottom: 3rem;
-            transition: all 0.3s ease;
-        }
-
-        .post-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .post-image {
-            width: 100%;
-            height: 300px;
-            background: var(--light-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-
-        .post-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .post-card:hover .post-image img {
-            transform: scale(1.02);
-        }
-
-        .post-meta {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            color: var(--text-light);
-        }
-
-        .post-date {
-            font-weight: 500;
-        }
-
-        .post-category {
-            background: var(--electric-blue);
-            color: var(--white);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .post-title {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            color: var(--text-dark);
-            line-height: 1.3;
-            letter-spacing: -0.01em;
-        }
-
-        .post-title:hover {
-            color: var(--electric-blue);
-            cursor: pointer;
-        }
-
-        .post-excerpt {
-            color: var(--text-light);
-            margin-bottom: 2rem;
-            line-height: 1.7;
-            font-size: 1.05rem;
-        }
-
-        .read-more {
-            color: var(--electric-blue);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.95rem;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s ease;
-        }
-
-        .read-more:hover {
-            border-bottom-color: var(--electric-blue);
-        }
-
-        /* Sidebar minimalista */
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-        }
-
-        .sidebar-widget {
-            background: var(--white);
-            padding: 0;
-        }
-
-        .widget-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            color: var(--text-dark);
-            padding-bottom: 0.75rem;
-            border-bottom: 2px solid var(--electric-blue);
-        }
-
-        /* About widget clean */
-        .about-section {
-            text-align: left;
-        }
-
-        .about-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            border: 2px solid var(--electric-blue);
-        }
-
-        .about-text {
-            color: var(--text-light);
-            line-height: 1.6;
-            font-size: 0.95rem;
-        }
-
-        /* Recent posts clean */
-        .recent-posts {
-            list-style: none;
-        }
-
-        .recent-posts li {
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .recent-posts li:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .recent-posts a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            transition: color 0.2s ease;
-        }
-
-        .recent-posts a:hover {
-            color: var(--electric-blue);
-        }
-
-        .recent-date {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-top: 0.5rem;
-        }
-
-        /* Categories clean */
-        .categories {
-            list-style: none;
-        }
-
-        .categories li {
-            margin-bottom: 1rem;
-        }
-
-        .categories a {
-            text-decoration: none;
-            color: var(--text-light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
-        }
-
-        .categories a:hover {
-            color: var(--electric-blue);
-        }
-
-        .category-count {
-            background: var(--medium-gray);
-            color: var(--text-light);
-            padding: 0.2rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        /* Footer minimalista */
-        footer {
-            background: var(--light-gray);
-            padding: 4rem 0 3rem;
-            margin-top: 5rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            text-align: center;
-        }
-
-        .footer-text {
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--electric-blue);
-        }
-
-        /* Modal para posts completos */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            padding: 2rem;
-        }
-
-        .modal-content {
-            background: var(--white);
-            border-radius: 8px;
-            max-width: 900px;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: var(--white);
-            border: 1px solid var(--border-light);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            font-size: 18px;
-            color: var(--text-light);
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .modal-close:hover {
-            background: var(--light-gray);
-            color: var(--text-dark);
-        }
-
-        .modal-body {
-            padding: 3rem;
-        }
-
-        /* Estilos para contenido markdown */
-        .markdown-content {
-            line-height: 1.8;
-        }
-
-        .markdown-content h1,
-        .markdown-content h2,
-        .markdown-content h3 {
-            color: var(--text-dark);
-            margin: 2.5rem 0 1rem 0;
-            font-weight: 600;
-            letter-spacing: -0.01em;
-        }
-
-        .markdown-content h1 {
-            font-size: 2.2rem;
-            margin-top: 0;
-        }
-
-        .markdown-content h2 {
-            font-size: 1.8rem;
-            color: var(--electric-blue);
-        }
-
-        .markdown-content h3 {
-            font-size: 1.4rem;
-        }
-
-        .markdown-content p {
-            margin-bottom: 1.5rem;
-            color: var(--text-light);
-        }
-
-        .markdown-content ul,
-        .markdown-content ol {
-            margin: 1.5rem 0;
-            padding-left: 2rem;
-            color: var(--text-light);
-        }
-
-        .markdown-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        .markdown-content code {
-            background: var(--light-gray);
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
-            font-size: 0.9em;
-            color: var(--electric-blue);
-        }
-
-        .markdown-content pre {
-            background: var(--light-gray);
-            padding: 1.5rem;
-            border-radius: 8px;
-            overflow-x: auto;
-            margin: 2rem 0;
-        }
-
-        .markdown-content pre code {
-            background: none;
-            padding: 0;
-            color: var(--text-dark);
-        }
-
-        .markdown-content blockquote {
-            border-left: 3px solid var(--electric-blue);
-            padding-left: 1.5rem;
-            margin: 2rem 0;
-            font-style: italic;
-            color: var(--text-light);
-        }
-
-        .markdown-content a {
-            color: var(--electric-blue);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s ease;
-        }
-
-        .markdown-content a:hover {
-            border-bottom-color: var(--electric-blue);
-        }
-
-        /* Loading state */
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 200px;
-            color: var(--text-light);
-        }
-
-        .spinner {
-            width: 30px;
-            height: 30px;
-            border: 2px solid var(--border-light);
-            border-top: 2px solid var(--electric-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Animaciones suaves */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 0.4s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive design */
-        @media (max-width: 768px) {
-            .header-title {
-                font-size: 2rem;
-            }
-
-            .nav-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .nav-links {
-                gap: 1.5rem;
-            }
-
-            main {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-                padding: 3rem 1.5rem;
-            }
-
-            .blog-posts {
-                gap: 3rem;
-            }
-
-            .post-title {
-                font-size: 1.6rem;
-            }
-
-            .post-image {
-                height: 200px;
-            }
-
-            .modal-body {
-                padding: 2rem;
-            }
-        }
-    </style>
+    
+    <!-- Marked.js para procesar markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.2/marked.min.js"></script>
+    
+    <!-- Highlight.js para sintaxis de código -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
 </head>
 <body>
     <header>
+        <nav>
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#about">Acerca de</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
+        </nav>
         <div class="header-content">
-            <h1 class="header-title">Mi Blog</h1>
-            <p class="header-subtitle">Explorando ideas y compartiendo conocimiento</p>
+            <h1>Code thinking</h1>
+            <p class="subtitle">Explorant idees i compartint coneixement</p>
         </div>
     </header>
-
-    <nav>
-        <div class="nav-content">
-            <div class="logo">Blog</div>
-            <ul class="nav-links">
-                <li><a href="#home" class="active">Inicio</a></li>
-                <li><a href="#about">Acerca de</a></li>
-                <li><a href="#archive">Archivo</a></li>
-                <li><a href="#contact">Contacto</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <main>
         <section class="blog-posts" id="posts-container">
             <div class="loading">
                 <div class="spinner"></div>
             </div>
-        </section>
-
-        <aside class="sidebar">
-            <div class="sidebar-widget about-section">
-                <h3 class="widget-title">Acerca de</h3>
-                <img src="https://via.placeholder.com/60x60/0066ff/ffffff?text=YO" alt="Perfil" class="about-avatar">
-                <p class="about-text">Bienvenido a mi espacio personal donde comparto reflexiones, experiencias y conocimientos sobre tecnología, diseño y desarrollo web.</p>
-            </div>
-
-            <div class="sidebar-widget">
-                <h3 class="widget-title">Posts Recientes</h3>
-                <ul class="recent-posts" id="recent-posts">
-                    <!-- Se carga dinámicamente -->
-                </ul>
-            </div>
-
-            <div class="sidebar-widget">
-                <h3 class="widget-title">Categorías</h3>
-                <ul class="categories" id="categories-list">
-                    <!-- Se carga dinámicamente -->
-                </ul>
-            </div>
-        </aside>
+        </section>        
     </main>
 
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="#">GitHub</a>
-                <a href="#">Twitter</a>
-                <a href="#">LinkedIn</a>
+                <a href="#" title="GitHub">GH</a>
+                <a href="#" title="Twitter">TW</a>
+                <a href="#" title="LinkedIn">IN</a>
+                <a href="#" title="Email">@</a>
             </div>
-            <p class="footer-text">&copy; 2025 Mi Blog. Hecho con ❤️ y GitHub Pages.</p>
+            <p>&copy; 2025 Mi Blog. Creado con GitHub Pages.</p>
         </div>
     </footer>
 
     <script>
-        // Configuración para cargar posts desde archivos markdown
-        let blogPosts = [];
-        const postsDirectory = '_posts/';
-        
-        // Lista de archivos markdown (en producción esto se obtendría dinámicamente)
-        const postFiles = [
-            '2025-09-23-desarrollo-web-moderno.md',
-            '2025-09-20-diseno-responsive.md',
-            '2025-09-18-javascript-avanzado.md',
-            '2025-09-15-css-grid-flexbox.md'
+        // Simulación de datos de posts de markdown
+        const blogPosts = [
+            {
+                id: 1,
+                title: "Introducción al Desarrollo Web Moderno",
+                excerpt: "Explora las últimas tendencias y tecnologías en el desarrollo web. Desde frameworks JavaScript hasta herramientas de CI/CD, descubre qué necesitas saber para mantenerte actualizado.",
+                date: "2025-09-15",
+                category: "Tecnología",
+                image: "https://via.placeholder.com/400x250/0066ff/ffffff?text=Web+Dev",
+                content: `# Introducción al Desarrollo Web Moderno
+
+El desarrollo web ha evolucionado tremendamente en los últimos años. Las tecnologías que utilizamos hoy permiten crear aplicaciones más rápidas, escalables y mantenibles.
+
+## Tecnologías Clave
+
+- **React/Vue/Angular**: Frameworks para interfaces dinámicas
+- **Node.js**: JavaScript en el servidor
+- **TypeScript**: Tipado estático para JavaScript
+- **Tailwind CSS**: Utilidades CSS modernas
+
+## Mejores Prácticas
+
+1. Escribir código limpio y documentado
+2. Implementar pruebas automatizadas
+3. Usar control de versiones efectivamente
+4. Optimizar el rendimiento desde el inicio
+
+> El desarrollo web moderno no solo se trata de escribir código, sino de crear experiencias excepcionales para los usuarios.`
+            },
+            {
+                id: 2,
+                title: "Diseño Responsive: Mejores Prácticas",
+                excerpt: "Aprende a crear sitios web que se adapten perfectamente a cualquier dispositivo. Técnicas, herramientas y consejos para un diseño responsive efectivo.",
+                date: "2025-09-10",
+                category: "Diseño",
+                image: "https://via.placeholder.com/400x250/0052cc/ffffff?text=Responsive",
+                content: `# Diseño Responsive: Mejores Prácticas
+
+Un buen diseño responsive es esencial en el mundo móvil de hoy.
+
+## Principios Fundamentales
+
+- **Mobile First**: Diseña primero para móvil
+- **Flexibilidad**: Usa unidades relativas
+- **Breakpoints**: Define puntos de quiebre lógicos`
+            },
+            {
+                id: 3,
+                title: "JavaScript: Conceptos Avanzados",
+                excerpt: "Profundiza en JavaScript con conceptos avanzados como closures, async/await, y programación funcional. Lleva tus habilidades al siguiente nivel.",
+                date: "2025-09-05",
+                category: "Programación",
+                image: "https://via.placeholder.com/400x250/0066ff/ffffff?text=JavaScript",
+                content: `# JavaScript: Conceptos Avanzados
+
+JavaScript ofrece muchas características poderosas que todo desarrollador debe conocer.
+
+## Temas Avanzados
+
+- **Closures**: Funciones que "recuerdan" su entorno
+- **Promises y Async/Await**: Manejo de operaciones asíncronas
+- **Programación Funcional**: Paradigma declarativo`
+            }
         ];
-
-        // Función para parsear el front matter de un archivo markdown
-        function parseFrontMatter(content) {
-            const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-            const match = content.match(frontMatterRegex);
-            
-            if (!match) {
-                return { frontMatter: {}, content: content };
-            }
-            
-            const frontMatterText = match[1];
-            const markdownContent = match[2];
-            const frontMatter = {};
-            
-            // Parse YAML front matter básico
-            frontMatterText.split('\n').forEach(line => {
-                const [key, ...valueParts] = line.split(':');
-                if (key && valueParts.length > 0) {
-                    const value = valueParts.join(':').trim();
-                    frontMatter[key.trim()] = value.replace(/^["']|["']$/g, '');
-                }
-            });
-            
-            return { frontMatter, content: markdownContent };
-        }
-
-        // Función para extraer excerpt del contenido
-        function extractExcerpt(content, maxLength = 200) {
-            let plainText = content
-                .replace(/^#{1,6}\s+/gm, '')
-                .replace(/\*\*(.*?)\*\*/g, '$1')
-                .replace(/\*(.*?)\*/g, '$1')
-                .replace(/`(.*?)`/g, '$1')
-                .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-                .replace(/^\s*[-*+]\s+/gm, '')
-                .replace(/^\s*\d+\.\s+/gm, '')
-                .replace(/\n\s*\n/g, ' ')
-                .trim();
-            
-            if (plainText.length > maxLength) {
-                plainText = plainText.substring(0, maxLength) + '...';
-            }
-            
-            return plainText;
-        }
-
-        // Función para cargar un archivo markdown
-        async function loadMarkdownFile(filename) {
-            try {
-                const response = await fetch(postsDirectory + filename);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const content = await response.text();
-                const { frontMatter, content: markdownContent } = parseFrontMatter(content);
-                
-                const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/);
-                const date = frontMatter.date || (dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0]);
-                
-                const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
-                
-                return {
-                    slug,
-                    title: frontMatter.title || slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-                    date: date,
-                    category: frontMatter.category || 'General',
-                    tags: frontMatter.tags ? frontMatter.tags.split(',').map(t => t.trim()) : [],
-                    image: frontMatter.image || `https://via.placeholder.com/400x300/f8f9fa/0066ff?text=${encodeURIComponent(frontMatter.title || 'Post')}`,
-                    excerpt: frontMatter.excerpt || extractExcerpt(markdownContent),
-                    content: markdownContent,
-                    filename: filename
-                };
-            } catch (error) {
-                console.error(`Error loading ${filename}:`, error);
-                return null;
-            }
-        }
-
-        // Función para cargar todos los posts
-        async function loadAllPosts() {
-            const container = document.getElementById('posts-container');
-            container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-            
-            try {
-                const promises = postFiles.map(loadMarkdownFile);
-                const posts = await Promise.all(promises);
-                
-                blogPosts = posts
-                    .filter(post => post !== null)
-                    .sort((a, b) => new Date(b.date) - new Date(a.date));
-                
-                renderPosts();
-                updateSidebar();
-            } catch (error) {
-                console.error('Error loading posts:', error);
-                container.innerHTML = `
-                    <div class="post-card">
-                        <div style="padding: 2rem; text-align: center; color: var(--text-light);">
-                            <h2 style="margin-bottom: 1rem;">Cargando contenido...</h2>
-                            <p>Para ver los posts, crea archivos markdown en el directorio <code>_posts/</code> con el siguiente formato:</p>
-                            <div style="text-align: left; background: var(--light-gray); padding: 1.5rem; border-radius: 8px; margin: 2rem 0; font-family: monospace; font-size: 0.9rem;">
----<br>
-title: "Mi Primer Post"<br>
-date: 2025-09-23<br>
-category: "Tecnología"<br>
-image: "/assets/images/post.jpg"<br>
-excerpt: "Breve descripción del post..."<br>
----<br><br>
-# Mi Primer Post<br><br>
-Contenido en **markdown** aquí...
-                            </div>
-                        </div>
-                    </div>
-                `;
-            }
-        }
 
         // Función para renderizar posts
         function renderPosts() {
             const container = document.getElementById('posts-container');
             container.innerHTML = '';
 
-            if (blogPosts.length === 0) {
-                container.innerHTML = `
-                    <div class="post-card" style="text-align: center; padding: 3rem; color: var(--text-light);">
-                        <h2 style="margin-bottom: 1rem;">No hay posts disponibles</h2>
-                        <p>Agrega archivos markdown en el directorio _posts/ para ver contenido aquí.</p>
-                    </div>
-                `;
-                return;
-            }
-
             blogPosts.forEach((post, index) => {
                 const postElement = document.createElement('article');
                 postElement.className = 'post-card fade-in';
-                postElement.style.animationDelay = `${index * 0.1}s`;
+                postElement.style.animationDelay = `${index * 0.2}s`;
                 
                 postElement.innerHTML = `
                     <div class="post-image">
-                        <img src="${post.image}" alt="${post.title}" 
-                             onerror="this.src='https://via.placeholder.com/400x300/f8f9fa/0066ff?text=Post'">
+                        <img src="${post.image}" alt="${post.title}">
                     </div>
-                    <div class="post-meta">
-                        <span class="post-date">${formatDate(post.date)}</span>
-                        <span class="post-category">${post.category}</span>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-tag">${post.category}</span>
+                            <span>${formatDate(post.date)}</span>
+                        </div>
+                        <h2 class="post-title">${post.title}</h2>
+                        <p class="post-excerpt">${post.excerpt}</p>
+                        <a href="#" class="read-more" onclick="showFullPost(${post.id})">Leer más</a>
                     </div>
-                    <h2 class="post-title" onclick="showFullPost('${post.slug}')">${post.title}</h2>
-                    <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="#" class="read-more" onclick="showFullPost('${post.slug}'); return false;">Leer más →</a>
                 `;
 
                 container.appendChild(postElement);
             });
-        }
-
-        // Función para actualizar la sidebar
-        function updateSidebar() {
-            updateRecentPosts();
-            updateCategories();
-        }
-
-        // Función para actualizar posts recientes
-        function updateRecentPosts() {
-            const recentPostsContainer = document.getElementById('recent-posts');
-            if (blogPosts.length > 0) {
-                const recentPosts = blogPosts.slice(0, 3);
-                recentPostsContainer.innerHTML = recentPosts.map(post => `
-                    <li>
-                        <a href="#" onclick="showFullPost('${post.slug}'); return false;">${post.title}</a>
-                        <div class="recent-date">${formatDate(post.date)}</div>
-                    </li>
-                `).join('');
-            }
-        }
-
-        // Función para actualizar categorías
-        function updateCategories() {
-            const categoriesContainer = document.getElementById('categories-list');
-            const categoryCount = {};
-            
-            blogPosts.forEach(post => {
-                categoryCount[post.category] = (categoryCount[post.category] || 0) + 1;
-            });
-
-            const categoriesHtml = Object.entries(categoryCount).map(([category, count]) => `
-                <li>
-                    <a href="#" onclick="filterByCategory('${category}'); return false;">
-                        <span>${category}</span>
-                        <span class="category-count">${count}</span>
-                    </a>
-                </li>
-            `).join('');
-
-            categoriesContainer.innerHTML = categoriesHtml;
         }
 
         // Función para mostrar post completo
-        function showFullPost(slug) {
-            const post = blogPosts.find(p => p.slug === slug);
+        function showFullPost(postId) {
+            const post = blogPosts.find(p => p.id === postId);
             if (post) {
-                const modal = document.createElement('div');
-                modal.className = 'modal';
-                
-                modal.innerHTML = `
-                    <div class="modal-content">
-                        <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
-                        <div class="post-image">
-                            <img src="${post.image}" alt="${post.title}" 
-                                 onerror="this.src='https://via.placeholder.com/400x300/f8f9fa/0066ff?text=Post'">
-                        </div>
-                        <div class="modal-body">
-                            <div class="post-meta" style="margin-bottom: 1.5rem;">
-                                <span class="post-date">${formatDate(post.date)}</span>
-                                <span class="post-category">${post.category}</span>
-                            </div>
-                            <h1 style="margin-bottom: 2rem; color: var(--text-dark);">${post.title}</h1>
-                            <div class="markdown-content">${renderMarkdown(post.content)}</div>
-                        </div>
-                    </div>
-                `;
-                
-                document.body.appendChild(modal);
-                
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.remove();
-                    }
-                });
-
-                // Prevenir scroll del body
-                document.body.style.overflow = 'hidden';
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal || e.target.classList.contains('modal-close')) {
-                        document.body.style.overflow = 'auto';
-                    }
-                });
+                // En un entorno real, esto navegaría a una página de post completo
+                // o abriría un modal con el contenido completo
+                alert(`Aquí se mostraría el post completo: "${post.title}"\n\nEn un entorno real, esto conectaría con el sistema de archivos markdown de GitHub Pages.`);
             }
-        }
-
-        // Función simple para renderizar markdown a HTML
-        function renderMarkdown(markdown) {
-            return markdown
-                .replace(/^### (.*$)/gm, '<h3>$1</h3>')
-                .replace(/^## (.*$)/gm, '<h2>$1</h2>')
-                .replace(/^# (.*$)/gm, '<h1>$1</h1>')
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                .replace(/`(.*?)`/g, '<code>$1</code>')
-                .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>')
-                .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-                .replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>')
-                .replace(/^[-*+] (.*$)/gm, '<li>$1</li>')
-                .replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>')
-                .replace(/^\d+\. (.*$)/gm, '<li>$1</li>')
-                .replace(/\n\n/g, '</p><p>')
-                .replace(/^(.*)$/gm, '<p>$1</p>')
-                .replace(/<p><\/p>/g, '')
-                .replace(/<p>(<h[1-6]>.*<\/h[1-6]>)<\/p>/g, '$1')
-                .replace(/<p>(<ul>.*<\/ul>)<\/p>/g, '$1')
-                .replace(/<p>(<ol>.*<\/ol>)<\/p>/g, '$1')
-                .replace(/<p>(<blockquote>.*<\/blockquote>)<\/p>/g, '$1')
-                .replace(/<p>(<pre><code>.*<\/code><\/pre>)<\/p>/g, '$1');
-        }
-
-        // Función para filtrar por categoría
-        function filterByCategory(category) {
-            const filteredPosts = blogPosts.filter(post => post.category === category);
-            renderFilteredPosts(filteredPosts, `Categoría: ${category}`);
-        }
-
-        // Función para renderizar posts filtrados
-        function renderFilteredPosts(posts, title) {
-            const container = document.getElementById('posts-container');
-            container.innerHTML = `
-                <div style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border-light);">
-                    <h2 style="color: var(--electric-blue); margin-bottom: 0.5rem;">${title}</h2>
-                    <a href="#" onclick="loadAllPosts(); return false;" style="color: var(--text-light); text-decoration: none; font-size: 0.9rem;">← Volver a todos los posts</a>
-                </div>
-            `;
-
-            if (posts.length === 0) {
-                container.innerHTML += `
-                    <div class="post-card" style="text-align: center; padding: 3rem; color: var(--text-light);">
-                        <h3>No hay posts en esta categoría</h3>
-                        <p>Prueba con otra categoría o vuelve a la vista principal.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            posts.forEach((post, index) => {
-                const postElement = document.createElement('article');
-                postElement.className = 'post-card fade-in';
-                postElement.style.animationDelay = `${index * 0.1}s`;
-                
-                postElement.innerHTML = `
-                    <div class="post-image">
-                        <img src="${post.image}" alt="${post.title}" 
-                             onerror="this.src='https://via.placeholder.com/400x300/f8f9fa/0066ff?text=Post'">
-                    </div>
-                    <div class="post-meta">
-                        <span class="post-date">${formatDate(post.date)}</span>
-                        <span class="post-category">${post.category}</span>
-                    </div>
-                    <h2 class="post-title" onclick="showFullPost('${post.slug}')">${post.title}</h2>
-                    <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="#" class="read-more" onclick="showFullPost('${post.slug}'); return false;">Leer más →</a>
-                `;
-
-                container.appendChild(postElement);
-            });
         }
 
         // Función para formatear fecha
@@ -987,59 +175,52 @@ Contenido en **markdown** aquí...
             return `${date.getDate()} de ${months[date.getMonth()]}, ${date.getFullYear()}`;
         }
 
-        // Función para navegación suave
-        function smoothScroll(target) {
-            document.querySelector(target)?.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', () => {
-            loadAllPosts();
-            
-            // Navegación suave
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = this.getAttribute('href');
-                    if (target !== '#') {
-                        smoothScroll(target);
-                    }
-                });
-            });
-
-            // Cerrar modales con ESC
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    const modal = document.querySelector('.modal');
-                    if (modal) {
-                        modal.remove();
-                        document.body.style.overflow = 'auto';
-                    }
+        // Funcionalidad de navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
                 }
             });
         });
 
-        // Funcionalidad adicional para GitHub Pages
-        // En un entorno real con Jekyll, podrías usar algo como:
+        // Efecto parallax sutil en el header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                renderPosts();
+            }, 500);
+        });
+
+        // Funcionalidad para GitHub Pages (comentada para referencia)
         /*
-        async function loadPostsFromJekyll() {
+        En un entorno real de GitHub Pages, utilizarías algo como esto:
+        
+        async function loadMarkdownPosts() {
             try {
-                // Jekyll puede generar un JSON con todos los posts
-                const response = await fetch('/posts.json');
+                const response = await fetch('/api/posts'); // Jekyll API endpoint
                 const posts = await response.json();
                 
-                blogPosts = posts.map(post => ({
-                    ...post,
-                    content: post.content // Ya procesado por Jekyll
-                }));
-                
-                renderPosts();
-                updateSidebar();
+                posts.forEach(post => {
+                    // Procesar el contenido markdown con una librería como marked.js
+                    const htmlContent = marked(post.content);
+                    // Renderizar el post
+                });
             } catch (error) {
-                console.error('Error loading posts from Jekyll:', error);
+                console.error('Error loading posts:', error);
             }
         }
         */
