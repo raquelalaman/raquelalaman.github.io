@@ -39,11 +39,11 @@ header {
     z-index: 1000; /* Assegura que el header estigui per sobre de tot */
     
     /* RUTA CORREGIDA: Amb el CSS a 'css/', necessitem anar amunt (..) i després a 'assets/'. */
-    background-image: url('../assets/images/header.png'); 
+    background-image: url('../assets/images/header.png') !important; /* FORCEM la càrrega de la imatge */
     background-size: cover;       
     background-position: center;  
     background-repeat: no-repeat;
-    background-color: #333;       /* Color de fons de seguretat */
+    /* Hem eliminat el background-color per veure si realment es carrega la imatge o no */
     
     /* Altura explícita consistent amb el body padding */
     height: 100px; 
