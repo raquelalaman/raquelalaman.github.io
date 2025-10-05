@@ -156,7 +156,6 @@ section {
 /* Secció Qui soc */
 .about-section {
     background: var(--white);
-    border-radius: 12px;
     padding: 0;
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -232,7 +231,6 @@ section {
 
 .project-card {
     position: relative;
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
@@ -297,7 +295,6 @@ section {
 
 .post-card {
     background: var(--white);
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
