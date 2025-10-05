@@ -21,39 +21,17 @@ body {
     color: var(--text-dark);
     background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
     min-height: 100vh;
-    /* Afegeix un espai a la part superior igual a l'altura del header */
-    padding-top: 100px; 
-    
 }
-/* -------------------------------------------------------------------
-   CORRECCIONS I NOUS ESTILS PER AL WEB
-   ------------------------------------------------------------------- */
 
-/* 1. CORRECCIÓ HEADER (Posicionament i Imatge) */
+/* Header con imagen de fondo */
 header {
-    /* Fija el header a la part superior */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000; /* Assegura que el header estigui per sobre de tot */
-    
-    /* RUTA CORREGIDA: Amb el CSS a 'css/', necessitem anar amunt (..) i després a 'assets/'. */
-    background-image: url('../assets/images/header.png') !important; /* FORCEM la càrrega de la imatge */
-    background-size: cover;       
-    background-position: center;  
-    background-repeat: no-repeat;
-    /* Hem eliminat el background-color per veure si realment es carrega la imatge o no */
-    
-    /* Altura explícita consistent amb el body padding */
-    height: 100px; 
-    
-    /* Estils de disseny bàsics per al menú */
-    display: flex; 
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombra per destacar-lo */
+    background: url('../assets/images/header.png') center/cover no-repeat, linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
+    color: var(--white);
+    padding: 2rem 0;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
 header::before {
@@ -151,7 +129,6 @@ main {
     position: relative;
     z-index: 2;
     background: transparent;
-    margin-top: 100px;
 }
 
 /* Blog Posts - Ocupa 100% del ancho de main */
@@ -461,86 +438,3 @@ footer {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-/* 3. Estils per a les noves seccions ("Qui Soc" i "Projectes") */
-
-#qui-soc, #projectes {
-    max-width: 1000px; 
-    margin: 60px auto; /* Espai vertical i centrat */
-    padding: 0 20px; 
-    clear: both; /* Evita interferències de la barra lateral (si n'hi hagués) */
-    text-align: left;
-}
-
-#qui-soc h2, #projectes h2, #blog-posts h2 {
-    text-align: center;
-    font-size: 2.5em;
-    margin-bottom: 40px;
-}
-
-/* Secció Qui Soc (Layout per a imatge i text) */
-.qui-soc-content {
-    display: flex; 
-    flex-direction: column; /* Apilament per a mòbil */
-    align-items: center;
-    gap: 40px;
-    background-color: #f9f9f9;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-.profile-image {
-    width: 180px; 
-    height: 180px;
-    object-fit: cover;
-    border-radius: 50%; /* Imatge rodona */
-    flex-shrink: 0; 
-}
-
-/* Media Query per a escriptori/tableta (imatge i text costat a costat) */
-@media (min-width: 768px) {
-    .qui-soc-content {
-        flex-direction: row; 
-        text-align: left;
-    }
-}
-
-/* Secció Projectes (Cuadrícula de targetes) */
-.projectes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-}
-
-.projecte {
-    background-color: #fff;
-    border: 1px solid #eee;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-    overflow: hidden; 
-}
-
-.projecte:hover {
-    transform: translateY(-5px); 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-.projecte-link {
-    display: inline-block;
-    margin-top: 15px;
-    font-weight: bold;
-    color: #007bff; 
-    text-decoration: none;
-}
-
-.project-image {
-    width: 100%; 
-    height: 180px; 
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
-}
-
