@@ -21,17 +21,24 @@ body {
     color: var(--text-dark);
     background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
     min-height: 100vh;
+    
 }
 
-/* Header con imagen de fondo */
 header {
-    background: url('assets/images/header.png') center/cover no-repeat, linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
-    color: var(--white);
-    padding: 2rem 0;
-    box-shadow: var(--shadow);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
+    /* Ruta a la imagen. Asegúrate de que la ruta sea correcta desde la ubicación del archivo CSS */
+    background-image: url('../images/header.png'); 
+    background-size: cover; /* Asegura que la imagen cubra todo el header */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    /* Puedes añadir un color de fondo de respaldo por si la imagen no carga */
+    background-color: #333; 
+    /* Altura mínima para que la imagen se vea, ajusta según necesidad */
+    min-height: 200px; 
+    position: fixed; /* Hace que el header se quede fijo en la ventana */
+    top: 0; /* Lo fija en la parte superior */
+    left: 0; /* Lo extiende desde la izquierda */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    z-index: 1000; /* Lo pone por encima de otros elementos */
 }
 
 header::before {
