@@ -25,7 +25,7 @@ body {
 
 /* Header con imagen de fondo */
 header {
-    background: url('../assets/images/header.png') center/cover no-repeat, linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
+    background: url('assets/images/header.png') center/cover no-repeat, linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
     color: var(--white);
     padding: 2rem 0;
     box-shadow: var(--shadow);
