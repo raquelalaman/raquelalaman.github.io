@@ -69,20 +69,18 @@ h1 {
 }
 
 /* Navigation */
-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    float: right;
+/* Logo */
+.logo {
+    position: absolute;
+    left: 5%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
-.nav-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.logo img {
+    height: 40px;
+    width: auto;
+    display: block;
 }
 
 .nav-links {
