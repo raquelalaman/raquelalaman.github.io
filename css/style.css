@@ -446,3 +446,35 @@ footer {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+/* Estilos generales para las secciones */
+#qui-soc, #projectes {
+    max-width: 1200px; /* Ajusta al ancho de tu diseño */
+    margin: 40px auto; /* Espacio vertical y centrado */
+    padding: 20px;
+    background-color: #f4f4f4; /* Un fondo sutil */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#qui-soc h2, #projectes h2 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Estilos para la cuadrícula de proyectos (opcional) */
+.projectes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 2 o 3 columnas */
+    gap: 20px;
+}
+
+.projecte {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 5px;
+    transition: transform 0.3s;
+}
+
+.projecte:hover {
+    transform: translateY(-5px); /* Pequeño efecto al pasar el ratón */
+}
