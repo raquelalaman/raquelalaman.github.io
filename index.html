@@ -24,72 +24,28 @@
 </head>
 <body>
     <header>
-        <div class="logo">
-            <h1><a href="/">Raquel Alamán</a></h1>
-        </div>
         <nav>
-            <ul>
-                <li><a href="#qui-soc">Qui Soc</a></li>
-                <li><a href="#projectes">Projectes</a></li>
-                <li><a href="#blog-posts">Blog</a></li>
-            </ul>
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="#about">Acerca de</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+            </div>
         </nav>
+        <div class="header-content">
+            <h1>Code thinking</h1>
+            <p class="subtitle">Explorant idees i compartint coneixement</p>
+        </div>
     </header>
-
-    <!-- 2. MAIN (Contingut introductori) -->
     <main>
-        <section class="intro">
-            <h2>Benvinguda a la meva web!</h2>
-            <p>Sóc enginyera de software i aquí comparteixo la meva feina, projectes i reflexions sobre el món digital.</p>
-        </section>
+        <section class="blog-posts" id="posts-container">
+            <div class="loading">
+                <div class="spinner"></div>
+            </div>
+        </section>        
     </main>
-
-    <!-- 3. NOVA SECCIÓ: QUI SOC -->
-    <section id="qui-soc">
-        <h2>Qui Soc</h2>
-        <div class="qui-soc-content">
-            <!-- Etiqueta IMATGE per al perfil -->
-            <img src="assets/images/profile.jpg" alt="Foto de perfil de Raquel Alamán" class="profile-image">
-            <p>Sóc una apassionada de la tecnologia amb una trajectòria en el desenvolupament full-stack. La meva feina es centra en crear solucions escalables i fàcils d'utilitzar, des de la conceptualització fins a la implementació. M'encanta aprendre coses noves i afrontar reptes complexos amb creativitat i eficiència.</p>
-        </div>
-    </section>
-
-    <!-- 4. NOVA SECCIÓ: PROJECTES (En quadrícula, sota Qui Soc) -->
-    <section id="projectes">
-        <h2>Projectes</h2>
-        <div class="projectes-grid">
-            
-            <article class="projecte">
-                <h3>Projecte A: Gestió de Tasques</h3>
-                <!-- Etiqueta IMATGE per al projecte 1 -->
-                <img src="assets/images/projecte1.jpg" alt="Captura de pantalla del Projecte A" class="project-image">
-                <p>Aplicació web dissenyada per a la gestió de fluxos de treball en equips petits. Desenvolupat amb Angular i Firebase.</p>
-                <a href="#" class="projecte-link">Veure detalls →</a>
-            </article>
-            
-            <article class="projecte">
-                <h3>Projecte B: Dashboard Analític</h3>
-                <!-- Etiqueta IMATGE per al projecte 2 -->
-                <img src="assets/images/projecte2.jpg" alt="Captura de pantalla del Projecte B" class="project-image">
-                <p>Eina de visualització de dades en temps real utilitzant D3.js. Optimització de la càrrega de dades massives.</p>
-                <a href="#" class="projecte-link">Veure detalls →</a>
-            </article>
-            
-            <article class="projecte">
-                <h3>Projecte C: Lloc Web Corporatiu</h3>
-                <!-- Etiqueta IMATGE per al projecte 3 -->
-                <img src="assets/images/projecte3.jpg" alt="Captura de pantalla del Projecte C" class="project-image">
-                <p>Redisseny complet d'un lloc web corporatiu, centrat en la usabilitat i l'optimització SEO. HTML, CSS i JavaScript modern.</p>
-                <a href="#" class="projecte-link">Veure detalls →</a>
-            </article>
-        </div>
-    </section>
-    <section class="blog-posts" id="posts-container">
-        <div class="loading">
-            <div class="spinner"></div>
-        </div>
-    </section>        
-</main>
 
     <footer>
         <div class="footer-content">
