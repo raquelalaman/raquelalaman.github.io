@@ -23,15 +23,14 @@ body {
     min-height: 100vh;
 }
 
-/* Header con imagen de fondo */
+/* Header */
 header {
-    background: url('../assets/images/header.jpeg') center/cover no-repeat, linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
+    background: linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
     color: var(--white);
     padding: 2rem 0;
     box-shadow: var(--shadow);
     position: relative;
     overflow: hidden;
-    z-index: 1;
 }
 
 header::before {
@@ -43,7 +42,6 @@ header::before {
     bottom: 0;
     background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,0 1000,0 1000,80 0,100"/></svg>');
     background-size: cover;
-    z-index: -1;
 }
 
 .header-content {
@@ -118,7 +116,7 @@ nav {
     width: 100%;
 }
 
-/* Main Container - No se superpone al header */
+/* Main Container */
 main {
     max-width: 1200px;
     margin: 3rem auto;
@@ -126,18 +124,13 @@ main {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 3rem;
-    position: relative;
-    z-index: 2;
-    background: transparent;
 }
 
-/* Blog Posts - Ocupa 100% del ancho de main */
+/* Blog Posts */
 .blog-posts {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    width: 100%;
-    grid-column: 1 / -1;
 }
 
 .post-card {
@@ -384,10 +377,6 @@ footer {
         grid-template-columns: 1fr;
         gap: 2rem;
         margin: 2rem auto;
-    }
-
-    .blog-posts {
-        grid-column: 1;
     }
 
     .post-content {
