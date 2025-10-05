@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code thinking</title>
-    <meta name="description" content="Blog personal">
+    <title>Mi Blog</title>
+    <meta name="description" content="Blog personal con entradas en formato markdown">
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -23,207 +23,123 @@
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="nav-content">
-                <ul class="nav-links">
-                    <li><a href="#home">Inicio</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="#about">Acerca de</a></li>
-                    <li><a href="#contact">Contacto</a></li>
-                </ul>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-blog"></i> Mi Blog</h1>
+                </div>
+                <nav class="nav">
+                    <ul class="nav-list">
+                        <li><a href="#" onclick="showHome()" class="nav-link active" id="home-link">Inicio</a></li>
+                        <li><a href="#" onclick="showAbout()" class="nav-link" id="about-link">Acerca de</a></li>
+                        <li><a href="#" onclick="showArchive()" class="nav-link" id="archive-link">Archivo</a></li>
+                    </ul>
+                </nav>
+                <button class="menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
             </div>
-        </nav>
-        <div class="header-content">
-            <h1>Code thinking</h1>
-            <p class="subtitle">Explorant idees i compartint coneixement</p>
         </div>
     </header>
-    <main>
-        <section class="blog-posts" id="posts-container">
-            <div class="loading">
-                <div class="spinner"></div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Loading indicator -->
+            <div id="loading" class="loading">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Cargando contenido...</p>
             </div>
-        </section>        
+
+            <!-- Home Page -->
+            <section id="home-section" class="content-section active">
+                <div class="hero">
+                    <h2>Bienvenido a mi Blog</h2>
+                    <p>Explora mis últimas entradas y pensamientos sobre tecnología, desarrollo web y más.</p>
+                </div>
+                
+                <div class="posts-grid" id="posts-grid">
+                    <!-- Posts serán cargados dinámicamente aquí -->
+                </div>
+                
+                <div class="pagination" id="pagination" style="display: none;">
+                    <button onclick="loadPreviousPage()" id="prev-btn" disabled>
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </button>
+                    <span id="page-info">Página 1 de 1</span>
+                    <button onclick="loadNextPage()" id="next-btn" disabled>
+                        Siguiente <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Post Detail -->
+            <section id="post-section" class="content-section">
+                <article id="post-content" class="post-detail">
+                    <!-- Contenido del post será cargado aquí -->
+                </article>
+                <div class="post-navigation">
+                    <button onclick="showHome()" class="back-btn">
+                        <i class="fas fa-arrow-left"></i> Volver al inicio
+                    </button>
+                </div>
+            </section>
+
+            <!-- About Page -->
+            <section id="about-section" class="content-section">
+                <div class="about-content">
+                    <h2>Acerca de este Blog</h2>
+                    <p>Este es un blog personal creado con GitHub Pages. Las entradas se escriben en formato Markdown y se almacenan directamente en el repositorio de GitHub.</p>
+                    
+                    <h3>Características</h3>
+                    <ul>
+                        <li>Diseño responsive y moderno</li>
+                        <li>Entradas en formato Markdown</li>
+                        <li>Resaltado de sintaxis para código</li>
+                        <li>Navegación intuitiva</li>
+                        <li>Optimizado para GitHub Pages</li>
+                    </ul>
+                    
+                    <h3>Tecnologías utilizadas</h3>
+                    <div class="tech-stack">
+                        <span class="tech-tag"><i class="fab fa-html5"></i> HTML5</span>
+                        <span class="tech-tag"><i class="fab fa-css3-alt"></i> CSS3</span>
+                        <span class="tech-tag"><i class="fab fa-js"></i> JavaScript</span>
+                        <span class="tech-tag"><i class="fab fa-markdown"></i> Markdown</span>
+                        <span class="tech-tag"><i class="fab fa-github"></i> GitHub Pages</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Archive Page -->
+            <section id="archive-section" class="content-section">
+                <div class="archive-content">
+                    <h2>Archivo de Entradas</h2>
+                    <div id="archive-list" class="archive-list">
+                        <!-- Lista de archivo será cargada aquí -->
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#" title="GitHub">GH</a>
-                <a href="#" title="Twitter">TW</a>
-                <a href="#" title="LinkedIn">IN</a>
-                <a href="#" title="Email">@</a>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Mi Blog. Creado con <i class="fas fa-heart"></i> y GitHub Pages</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
-            <p>&copy; 2025 Mi Blog. Creado con GitHub Pages.</p>
         </div>
     </footer>
 
-    <script>
-        // Simulación de datos de posts de markdown
-        const blogPosts = [
-            {
-                id: 1,
-                title: "Introducción al Desarrollo Web Moderno",
-                excerpt: "Explora las últimas tendencias y tecnologías en el desarrollo web. Desde frameworks JavaScript hasta herramientas de CI/CD, descubre qué necesitas saber para mantenerte actualizado.",
-                date: "2025-09-15",
-                category: "Tecnología",
-                image: "https://via.placeholder.com/400x250/0066ff/ffffff?text=Web+Dev",
-                content: `# Introducción al Desarrollo Web Moderno
-
-El desarrollo web ha evolucionado tremendamente en los últimos años. Las tecnologías que utilizamos hoy permiten crear aplicaciones más rápidas, escalables y mantenibles.
-
-## Tecnologías Clave
-
-- **React/Vue/Angular**: Frameworks para interfaces dinámicas
-- **Node.js**: JavaScript en el servidor
-- **TypeScript**: Tipado estático para JavaScript
-- **Tailwind CSS**: Utilidades CSS modernas
-
-## Mejores Prácticas
-
-1. Escribir código limpio y documentado
-2. Implementar pruebas automatizadas
-3. Usar control de versiones efectivamente
-4. Optimizar el rendimiento desde el inicio
-
-> El desarrollo web moderno no solo se trata de escribir código, sino de crear experiencias excepcionales para los usuarios.`
-            },
-            {
-                id: 2,
-                title: "Diseño Responsive: Mejores Prácticas",
-                excerpt: "Aprende a crear sitios web que se adapten perfectamente a cualquier dispositivo. Técnicas, herramientas y consejos para un diseño responsive efectivo.",
-                date: "2025-09-10",
-                category: "Diseño",
-                image: "https://via.placeholder.com/400x250/0052cc/ffffff?text=Responsive",
-                content: `# Diseño Responsive: Mejores Prácticas
-
-Un buen diseño responsive es esencial en el mundo móvil de hoy.
-
-## Principios Fundamentales
-
-- **Mobile First**: Diseña primero para móvil
-- **Flexibilidad**: Usa unidades relativas
-- **Breakpoints**: Define puntos de quiebre lógicos`
-            },
-            {
-                id: 3,
-                title: "JavaScript: Conceptos Avanzados",
-                excerpt: "Profundiza en JavaScript con conceptos avanzados como closures, async/await, y programación funcional. Lleva tus habilidades al siguiente nivel.",
-                date: "2025-09-05",
-                category: "Programación",
-                image: "https://via.placeholder.com/400x250/0066ff/ffffff?text=JavaScript",
-                content: `# JavaScript: Conceptos Avanzados
-
-JavaScript ofrece muchas características poderosas que todo desarrollador debe conocer.
-
-## Temas Avanzados
-
-- **Closures**: Funciones que "recuerdan" su entorno
-- **Promises y Async/Await**: Manejo de operaciones asíncronas
-- **Programación Funcional**: Paradigma declarativo`
-            }
-        ];
-
-        // Función para renderizar posts
-        function renderPosts() {
-            const container = document.getElementById('posts-container');
-            container.innerHTML = '';
-
-            blogPosts.forEach((post, index) => {
-                const postElement = document.createElement('article');
-                postElement.className = 'post-card fade-in';
-                postElement.style.animationDelay = `${index * 0.2}s`;
-                
-                postElement.innerHTML = `
-                    <div class="post-image">
-                        <img src="${post.image}" alt="${post.title}">
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-tag">${post.category}</span>
-                            <span>${formatDate(post.date)}</span>
-                        </div>
-                        <h2 class="post-title">${post.title}</h2>
-                        <p class="post-excerpt">${post.excerpt}</p>
-                        <a href="#" class="read-more" onclick="showFullPost(${post.id})">Leer más</a>
-                    </div>
-                `;
-
-                container.appendChild(postElement);
-            });
-        }
-
-        // Función para mostrar post completo
-        function showFullPost(postId) {
-            const post = blogPosts.find(p => p.id === postId);
-            if (post) {
-                // En un entorno real, esto navegaría a una página de post completo
-                // o abriría un modal con el contenido completo
-                alert(`Aquí se mostraría el post completo: "${post.title}"\n\nEn un entorno real, esto conectaría con el sistema de archivos markdown de GitHub Pages.`);
-            }
-        }
-
-        // Función para formatear fecha
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const months = [
-                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ];
-            
-            return `${date.getDate()} de ${months[date.getMonth()]}, ${date.getFullYear()}`;
-        }
-
-        // Funcionalidad de navegación suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Efecto parallax sutil en el header
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const header = document.querySelector('header');
-            if (header) {
-                header.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-
-        // Inicializar la página
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                renderPosts();
-            }, 500);
-        });
-
-        // Funcionalidad para GitHub Pages (comentada para referencia)
-        /*
-        En un entorno real de GitHub Pages, utilizarías algo como esto:
-        
-        async function loadMarkdownPosts() {
-            try {
-                const response = await fetch('/api/posts'); // Jekyll API endpoint
-                const posts = await response.json();
-                
-                posts.forEach(post => {
-                    // Procesar el contenido markdown con una librería como marked.js
-                    const htmlContent = marked(post.content);
-                    // Renderizar el post
-                });
-            } catch (error) {
-                console.error('Error loading posts:', error);
-            }
-        }
-        */
-    </script>
+    <!-- JavaScript -->
+    <script src="js/main.js"></script>
 </body>
 </html>
