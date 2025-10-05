@@ -38,16 +38,15 @@ header {
     width: 100%;
     z-index: 1000; /* Assegura que el header estigui per sobre de tot */
     
-    /* RUTA CORREGIDA: Va cap amunt d'un directori (de 'css/' a 'main/') 
-       i després baixa a 'assets/images/'. */
+    /* RUTA CORREGIDA: Amb el CSS a 'css/', necessitem anar amunt (..) i després a 'assets/'. */
     background-image: url('../assets/images/header.png'); 
     background-size: cover;       
     background-position: center;  
     background-repeat: no-repeat;
     background-color: #333;       /* Color de fons de seguretat */
     
-    /* Altura explícita perquè la imatge es visualitzi */
-    height: 100px; /* Ajusteu aquesta altura si el vostre header és més gran */
+    /* Altura explícita consistent amb el body padding */
+    height: 100px; 
     
     /* Estils de disseny bàsics per al menú */
     display: flex; 
@@ -462,15 +461,13 @@ footer {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-/* -------------------------------------------------------------------
-   ESTILS PER A LES NOVES SECCIONS ("Qui Soc" i "Projectes")
-   ------------------------------------------------------------------- */
+/* 3. Estils per a les noves seccions ("Qui Soc" i "Projectes") */
 
 #qui-soc, #projectes {
     max-width: 1000px; 
     margin: 60px auto; /* Espai vertical i centrat */
     padding: 0 20px; 
-    clear: both; /* Evita que qualsevol element flotant anterior interfereixi (adéu a l'efecte de barra lateral) */
+    clear: both; /* Evita interferències de la barra lateral (si n'hi hagués) */
     text-align: left;
 }
 
@@ -483,7 +480,7 @@ footer {
 /* Secció Qui Soc (Layout per a imatge i text) */
 .qui-soc-content {
     display: flex; 
-    flex-direction: column; /* Per defecte, apilament vertical (mòbil) */
+    flex-direction: column; /* Apilament per a mòbil */
     align-items: center;
     gap: 40px;
     background-color: #f9f9f9;
@@ -511,7 +508,6 @@ footer {
 /* Secció Projectes (Cuadrícula de targetes) */
 .projectes-grid {
     display: grid;
-    /* Disseny de quadrícula flexible i responsiu */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
@@ -523,15 +519,20 @@ footer {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     padding: 20px;
     text-align: center;
-    transition: transform 0.3s;
+    transition: transform 0.3s, box-shadow 0.3s;
     overflow: hidden; 
+}
+
+.projecte:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 }
 
 .projecte-link {
     display: inline-block;
     margin-top: 15px;
     font-weight: bold;
-    color: #007bff; /* Color de link */
+    color: #007bff; 
     text-decoration: none;
 }
 
@@ -542,3 +543,4 @@ footer {
     border-radius: 8px;
     margin-bottom: 15px;
 }
+
