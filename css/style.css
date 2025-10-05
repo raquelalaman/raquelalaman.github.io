@@ -21,24 +21,40 @@ body {
     color: var(--text-dark);
     background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
     min-height: 100vh;
+    /* Afegeix un espai a la part superior igual a l'altura del header */
+    padding-top: 100px; 
     
 }
+/* -------------------------------------------------------------------
+   CORRECCIONS I NOUS ESTILS PER AL WEB
+   ------------------------------------------------------------------- */
 
+/* 1. CORRECCIÓ HEADER (Posicionament i Imatge) */
 header {
-    /* Ruta a la imagen. Asegúrate de que la ruta sea correcta desde la ubicación del archivo CSS */
-    background-image: url('../images/header.png'); 
-    background-size: cover; /* Asegura que la imagen cubra todo el header */
-    background-position: center; /* Centra la imagen */
-    background-repeat: no-repeat; /* Evita que la imagen se repita */
-    /* Puedes añadir un color de fondo de respaldo por si la imagen no carga */
-    background-color: #333; 
-    /* Altura mínima para que la imagen se vea, ajusta según necesidad */
-    min-height: 200px; 
-    position: fixed; /* Hace que el header se quede fijo en la ventana */
-    top: 0; /* Lo fija en la parte superior */
-    left: 0; /* Lo extiende desde la izquierda */
-    width: 100%; /* Asegura que ocupe todo el ancho */
-    z-index: 1000; /* Lo pone por encima de otros elementos */
+    /* Fija el header a la part superior */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Assegura que el header estigui per sobre de tot */
+    
+    /* RUTA CORREGIDA: Va cap amunt d'un directori (de 'css/' a 'main/') 
+       i després baixa a 'assets/images/'. */
+    background-image: url('../assets/images/header.png'); 
+    background-size: cover;       
+    background-position: center;  
+    background-repeat: no-repeat;
+    background-color: #333;       /* Color de fons de seguretat */
+    
+    /* Altura explícita perquè la imatge es visualitzi */
+    height: 100px; /* Ajusteu aquesta altura si el vostre header és més gran */
+    
+    /* Estils de disseny bàsics per al menú */
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombra per destacar-lo */
 }
 
 header::before {
@@ -446,22 +462,28 @@ footer {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-/* Estilos generales para las secciones */
+/* -------------------------------------------------------------------
+   ESTILS PER A LES NOVES SECCIONS ("Qui Soc" i "Projectes")
+   ------------------------------------------------------------------- */
+
 #qui-soc, #projectes {
-    max-width: 1000px; /* Ancho máximo para el contenido, ajústalo */
-    margin: 60px auto; /* Espacio vertical y centrado */
-    padding: 0 20px; /* Padding horizontal para móviles */
+    max-width: 1000px; 
+    margin: 60px auto; /* Espai vertical i centrat */
+    padding: 0 20px; 
+    clear: both; /* Evita que qualsevol element flotant anterior interfereixi (adéu a l'efecte de barra lateral) */
+    text-align: left;
 }
 
-#qui-soc h2, #projectes h2 {
+#qui-soc h2, #projectes h2, #blog-posts h2 {
     text-align: center;
     font-size: 2.5em;
     margin-bottom: 40px;
 }
 
-/* Sección Qui Soc (Imagen + Texto) */
+/* Secció Qui Soc (Layout per a imatge i text) */
 .qui-soc-content {
     display: flex; 
+    flex-direction: column; /* Per defecte, apilament vertical (mòbil) */
     align-items: center;
     gap: 40px;
     background-color: #f9f9f9;
@@ -471,47 +493,52 @@ footer {
 }
 
 .profile-image {
-    width: 180px; /* Tamaño de la imagen de perfil */
+    width: 180px; 
     height: 180px;
     object-fit: cover;
-    border-radius: 50%; /* Imagen redonda */
+    border-radius: 50%; /* Imatge rodona */
     flex-shrink: 0; 
 }
 
-/* Sección Proyectos (Cuadrícula de tarjetas) */
+/* Media Query per a escriptori/tableta (imatge i text costat a costat) */
+@media (min-width: 768px) {
+    .qui-soc-content {
+        flex-direction: row; 
+        text-align: left;
+    }
+}
+
+/* Secció Projectes (Cuadrícula de targetes) */
 .projectes-grid {
     display: grid;
-    /* Crea un diseño de cuadrícula flexible (mínimo 300px por columna) */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    /* Disseny de quadrícula flexible i responsiu */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 30px;
 }
 
 .projecte {
     background-color: #fff;
+    border: 1px solid #eee;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     padding: 20px;
     text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.projecte:hover {
-    transform: translateY(-5px); /* Pequeño efecto 3D al pasar el ratón */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.project-image {
-    width: 100%; 
-    height: 180px; /* Altura uniforme para las miniaturas */
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    transition: transform 0.3s;
+    overflow: hidden; 
 }
 
 .projecte-link {
     display: inline-block;
     margin-top: 15px;
     font-weight: bold;
-    color: #007bff; /* Color de enlace, ajusta al de tu web */
+    color: #007bff; /* Color de link */
     text-decoration: none;
+}
+
+.project-image {
+    width: 100%; 
+    height: 180px; 
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
 }
