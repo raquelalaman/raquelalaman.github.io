@@ -74,12 +74,13 @@ h1 {
 .logo {
     position: absolute;
     left: 5%;
+    top: 50%;
     transform: translateY(-50%);
-    z-index: 150;
+    z-index: 101;
 }
 
 .logo img {
-    height: 60px;
+    height: 40px;
     width: auto;
     display: block;
 }
@@ -88,8 +89,6 @@ h1 {
     display: flex;
     gap: 2rem;
     list-style: none;
-    float: right;
-    margin-right: 2rem;
 }
 
 .nav-links a {
