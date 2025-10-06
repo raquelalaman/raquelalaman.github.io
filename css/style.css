@@ -25,12 +25,12 @@ body {
 
 /* Header con imagen de fondo */
 header {
-    background: url('../assets/images/header.jpeg') center/cover no-repeat, linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
+    background: url('../assets/images/header.png') center/cover no-repeat, linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
     color: var(--white);
     padding: 2rem 0;
     box-shadow: var(--shadow);
     position: relative;
-    overflow: visible;
+    overflow: hidden;
     z-index: 1;
 }
 
@@ -49,11 +49,10 @@ header::before {
 .header-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 4rem 2rem 0;
     position: relative;
     z-index: 1;
     text-align: center;
-    padding-top: 4rem
 }
 
 h1 {
@@ -70,6 +69,24 @@ h1 {
 }
 
 /* Navigation */
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    float: right;
+}
+
+.nav-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 101;
+}
+
 /* Logo */
 .logo {
     position: absolute;
@@ -100,7 +117,7 @@ h1 {
 }
 
 .nav-links a:hover {
-    color: var(--white);
+    color: var(--electric-blue);
 }
 
 .nav-links a::after {
@@ -110,7 +127,7 @@ h1 {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--white);
+    background: var(--electric-blue);
     transition: width 0.3s ease;
 }
 
@@ -131,6 +148,7 @@ main {
 
 /* Seccions generals */
 section {
+    margin-bottom: 6rem;
     padding: 3rem 0;
 }
 
@@ -155,6 +173,7 @@ section {
 /* Secció Qui soc */
 .about-section {
     background: var(--white);
+    border-radius: 12px;
     padding: 0;
     overflow: hidden;
     box-shadow: var(--shadow);
@@ -189,10 +208,11 @@ section {
 }
 
 .about-btn {
-    background: #494EC4;
+    background: var(--electric-blue);
     color: var(--white);
     padding: 0.75rem 2rem;
     border: none;
+    border-radius: 6px;
     font-weight: 500;
     cursor: pointer;
     transition: background 0.3s ease;
@@ -229,6 +249,7 @@ section {
 
 .project-card {
     position: relative;
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
@@ -293,6 +314,7 @@ section {
 
 .post-card {
     background: var(--white);
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
@@ -346,9 +368,10 @@ section {
 }
 
 .post-tag {
-    background: #494EC4;
+    background: var(--electric-blue);
     color: var(--white);
     padding: 0.2rem 0.6rem;
+    border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 500;
 }
@@ -370,7 +393,7 @@ section {
 }
 
 .read-more {
-    color: #494EC4;
+    color: var(--electric-blue);
     padding: 0;
     background: none;
     border: none;
@@ -507,7 +530,7 @@ footer {
 }
 
 .social-links a {
-    background: #494EC4;
+    background: var(--electric-blue);
     color: var(--white);
     width: 40px;
     height: 40px;
@@ -520,7 +543,7 @@ footer {
 }
 
 .social-links a:hover {
-    background: #494EC4;
+    background: var(--dark-blue);
 }
 
 /* Responsive Design */
@@ -532,9 +555,6 @@ footer {
     .nav-content {
         flex-direction: column;
         gap: 1rem;
-        position: absolute;
-        right: 5%,
-        z-index: 150;
     }
 
     .nav-links {
