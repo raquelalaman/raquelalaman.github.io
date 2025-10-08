@@ -199,19 +199,91 @@ main {
     height: 100%;
     object-fit: cover;
 }
-/* Blog Posts */
-.blog-posts {
-    display: flex;
-    flex-direction: column;
+/* Secció Projectes */
+.projects-section {
+    padding: 3rem 0;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
+}
+
+.project-card {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    height: 250px;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.project-card:hover .project-image img {
+    transform: scale(1.05);
+}
+
+.project-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 2rem 1.5rem 1.5rem;
+    color: var(--white);
+}
+
+.project-overlay h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.project-overlay p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Secció Blog - Reflexions digitals */
+.blog-section {
+    padding: 3rem 0;
+}
+
+/* Blog Posts en graella 2x3 */
+.blog-posts {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    width: 100%;
 }
 
 .post-card {
     background: var(--white);
+    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
     border: 1px solid var(--medium-gray);
+    display: flex;
+    flex-direction: column;
 }
 
 .post-card:hover {
@@ -221,7 +293,7 @@ main {
 
 .post-image {
     width: 100%;
-    height: 250px;
+    height: 180px;
     background: linear-gradient(45deg, var(--electric-blue), var(--dark-blue));
     position: relative;
     overflow: hidden;
@@ -244,56 +316,64 @@ main {
 }
 
 .post-content {
-    padding: 2rem;
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .post-meta {
     display: flex;
     gap: 1rem;
     margin-bottom: 1rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--dark-gray);
 }
 
 .post-tag {
     background: var(--electric-blue);
     color: var(--white);
-    padding: 0.25rem 0.75rem;
+    padding: 0.2rem 0.6rem;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 500;
 }
 
 .post-title {
-    font-size: 1.8rem;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     color: var(--text-dark);
     line-height: 1.3;
 }
 
 .post-excerpt {
     color: var(--dark-gray);
-    margin-bottom: 1.5rem;
-    line-height: 1.7;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    flex: 1;
 }
 
 .read-more {
-    background: var(--electric-blue);
-    color: var(--white);
-    padding: 0.75rem 1.5rem;
+    color: var(--electric-blue);
+    padding: 0;
+    background: none;
     border: none;
-    border-radius: 6px;
+    border-radius: 0;
     font-weight: 500;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: color 0.3s ease;
     text-decoration: none;
     display: inline-block;
+    width: fit-content;
 }
 
 .read-more:hover {
-    background: var(--dark-blue);
+    color: var(--dark-blue);
+    background: none;
 }
+
 /* About Widget */
 .about-widget img {
     width: 80px;
