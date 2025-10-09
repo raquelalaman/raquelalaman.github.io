@@ -212,7 +212,6 @@ main {
 
 .project-card {
     position: relative;
-    border-radius: 12px;
     overflow: hidden;
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
