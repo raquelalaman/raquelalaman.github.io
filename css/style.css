@@ -313,6 +313,7 @@ section {
 }
 
 /* Blog Posts en graella 2x3 centrada */
+/* Blog Posts en graella 2x3 centrada */
 .blog-posts {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
