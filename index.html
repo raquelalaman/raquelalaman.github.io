@@ -133,6 +133,7 @@
         const match = content.match(frontMatterRegex);
         
         if (!match) {
+            console.log('No s\'ha trobat front matter');
             return { frontMatter: {}, content: content };
         }
         
@@ -175,14 +176,21 @@
     // Funció per carregar un fitxer markdown
     async function loadMarkdownFile(filename) {
         try {
+            console.log('Intentant carregar:', postsDirectory + filename);
             const response = await fetch(postsDirectory + filename);
+            
+            console.log('Resposta status:', response.status, 'per a', filename);
+            
             if (!response.ok) {
                 console.error(`Error carregant ${filename}: ${response.status}`);
                 return null;
             }
             
             const content = await response.text();
+            console.log('Contingut carregat per a', filename, '- Longitud:', content.length);
+            
             const { frontMatter, content: markdownContent } = parseFrontMatter(content);
+            console.log('Front matter:', frontMatter);
             
             const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/);
             const date = frontMatter.date || (dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0]);
@@ -192,7 +200,7 @@
             // Generar imatge per defecte basada en el títol
             const defaultImage = `https://via.placeholder.com/400x250/6065FF/ffffff?text=${encodeURIComponent(frontMatter.title || 'Post')}`;
             
-            return {
+            const post = {
                 slug,
                 title: frontMatter.title || slug.replace(/-/g, ' '),
                 date: date,
@@ -204,6 +212,10 @@
                 content: markdownContent,
                 filename: filename
             };
+            
+            console.log('Post creat:', post.title);
+            return post;
+            
         } catch (error) {
             console.error(`Error carregant ${filename}:`, error);
             return null;
@@ -215,14 +227,26 @@
         const container = document.getElementById('posts-container');
         container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
         
+        console.log('Iniciant càrrega de posts...');
+        console.log('Fitxers a carregar:', postFiles);
+        
         try {
             const promises = postFiles.map(loadMarkdownFile);
             const posts = await Promise.all(promises);
             
+            console.log('Posts carregats:', posts);
+            console.log('Posts no nuls:', posts.filter(p => p !== null));
+            
             blogPosts = posts
                 .filter(post => post !== null)
                 .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, 6); // Mostrar només els 6 primers
+                .slice(0, 6);
+            
+            console.log('Posts finals a mostrar:', blogPosts.length);
+            
+            if (blogPosts.length === 0) {
+                console.warn('No s\'han pogut carregar cap post!');
+            }
             
             renderPosts();
         } catch (error) {
@@ -230,7 +254,8 @@
             container.innerHTML = `
                 <div class="post-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
                     <h3>Error carregant els posts</h3>
-                    <p>Assegura't que els fitxers markdown existeixen a la carpeta <code>posts/</code></p>
+                    <p>Comprova la consola del navegador per més detalls</p>
+                    <p style="color: red; font-family: monospace; margin-top: 1rem;">${error.message}</p>
                 </div>
             `;
         }
@@ -241,11 +266,17 @@
         const container = document.getElementById('posts-container');
         container.innerHTML = '';
 
+        console.log('Renderitzant', blogPosts.length, 'posts');
+
         if (blogPosts.length === 0) {
             container.innerHTML = `
                 <div class="post-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
                     <h3>No hi ha posts disponibles</h3>
-                    <p>Afegeix fitxers markdown a la carpeta posts/</p>
+                    <p>Els fitxers no s'han pogut carregar. Comprova la consola del navegador.</p>
+                    <p style="margin-top: 1rem;"><strong>Fitxers esperats:</strong></p>
+                    <ul style="list-style: none; padding: 0;">
+                        ${postFiles.map(f => `<li style="margin: 0.5rem 0;">posts/${f}</li>`).join('')}
+                    </ul>
                 </div>
             `;
             return;
@@ -303,6 +334,7 @@
 
     // Inicialitzar la pàgina
     document.addEventListener('DOMContentLoaded', () => {
+        console.log('DOM carregat, iniciant...');
         loadAllPosts();
     });
 </script>
