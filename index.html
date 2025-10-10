@@ -117,170 +117,194 @@
     </footer>
 
     <script>
-        // Simulación de datos de posts de markdown
-        const blogPosts = [
-            {
-                id: 1,
-                title: "Introducción al Desarrollo Web Moderno",
-                excerpt: "Explora las últimas tendencias y tecnologías en el desarrollo web. Desde frameworks JavaScript hasta herramientas de CI/CD, descubre qué necesitas saber para mantenerte actualizado.",
-                date: "2025-09-15",
-                category: "Tecnología",
-                image: "https://via.placeholder.com/400x250/0066ff/ffffff?text=Web+Dev",
-                content: `# Introducción al Desarrollo Web Moderno
+    // Configuració dels posts
+    const postsDirectory = 'posts/';
+    const postFiles = [
+        '2025-11-08-chatgpt5.md',
+        '2024-01-12-guia-markdown.md',
+        '2024-01-10-css-grid-flexbox.md'
+    ];
+    
+    let blogPosts = [];
 
-El desarrollo web ha evolucionado tremendamente en los últimos años. Las tecnologías que utilizamos hoy permiten crear aplicaciones más rápidas, escalables y mantenibles.
-
-## Tecnologías Clave
-
-- **React/Vue/Angular**: Frameworks para interfaces dinámicas
-- **Node.js**: JavaScript en el servidor
-- **TypeScript**: Tipado estático para JavaScript
-- **Tailwind CSS**: Utilidades CSS modernas
-
-## Mejores Prácticas
-
-1. Escribir código limpio y documentado
-2. Implementar pruebas automatizadas
-3. Usar control de versiones efectivamente
-4. Optimizar el rendimiento desde el inicio
-
-> El desarrollo web moderno no solo se trata de escribir código, sino de crear experiencias excepcionales para los usuarios.`
-            },
-            {
-                id: 2,
-                title: "Diseño Responsive: Mejores Prácticas",
-                excerpt: "Aprende a crear sitios web que se adapten perfectamente a cualquier dispositivo. Técnicas, herramientas y consejos para un diseño responsive efectivo.",
-                date: "2025-09-10",
-                category: "Diseño",
-                image: "https://via.placeholder.com/400x250/0052cc/ffffff?text=Responsive",
-                content: `# Diseño Responsive: Mejores Prácticas
-
-Un buen diseño responsive es esencial en el mundo móvil de hoy.
-
-## Principios Fundamentales
-
-- **Mobile First**: Diseña primero para móvil
-- **Flexibilidad**: Usa unidades relativas
-- **Breakpoints**: Define puntos de quiebre lógicos`
-            },
-            {
-                id: 3,
-                title: "JavaScript: Conceptos Avanzados",
-                excerpt: "Profundiza en JavaScript con conceptos avanzados como closures, async/await, y programación funcional. Lleva tus habilidades al siguiente nivel.",
-                date: "2025-09-05",
-                category: "Programación",
-                image: "https://via.placeholder.com/400x250/0066ff/ffffff?text=JavaScript",
-                content: `# JavaScript: Conceptos Avanzados
-
-JavaScript ofrece muchas características poderosas que todo desarrollador debe conocer.
-
-## Temas Avanzados
-
-- **Closures**: Funciones que "recuerdan" su entorno
-- **Promises y Async/Await**: Manejo de operaciones asíncronas
-- **Programación Funcional**: Paradigma declarativo`
-            }
-        ];
-
-        // Función para renderizar posts
-        function renderPosts() {
-            const container = document.getElementById('posts-container');
-            container.innerHTML = '';
-
-            blogPosts.forEach((post, index) => {
-                const postElement = document.createElement('article');
-                postElement.className = 'post-card fade-in';
-                postElement.style.animationDelay = `${index * 0.2}s`;
-                
-                postElement.innerHTML = `
-                    <div class="post-image">
-                        <img src="${post.image}" alt="${post.title}">
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span class="post-tag">${post.category}</span>
-                            <span>${formatDate(post.date)}</span>
-                        </div>
-                        <h2 class="post-title">${post.title}</h2>
-                        <p class="post-excerpt">${post.excerpt}</p>
-                        <a href="#" class="read-more" onclick="showFullPost(${post.id})">Leer más</a>
-                    </div>
-                `;
-
-                container.appendChild(postElement);
-            });
-        }
-
-        // Función para mostrar post completo
-        function showFullPost(postId) {
-            const post = blogPosts.find(p => p.id === postId);
-            if (post) {
-                // En un entorno real, esto navegaría a una página de post completo
-                // o abriría un modal con el contenido completo
-                alert(`Aquí se mostraría el post completo: "${post.title}"\n\nEn un entorno real, esto conectaría con el sistema de archivos markdown de GitHub Pages.`);
-            }
-        }
-
-        // Función para formatear fecha
-        function formatDate(dateString) {
-            const date = new Date(dateString);
-            const months = [
-                'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
-            ];
-            
-            return `${date.getDate()} de ${months[date.getMonth()]}, ${date.getFullYear()}`;
-        }
-
-        // Funcionalidad de navegación suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Efecto parallax sutil en el header
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const header = document.querySelector('header');
-            if (header) {
-                header.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-
-        // Inicializar la página
-        document.addEventListener('DOMContentLoaded', () => {
-            setTimeout(() => {
-                renderPosts();
-            }, 500);
-        });
-
-        // Funcionalidad para GitHub Pages (comentada para referencia)
-        /*
-        En un entorno real de GitHub Pages, utilizarías algo como esto:
+    // Funció per parsear el front matter YAML
+    function parseFrontMatter(content) {
+        const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
+        const match = content.match(frontMatterRegex);
         
-        async function loadMarkdownPosts() {
-            try {
-                const response = await fetch('/api/posts'); // Jekyll API endpoint
-                const posts = await response.json();
-                
-                posts.forEach(post => {
-                    // Procesar el contenido markdown con una librería como marked.js
-                    const htmlContent = marked(post.content);
-                    // Renderizar el post
-                });
-            } catch (error) {
-                console.error('Error loading posts:', error);
-            }
+        if (!match) {
+            return { frontMatter: {}, content: content };
         }
-        */
-    </script>
+        
+        const frontMatterText = match[1];
+        const markdownContent = match[2];
+        const frontMatter = {};
+        
+        frontMatterText.split('\n').forEach(line => {
+            const colonIndex = line.indexOf(':');
+            if (colonIndex > 0) {
+                const key = line.substring(0, colonIndex).trim();
+                const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
+                frontMatter[key] = value;
+            }
+        });
+        
+        return { frontMatter, content: markdownContent };
+    }
+
+    // Funció per extreure excerpt del contingut
+    function extractExcerpt(content, maxLength = 150) {
+        let plainText = content
+            .replace(/^#{1,6}\s+/gm, '')
+            .replace(/\*\*(.*?)\*\*/g, '$1')
+            .replace(/\*(.*?)\*/g, '$1')
+            .replace(/`(.*?)`/g, '$1')
+            .replace(/\[(.*?)\]\(.*?\)/g, '$1')
+            .replace(/^\s*[-*+]\s+/gm, '')
+            .replace(/^\s*\d+\.\s+/gm, '')
+            .replace(/\n\s*\n/g, ' ')
+            .trim();
+        
+        if (plainText.length > maxLength) {
+            plainText = plainText.substring(0, maxLength) + '...';
+        }
+        
+        return plainText;
+    }
+
+    // Funció per carregar un fitxer markdown
+    async function loadMarkdownFile(filename) {
+        try {
+            const response = await fetch(postsDirectory + filename);
+            if (!response.ok) {
+                console.error(`Error carregant ${filename}: ${response.status}`);
+                return null;
+            }
+            
+            const content = await response.text();
+            const { frontMatter, content: markdownContent } = parseFrontMatter(content);
+            
+            const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/);
+            const date = frontMatter.date || (dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0]);
+            
+            const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
+            
+            // Generar imatge per defecte basada en el títol
+            const defaultImage = `https://via.placeholder.com/400x250/6065FF/ffffff?text=${encodeURIComponent(frontMatter.title || 'Post')}`;
+            
+            return {
+                slug,
+                title: frontMatter.title || slug.replace(/-/g, ' '),
+                date: date,
+                author: frontMatter.author || 'Autor',
+                category: frontMatter.tags ? frontMatter.tags.split(',')[0].trim() : 'General',
+                tags: frontMatter.tags ? frontMatter.tags.split(',').map(t => t.trim()) : [],
+                image: frontMatter.image || defaultImage,
+                excerpt: frontMatter.excerpt || extractExcerpt(markdownContent),
+                content: markdownContent,
+                filename: filename
+            };
+        } catch (error) {
+            console.error(`Error carregant ${filename}:`, error);
+            return null;
+        }
+    }
+
+    // Funció per carregar tots els posts
+    async function loadAllPosts() {
+        const container = document.getElementById('posts-container');
+        container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+        
+        try {
+            const promises = postFiles.map(loadMarkdownFile);
+            const posts = await Promise.all(promises);
+            
+            blogPosts = posts
+                .filter(post => post !== null)
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .slice(0, 6); // Mostrar només els 6 primers
+            
+            renderPosts();
+        } catch (error) {
+            console.error('Error carregant posts:', error);
+            container.innerHTML = `
+                <div class="post-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                    <h3>Error carregant els posts</h3>
+                    <p>Assegura't que els fitxers markdown existeixen a la carpeta <code>posts/</code></p>
+                </div>
+            `;
+        }
+    }
+
+    // Funció per renderitzar posts
+    function renderPosts() {
+        const container = document.getElementById('posts-container');
+        container.innerHTML = '';
+
+        if (blogPosts.length === 0) {
+            container.innerHTML = `
+                <div class="post-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                    <h3>No hi ha posts disponibles</h3>
+                    <p>Afegeix fitxers markdown a la carpeta posts/</p>
+                </div>
+            `;
+            return;
+        }
+
+        blogPosts.forEach((post, index) => {
+            const postElement = document.createElement('article');
+            postElement.className = 'post-card fade-in';
+            postElement.style.animationDelay = `${index * 0.1}s`;
+            
+            postElement.innerHTML = `
+                <div class="post-image">
+                    <img src="${post.image}" alt="${post.title}" 
+                         onerror="this.src='https://via.placeholder.com/400x250/6065FF/ffffff?text=Post'">
+                </div>
+                <div class="post-content">
+                    <div class="post-meta">
+                        <span class="post-tag">${post.category}</span>
+                        <span class="post-date">${formatDate(post.date)}</span>
+                    </div>
+                    <h3 class="post-title">${post.title}</h3>
+                    <p class="post-excerpt">${post.excerpt}</p>
+                    <a href="post.html?slug=${post.slug}" class="read-more">Read more</a>
+                </div>
+            `;
+
+            container.appendChild(postElement);
+        });
+    }
+
+    // Funció per formatar data
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const months = [
+            'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
+            'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'
+        ];
+        
+        return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
+    }
+
+    // Funcionalitat de navegació suau
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Inicialitzar la pàgina
+    document.addEventListener('DOMContentLoaded', () => {
+        loadAllPosts();
+    });
+</script>
 </body>
 </html>
