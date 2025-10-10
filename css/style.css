@@ -25,7 +25,7 @@ body {
 
 /* Header con imagen de fondo */
 header {
-    background: url('../assets/images/header.png') center/cover no-repeat, linear-gradient(135deg, var(--electric-blue), var(--dark-blue));
+    background-image: url('../assets/images/header.jpeg'); 
     color: var(--white);
     padding: 2rem 0;
     box-shadow: var(--shadow);
@@ -61,7 +61,14 @@ h1 {
     margin-bottom: 0.5rem;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
+h1 a{
+    color: var(--white);
+    text-decoration: none;
+}
 
+h1 a:hover, h1 a::after {
+    color: var(--text-dark);
+}
 .subtitle {
     font-size: 1.2rem;
     opacity: 0.9;
@@ -208,7 +215,7 @@ section {
 }
 
 .about-btn {
-    background: var(--electric-blue);
+    background: rgba(var(96,101,255),1);;
     color: var(--white);
     padding: 0.75rem 2rem;
     border: none;
@@ -222,7 +229,7 @@ section {
 }
 
 .about-btn:hover {
-    background: var(--dark-blue);
+    background: #3F43A9;
 }
 
 .about-image {
