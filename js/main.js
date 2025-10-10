@@ -1,666 +1,379 @@
-// Configuración global
-const CONFIG = {
-    postsPerPage: 6,
-    postsDirectory: 'posts',
-    githubRepo: 'https://github.com/raquelalaman/raquelalaman.github.io/tree/main/posts', 
-    currentPage: 1,
-    totalPosts: 0,
-    allPosts: [],
-    siteName: 'Mi Blog Personal',
-    authorName: 'Tu Nombre'
+// Configuración del blog
+const BLOG_CONFIG = {
+    postsDirectory: 'posts/',
+    maxPosts: 12,
+    defaultImage: 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+    githubAPI: null // Se configurará automáticamente si está en GitHub Pages
 };
 
-// Variables globales para el estado de la aplicación
-let currentSection = 'home';
-let isLoading = false;
+let blogPosts = [];
 
-// Inicialización de la aplicación
-document.addEventListener('DOMContentLoaded', function() {
-    // Configurar marked.js para procesamiento de markdown
-    marked.setOptions({
-        highlight: function(code, lang) {
-            if (lang && hljs.getLanguage(lang)) {
-                try {
-                    return hljs.highlight(code, { language: lang }).value;
-                } catch (err) {}
-            }
-            return hljs.highlightAuto(code).value;
-        },
-        breaks: true,
-        gfm: true
-    });
-
-    // Detectar automáticamente el repositorio de GitHub
-    detectGithubRepo();
-    
-    // Cargar posts iniciales
-    loadPosts();
-    
-    // Configurar eventos
-    setupEventListeners();
-});
-
-// Detecta automáticamente el repositorio de GitHub desde la URL
-function detectGithubRepo() {
+// Detectar si estamos en GitHub Pages y configurar API
+function detectGitHubAPI() {
     const hostname = window.location.hostname;
     if (hostname.includes('github.io')) {
         const parts = hostname.split('.');
-        if (parts.length >= 3) {
+        if (parts.length >= 2) {
             const username = parts[0];
-            const repoName = window.location.pathname.split('/')[1] || `${username}.github.io`;
-            CONFIG.githubRepo = `https://api.github.com/repos/${username}/${repoName}/contents/${CONFIG.postsDirectory}`;
+            const repoName = window.location.pathname.split('/')[1] || username + '.github.io';
+            BLOG_CONFIG.githubAPI = `https://api.github.com/repos/${username}/${repoName}/contents/${BLOG_CONFIG.postsDirectory}`;
         }
     }
 }
 
-// Configurar event listeners
-function setupEventListeners() {
-    // Configurar resaltado de sintaxis después de cargar contenido
-    document.addEventListener('DOMContentLoaded', function() {
-        hljs.highlightAll();
+// Función para parsear el front matter YAML
+function parseFrontMatter(content) {
+    const frontMatterRegex = /^---\s*\r?\n([\s\S]*?)\r?\n---\s*\r?\n([\s\S]*)$/;
+    const match = content.match(frontMatterRegex);
+    
+    if (!match) {
+        return { 
+            frontMatter: {}, 
+            content: content 
+        };
+    }
+    
+    const frontMatterText = match[1];
+    const markdownContent = match[2];
+    const frontMatter = {};
+    
+    // Parsear líneas del front matter
+    frontMatterText.split(/\r?\n/).forEach(line => {
+        const colonIndex = line.indexOf(':');
+        if (colonIndex > 0) {
+            const key = line.substring(0, colonIndex).trim();
+            let value = line.substring(colonIndex + 1).trim();
+            
+            // Remover comillas si las hay
+            if ((value.startsWith('"') && value.endsWith('"')) || 
+                (value.startsWith("'") && value.endsWith("'"))) {
+                value = value.slice(1, -1);
+            }
+            
+            frontMatter[key] = value;
+        }
     });
+    
+    return { frontMatter, content: markdownContent };
 }
 
-// Función principal para cargar posts
-async function loadPosts() {
-    if (isLoading) return;
+// Función para extraer excerpt del contenido
+function extractExcerpt(content, maxLength = 160) {
+    let plainText = content
+        .replace(/^#{1,6}\s+/gm, '') // Remover headers
+        .replace(/\*\*(.*?)\*\*/g, '$1') // Remover bold
+        .replace(/\*(.*?)\*/g, '$1') // Remover italic
+        .replace(/`(.*?)`/g, '$1') // Remover code
+        .replace(/\[(.*?)\]\(.*?\)/g, '$1') // Remover links
+        .replace(/!\[.*?\]\(.*?\)/g, '') // Remover images
+        .replace(/^\s*[-*+]\s+/gm, '') // Remover bullets
+        .replace(/^\s*\d+\.\s+/gm, '') // Remover números
+        .replace(/\r?\n\s*\r?\n/g, ' ') // Remover líneas dobles
+        .replace(/\s+/g, ' ') // Normalizar espacios
+        .trim();
     
-    showLoading(true);
-    
-    try {
-        // Intentar cargar desde GitHub API
-        if (CONFIG.githubRepo) {
-            await loadFromGithubAPI();
-        } else {
-            // Cargar posts de ejemplo si no hay repositorio configurado
-            loadExamplePosts();
+    if (plainText.length > maxLength) {
+        plainText = plainText.substring(0, maxLength).trim();
+        // Cortar en la última palabra completa
+        const lastSpace = plainText.lastIndexOf(' ');
+        if (lastSpace > maxLength - 50) {
+            plainText = plainText.substring(0, lastSpace);
         }
-        
-        displayPosts();
-        updatePagination();
-        
-    } catch (error) {
-        console.error('Error cargando posts:', error);
-        loadExamplePosts();
-        displayPosts();
-        updatePagination();
-        
-        // Mostrar mensaje de bienvenida en consola
-        console.log('%c¡Bienvenido al blog! 🚀', 'color: #2563eb; font-size: 16px; font-weight: bold;');
-        console.log('%cTema con paleta azul, gris y blanco inspirado en portfolios profesionales', 'color: #3b82f6; font-size: 12px;');
+        plainText += '...';
     }
     
-    showLoading(false);
+    return plainText;
 }
 
-// Cargar posts desde la API de GitHub
-async function loadFromGithubAPI() {
+// Función para obtener lista de archivos desde GitHub API
+async function getPostsFromGitHubAPI() {
     try {
-        const response = await fetch(CONFIG.githubRepo);
+        const response = await fetch(BLOG_CONFIG.githubAPI);
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error(`GitHub API error: ${response.status}`);
         }
         
         const files = await response.json();
-        const markdownFiles = files.filter(file => 
-            file.name.endsWith('.md') && file.type === 'file'
-        );
-        
-        CONFIG.allPosts = [];
-        
-        for (const file of markdownFiles) {
-            try {
-                const postResponse = await fetch(file.download_url);
-                const content = await postResponse.text();
-                const post = parseMarkdownPost(content, file.name);
-                if (post) {
-                    CONFIG.allPosts.push(post);
-                }
-            } catch (error) {
-                console.error(`Error cargando post ${file.name}:`, error);
-            }
-        }
-        
-        // Ordenar posts por fecha (más recientes primero)
-        CONFIG.allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-        CONFIG.totalPosts = CONFIG.allPosts.length;
-        
+        return files
+            .filter(file => file.name.endsWith('.md') && file.type === 'file')
+            .map(file => ({
+                name: file.name,
+                download_url: file.download_url
+            }));
     } catch (error) {
-        console.error('Error cargando desde GitHub API:', error);
-        throw error;
+        console.error('Error accessing GitHub API:', error);
+        return [];
     }
 }
 
-// Parsear contenido markdown y extraer metadatos
-function parseMarkdownPost(content, filename) {
-    try {
-        const lines = content.split('\n');
-        let frontMatterEnd = -1;
-        let frontMatter = {};
-        
-        // Detectar y parsear front matter (YAML)
-        if (lines[0].trim() === '---') {
-            for (let i = 1; i < lines.length; i++) {
-                if (lines[i].trim() === '---') {
-                    frontMatterEnd = i;
-                    break;
-                }
-                const line = lines[i].trim();
-                if (line.includes(':')) {
-                    const [key, ...valueParts] = line.split(':');
-                    const value = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
-                    frontMatter[key.trim()] = value;
-                }
+// Función para obtener lista de archivos local (método de fallback)
+async function getPostsLocally() {
+    // Lista de archivos conocidos (puedes expandir esta lista)
+    const knownFiles = [
+        '2025-01-15-chatgpt5.md',
+        '2025-01-10-generacio-recursos-ia.md',
+        '2025-01-08-educacio-ia-dades.md',
+        '2025-01-05-uniser-teacher-week.md'
+    ];
+    
+    const posts = [];
+    
+    for (const filename of knownFiles) {
+        try {
+            const response = await fetch(BLOG_CONFIG.postsDirectory + filename);
+            if (response.ok) {
+                posts.push({
+                    name: filename,
+                    download_url: BLOG_CONFIG.postsDirectory + filename
+                });
             }
+        } catch (error) {
+            console.log(`File ${filename} not found locally`);
+        }
+    }
+    
+    return posts;
+}
+
+// Función para cargar un post individual
+async function loadPost(fileInfo) {
+    try {
+        const response = await fetch(fileInfo.download_url);
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
         }
         
-        // Contenido markdown (sin front matter)
-        const markdownContent = frontMatterEnd > -1 
-            ? lines.slice(frontMatterEnd + 1).join('\n')
-            : content;
+        const content = await response.text();
+        const { frontMatter, content: markdownContent } = parseFrontMatter(content);
         
-        // Extraer título si no está en front matter
-        let title = frontMatter.title;
-        if (!title) {
-            const titleMatch = markdownContent.match(/^#\s+(.+)/m);
-            title = titleMatch ? titleMatch[1] : filename.replace('.md', '').replace(/^\d{4}-\d{2}-\d{2}-/, '');
-        }
+        // Extraer información del archivo
+        const filename = fileInfo.name;
+        const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/);
+        const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
         
-        // Extraer fecha
-        let date = frontMatter.date;
-        if (!date) {
-            // Intentar extraer fecha del nombre del archivo (formato: YYYY-MM-DD-titulo.md)
-            const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/);
-            date = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
-        }
-        
-        // Generar excerpt
-        const plainText = markdownContent
-            .replace(/^#+\s+/gm, '')
-            .replace(/\*\*(.+?)\*\*/g, '$1')
-            .replace(/\*(.+?)\*/g, '$1')
-            .replace(/`(.+?)`/g, '$1')
-            .replace(/\[(.+?)\]\(.+?\)/g, '$1')
-            .replace(/!\[.*?\]\(.+?\)/g, '')
-            .replace(/\n\s*\n/g, ' ')
-            .trim();
-        
-        const excerpt = frontMatter.excerpt || plainText.substring(0, 200) + (plainText.length > 200 ? '...' : '');
-        
-        return {
-            id: filename.replace('.md', ''),
-            title: title,
-            date: date,
+        // Generar datos del post
+        const post = {
+            id: slug,
+            slug: slug,
+            filename: filename,
+            title: frontMatter.title || slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+            date: frontMatter.date || (dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0]),
             author: frontMatter.author || 'Autor',
-            excerpt: excerpt,
+            excerpt: frontMatter.excerpt || extractExcerpt(markdownContent),
             content: markdownContent,
-            tags: frontMatter.tags ? frontMatter.tags.split(',').map(tag => tag.trim()) : [],
-            image: frontMatter.image || null,
-            filename: filename
+            image: frontMatter.image || generatePostImage(frontMatter.title || slug),
+            tags: frontMatter.tags ? frontMatter.tags.split(',').map(tag => tag.trim()) : ['General'],
+            category: frontMatter.category || (frontMatter.tags ? frontMatter.tags.split(',')[0].trim() : 'General')
         };
+        
+        return post;
     } catch (error) {
-        console.error('Error parseando post:', error);
+        console.error(`Error loading post ${fileInfo.name}:`, error);
         return null;
     }
 }
 
-// Cargar posts de ejemplo cuando no hay repositorio configurado
-function loadExamplePosts() {
-    CONFIG.allPosts = [
-        {
-            id: 'welcome-post',
-            title: 'Bienvenido a tu nuevo blog',
-            date: '2024-01-15',
-            author: 'Autor del Blog',
-            excerpt: 'Este es tu primer post de ejemplo. Aquí puedes escribir sobre cualquier tema que te interese usando formato Markdown.',
-            image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            content: `# Bienvenido a tu nuevo blog
-
-¡Felicidades! Has configurado exitosamente tu blog personal usando GitHub Pages.
-
-## Características principales
-
-Este tema de blog incluye:
-
-- **Diseño responsive**: Se ve perfecto en cualquier dispositivo
-- **Soporte para Markdown**: Escribe tus posts usando la sintaxis familiar de Markdown
-- **Resaltado de sintaxis**: Perfecto para compartir código
-- **Navegación intuitiva**: Fácil de usar para tus lectores
-
-## Cómo agregar un nuevo post
-
-1. Crea un archivo \`.md\` en la carpeta \`posts/\`
-2. Agrega front matter al inicio del archivo:
-
-\`\`\`yaml
----
-title: "Título de tu post"
-date: "2024-01-15"
-author: "Tu nombre"
-excerpt: "Breve descripción del post"
-tags: "tecnología, web, desarrollo"
----
-\`\`\`
-
-3. Escribe tu contenido en Markdown
-4. ¡Publícalo con git push!
-
-## Ejemplo de código
-
-\`\`\`javascript
-function saludar(nombre) {
-    return \`¡Hola, \${nombre}!\`;
+// Función para generar imagen de placeholder
+function generatePostImage(title) {
+    const colors = ['4F46E5', '059669', 'DC2626', 'D97706', '7C2D12'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    const encodedTitle = encodeURIComponent(title?.substring(0, 20) || 'Post');
+    return `https://via.placeholder.com/800x400/${randomColor}/ffffff?text=${encodedTitle}`;
 }
 
-console.log(saludar('Mundo'));
-\`\`\`
-
-¡Empieza a escribir y comparte tus ideas con el mundo!`,
-            tags: ['blog', 'inicio', 'github-pages'],
-            filename: 'welcome-post.md'
-        },
-        {
-            id: 'markdown-guide',
-            title: 'Guía rápida de Markdown',
-            date: '2024-01-10',
-            author: 'Autor del Blog',
-            excerpt: 'Aprende los elementos básicos de Markdown para escribir posts atractivos y bien formateados.',
-            image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            content: `# Guía rápida de Markdown
-
-Markdown es un lenguaje de marcado ligero que te permite formatear texto de manera sencilla.
-
-## Encabezados
-
-\`\`\`markdown
-# Encabezado 1
-## Encabezado 2
-### Encabezado 3
-\`\`\`
-
-## Texto
-
-- **Texto en negrita**
-- *Texto en cursiva*
-- \`Código inline\`
-- [Enlaces](https://example.com)
-
-## Listas
-
-### Lista con viñetas
-- Elemento 1
-- Elemento 2
-- Elemento 3
-
-### Lista numerada
-1. Primer elemento
-2. Segundo elemento
-3. Tercer elemento
-
-## Citas
-
-> Esta es una cita en bloque.
-> Muy útil para destacar texto importante.
-
-## Código
-
-\`\`\`html
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Mi página</title>
-</head>
-<body>
-    <h1>¡Hola mundo!</h1>
-</body>
-</html>
-\`\`\`
-
-¡Con estos elementos básicos puedes crear posts increíbles!`,
-            tags: ['markdown', 'tutorial', 'escritura'],
-            filename: 'markdown-guide.md'
-        },
-        {
-            id: 'tips-blog',
-            title: 'Tips para un blog exitoso',
-            date: '2024-01-05',
-            author: 'Autor del Blog',
-            excerpt: 'Consejos prácticos para crear contenido de calidad y hacer crecer tu audiencia.',
-            image: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-            content: `# Tips para un blog exitoso
-
-Crear un blog exitoso requiere tiempo, dedicación y estrategia. Aquí tienes algunos consejos:
-
-## 1. Contenido de calidad
-
-- Escribe sobre temas que conoces y te apasionan
-- Investiga antes de escribir
-- Proporciona valor real a tus lectores
-- Mantén un tono consistente
-
-## 2. Consistencia
-
-- Establece un calendario de publicación
-- Mantén un diseño coherente
-- Usa un estilo de escritura consistente
-
-## 3. SEO básico
-
-- Usa títulos descriptivos
-- Incluye palabras clave relevantes
-- Optimiza las imágenes
-- Crea meta descripciones atractivas
-
-## 4. Interacción con lectores
-
-- Responde a los comentarios
-- Haz preguntas al final de los posts
-- Comparte en redes sociales
-- Colabora con otros bloggers
-
-## 5. Análisis y mejora
-
-- Usa Google Analytics
-- Revisa qué contenido funciona mejor
-- Aprende de tus errores
-- Adapta tu estrategia según los resultados
-
-¡Recuerda que el éxito no llega de la noche a la mañana!`,
-            tags: ['blogging', 'consejos', 'seo'],
-            filename: 'tips-blog.md'
+// Función principal para cargar todos los posts
+async function loadAllPosts() {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const postsContainer = document.getElementById('posts-container');
+    const errorMessage = document.getElementById('error-message');
+    
+    // Mostrar loading
+    loadingIndicator.style.display = 'block';
+    postsContainer.style.display = 'none';
+    errorMessage.style.display = 'none';
+    
+    console.log('🚀 Iniciando carga de posts...');
+    
+    try {
+        detectGitHubAPI();
+        
+        let files = [];
+        
+        // Intentar GitHub API primero
+        if (BLOG_CONFIG.githubAPI) {
+            console.log('📡 Intentando GitHub API:', BLOG_CONFIG.githubAPI);
+            files = await getPostsFromGitHubAPI();
         }
-    ];
-    
-    CONFIG.totalPosts = CONFIG.allPosts.length;
-}
-
-// Mostrar/ocultar indicador de carga
-function showLoading(show) {
-    const loading = document.getElementById('loading');
-    if (loading) {
-        loading.style.display = show ? 'block' : 'none';
+        
+        // Fallback a método local
+        if (files.length === 0) {
+            console.log('📁 Intentando método local...');
+            files = await getPostsLocally();
+        }
+        
+        console.log(`📄 Encontrados ${files.length} archivos`);
+        
+        if (files.length === 0) {
+            throw new Error('No se han encontrado archivos de posts en la carpeta posts/');
+        }
+        
+        // Cargar posts en paralelo
+        const postPromises = files.slice(0, BLOG_CONFIG.maxPosts).map(loadPost);
+        const loadedPosts = await Promise.all(postPromises);
+        
+        // Filtrar posts válidos y ordenar por fecha
+        blogPosts = loadedPosts
+            .filter(post => post !== null)
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        console.log(`✅ ${blogPosts.length} posts cargados exitosamente`);
+        
+        if (blogPosts.length === 0) {
+            throw new Error('No se han podido procesar los archivos de posts');
+        }
+        
+        // Renderizar posts
+        renderPosts();
+        
+    } catch (error) {
+        console.error('❌ Error cargando posts:', error);
+        showError(error.message);
     }
-    isLoading = show;
 }
 
-// Mostrar posts en la página principal
-function displayPosts() {
-    const postsGrid = document.getElementById('posts-grid');
-    if (!postsGrid) return;
+// Función para renderizar los posts
+function renderPosts() {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const postsContainer = document.getElementById('posts-container');
     
-    const startIndex = (CONFIG.currentPage - 1) * CONFIG.postsPerPage;
-    const endIndex = startIndex + CONFIG.postsPerPage;
-    const postsToShow = CONFIG.allPosts.slice(startIndex, endIndex);
+    loadingIndicator.style.display = 'none';
+    postsContainer.style.display = 'grid';
+    postsContainer.innerHTML = '';
     
-    postsGrid.innerHTML = '';
-    
-    postsToShow.forEach(post => {
-        const postCard = createPostCard(post);
-        postsGrid.appendChild(postCard);
+    blogPosts.forEach((post, index) => {
+        const postElement = createPostElement(post, index);
+        postsContainer.appendChild(postElement);
     });
 }
 
-// Crear tarjeta de post
-function createPostCard(post) {
-    const card = document.createElement('div');
-    card.className = 'post-card';
-    card.onclick = () => showPost(post);
+// Función para crear elemento de post
+function createPostElement(post, index) {
+    const article = document.createElement('article');
+    article.className = 'post-card fade-in';
+    article.style.animationDelay = `${index * 0.1}s`;
     
-    const formattedDate = formatDate(post.date);
-    const readingTime = calculateReadingTime(post.content);
-    const tagsHtml = post.tags.length > 0 
-        ? `<div class="post-tags" style="margin-top: 1rem;">${post.tags.slice(0, 3).map(tag => `<span style="display: inline-block; background: var(--primary-blue); color: white; padding: 0.25rem 0.75rem; border-radius: 6px; font-size: 0.75rem; margin-right: 0.5rem; font-weight: 500;">${tag}</span>`).join('')}</div>`
-        : '';
-    
-    const imageHtml = post.image 
-        ? `<img src="${post.image}" alt="${post.title}" class="post-image" loading="lazy">` 
-        : '';
-    
-    card.innerHTML = `
-        ${imageHtml}
-        <h3>${post.title}</h3>
-        <div class="post-meta">
-            <span><i class="fas fa-calendar"></i> ${formattedDate}</span>
-            <span><i class="fas fa-clock"></i> ${readingTime} min</span>
+    article.innerHTML = `
+        <div class="post-image">
+            <img src="${post.image}" 
+                 alt="${post.title}" 
+                 loading="lazy"
+                 onerror="this.src='${BLOG_CONFIG.defaultImage}'">
         </div>
-        <p class="post-excerpt">${post.excerpt}</p>
-        ${tagsHtml}
-        <a href="#" class="read-more">
-            Leer más <i class="fas fa-arrow-right"></i>
-        </a>
-    `;
-    
-    return card;
-}
-
-// Formatear fecha
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('es-ES', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
-}
-
-// Calcular tiempo de lectura estimado
-function calculateReadingTime(content) {
-    const wordsPerMinute = 200;
-    const words = content.trim().split(/\s+/).length;
-    const minutes = Math.ceil(words / wordsPerMinute);
-    return Math.max(1, minutes);
-}
-
-// Mostrar post individual
-function showPost(post) {
-    const postSection = document.getElementById('post-section');
-    const postContent = document.getElementById('post-content');
-    
-    if (!postSection || !postContent) return;
-    
-    // Procesar markdown a HTML
-    const htmlContent = marked.parse(post.content);
-    
-    const formattedDate = formatDate(post.date);
-    
-    const postImageHtml = post.image 
-        ? `<img src="${post.image}" alt="${post.title}" class="post-hero-image" style="width: 100%; height: 300px; object-fit: cover; border-radius: var(--border-radius-lg); margin-bottom: 2rem;">` 
-        : '';
-    
-    postContent.innerHTML = `
-        <div class="post-header">
-            <h1>${post.title}</h1>
-            <div class="post-meta" style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--gray-200);">
-                <span><i class="fas fa-calendar"></i> ${formattedDate}</span>
-                <span><i class="fas fa-user"></i> ${post.author}</span>
-                <span><i class="fas fa-clock"></i> ${calculateReadingTime(post.content)} min de lectura</span>
-                ${post.tags.length > 0 ? `<div style="margin-top: 1rem;">${post.tags.map(tag => `<span style="display: inline-block; background: var(--primary-blue); color: white; padding: 0.375rem 1rem; border-radius: 6px; font-size: 0.8rem; margin-right: 0.75rem; margin-bottom: 0.5rem; font-weight: 500;">${tag}</span>`).join('')}</div>` : ''}
+        <div class="post-content">
+            <div class="post-meta">
+                <span class="post-tag">${post.category}</span>
+                <time class="post-date" datetime="${post.date}">
+                    ${formatDate(post.date)}
+                </time>
             </div>
-        </div>
-        ${postImageHtml}
-        <div class="post-body">
-            ${htmlContent}
+            <h3 class="post-title">${post.title}</h3>
+            <p class="post-excerpt">${post.excerpt}</p>
+            <a href="post.html?slug=${post.slug}" class="read-more">
+                Read more
+            </a>
         </div>
     `;
     
-    // Cambiar a la sección de post
-    showSection('post');
-    
-    // Resaltar código después de cargar contenido
-    setTimeout(() => {
-        hljs.highlightAll();
-    }, 100);
-    
-    // Scroll al inicio
-    window.scrollTo(0, 0);
+    return article;
 }
 
-// Actualizar paginación
-function updatePagination() {
-    const pagination = document.getElementById('pagination');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const pageInfo = document.getElementById('page-info');
-    
-    if (!pagination || CONFIG.totalPosts <= CONFIG.postsPerPage) {
-        pagination.style.display = 'none';
-        return;
-    }
-    
-    pagination.style.display = 'flex';
-    
-    const totalPages = Math.ceil(CONFIG.totalPosts / CONFIG.postsPerPage);
-    
-    prevBtn.disabled = CONFIG.currentPage === 1;
-    nextBtn.disabled = CONFIG.currentPage === totalPages;
-    
-    pageInfo.textContent = `Página ${CONFIG.currentPage} de ${totalPages}`;
-}
-
-// Navegación entre páginas
-function loadPreviousPage() {
-    if (CONFIG.currentPage > 1) {
-        CONFIG.currentPage--;
-        displayPosts();
-        updatePagination();
-        window.scrollTo(0, 0);
-    }
-}
-
-function loadNextPage() {
-    const totalPages = Math.ceil(CONFIG.totalPosts / CONFIG.postsPerPage);
-    if (CONFIG.currentPage < totalPages) {
-        CONFIG.currentPage++;
-        displayPosts();
-        updatePagination();
-        window.scrollTo(0, 0);
-    }
-}
-
-// Navegación entre secciones
-function showSection(sectionName) {
-    // Ocultar todas las secciones
-    document.querySelectorAll('.content-section').forEach(section => {
-        section.classList.remove('active');
-    });
-    
-    // Mostrar sección seleccionada
-    const targetSection = document.getElementById(`${sectionName}-section`);
-    if (targetSection) {
-        targetSection.classList.add('active');
-    }
-    
-    // Actualizar navegación
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-    });
-    
-    const activeLink = document.getElementById(`${sectionName}-link`);
-    if (activeLink) {
-        activeLink.classList.add('active');
-    }
-    
-    currentSection = sectionName;
-    
-    // Cerrar menú móvil si está abierto
-    const nav = document.querySelector('.nav');
-    if (nav) {
-        nav.classList.remove('active');
-    }
-}
-
-function showHome() {
-    showSection('home');
-    CONFIG.currentPage = 1;
-    displayPosts();
-    updatePagination();
-}
-
-function showAbout() {
-    showSection('about');
-}
-
-function showArchive() {
-    showSection('archive');
-    displayArchive();
-}
-
-// Mostrar archivo de posts
-function displayArchive() {
-    const archiveList = document.getElementById('archive-list');
-    if (!archiveList) return;
-    
-    archiveList.innerHTML = '';
-    
-    CONFIG.allPosts.forEach(post => {
-        const archiveItem = document.createElement('div');
-        archiveItem.className = 'archive-item';
-        archiveItem.onclick = () => showPost(post);
+// Función para formatear fechas
+function formatDate(dateString) {
+    try {
+        const date = new Date(dateString);
+        const months = [
+            'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
+            'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'
+        ];
         
-        const formattedDate = formatDate(post.date);
-        
-        archiveItem.innerHTML = `
-            <a href="#" class="archive-title">${post.title}</a>
-            <span class="archive-date">${formattedDate}</span>
-        `;
-        
-        archiveList.appendChild(archiveItem);
-    });
-}
-
-// Toggle menú móvil
-function toggleMobileMenu() {
-    const nav = document.querySelector('.nav');
-    if (nav) {
-        nav.classList.toggle('active');
+        return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
+    } catch (error) {
+        return dateString;
     }
 }
 
-// Funciones de utilidad
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+// Función para mostrar errores
+function showError(message) {
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const postsContainer = document.getElementById('posts-container');
+    const errorMessage = document.getElementById('error-message');
+    const errorDetails = document.getElementById('error-details');
+    
+    loadingIndicator.style.display = 'none';
+    postsContainer.style.display = 'none';
+    errorMessage.style.display = 'block';
+    
+    errorDetails.textContent = message;
+    
+    // Información de debug
+    console.group('🔍 Debug Information');
+    console.log('Current URL:', window.location.href);
+    console.log('Posts directory:', BLOG_CONFIG.postsDirectory);
+    console.log('GitHub API:', BLOG_CONFIG.githubAPI);
+    console.log('Loaded posts:', blogPosts.length);
+    console.groupEnd();
 }
 
-// Manejo de errores global
-window.addEventListener('error', function(e) {
-    console.error('Error global:', e.error);
-});
-
-// Añadir efectos de hover suaves con colores azules
-function addHoverEffects() {
-    document.addEventListener('mouseover', (e) => {
-        if (e.target.matches('.post-card')) {
-            e.target.style.transform = 'translateY(-2px)';
-            e.target.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
-        }
-        if (e.target.matches('.tech-tag, .archive-item')) {
-            e.target.style.transform = 'translateY(-1px)';
-        }
-    });
-    
-    document.addEventListener('mouseout', (e) => {
-        if (e.target.matches('.post-card, .tech-tag, .archive-item')) {
-            e.target.style.transform = 'translateY(0)';
-            if (e.target.matches('.post-card')) {
-                e.target.style.boxShadow = '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)';
+// Funcionalidad de navegación suave
+function setupSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+            
+            if (targetElement) {
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const elementPosition = targetElement.offsetTop;
+                const offsetPosition = elementPosition - headerHeight - 20;
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
             }
-        }
+        });
     });
 }
 
-// Evento de redimensionamiento de ventana
-window.addEventListener('resize', debounce(() => {
-    // Cerrar menú móvil al redimensionar
-    const nav = document.querySelector('.nav');
-    if (nav && window.innerWidth > 768) {
-        nav.classList.remove('active');
+// Función de inicialización
+function initializeBlog() {
+    console.log('🎯 Inicializando Code thinking blog...');
+    
+    // Configurar navegación suave
+    setupSmoothScrolling();
+    
+    // Cargar posts
+    loadAllPosts();
+    
+    // Configurar Marked.js si está disponible
+    if (typeof marked !== 'undefined') {
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
     }
-}, 250));
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', initializeBlog);
+
+// Función global para reintentar carga (usada por el botón de retry)
+window.loadAllPosts = loadAllPosts;
+
+// Exportar funciones para uso global
+window.blogUtils = {
+    loadAllPosts,
+    formatDate,
+    blogPosts: () => blogPosts
+};
