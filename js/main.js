@@ -2,7 +2,7 @@
 const CONFIG = {
     postsPerPage: 6,
     postsDirectory: 'posts',
-    githubRepo: '', // Se configurará automáticamente
+    githubRepo: 'https://github.com/raquelalaman/raquelalaman.github.io/tree/main/posts', 
     currentPage: 1,
     totalPosts: 0,
     allPosts: [],
