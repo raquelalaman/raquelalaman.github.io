@@ -117,148 +117,55 @@
     </footer>
 
     <script>
-    // Configuració dels posts
-    const postsDirectory = 'posts/';
-    const postFiles = [
-        '2025-11-08-chatgpt5.md',
-        '2024-01-12-guia-markdown.md',
-        '2024-01-10-css-grid-flexbox.md'
-    ];
-    
     let blogPosts = [];
 
-    // Funció per parsear el front matter YAML
-    function parseFrontMatter(content) {
-        const frontMatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-        const match = content.match(frontMatterRegex);
-        
-        if (!match) {
-            console.log('No s\'ha trobat front matter');
-            return { frontMatter: {}, content: content };
+    // Dades dels posts (ho pots generar automàticament amb Jekyll)
+    // Alternativament, crea un fitxer posts.json amb Jekyll
+    const postsData = [
+        {
+            slug: "chatgpt5",
+            title: "GPT-5… és el que esperàvem?",
+            date: "2025-11-08",
+            author: "Raquel",
+            category: "GenAI",
+            tags: ["GenAI", "GPT"],
+            image: "assets/images/gpt-5.jpg",
+            excerpt: "El nou llançament de ChatGPT-5 presenta novetats però no són tant novedoses",
+            url: "/blog/2025/11/08/chatgpt5/"
+        },
+        {
+            slug: "guia-markdown",
+            title: "Guía completa de Markdown para bloggers",
+            date: "2024-01-12",
+            author: "Autor del Blog",
+            category: "markdown",
+            tags: ["markdown", "tutorial", "escritura", "blogging"],
+            image: "https://via.placeholder.com/400x250/6065FF/ffffff?text=Markdown",
+            excerpt: "Aprende todo lo que necesitas saber sobre Markdown para crear posts de blog profesionales y bien formateados.",
+            url: "/blog/2024/01/12/guia-markdown/"
+        },
+        {
+            slug: "css-grid-flexbox",
+            title: "CSS Grid vs Flexbox: Cuándo usar cada uno",
+            date: "2024-01-10",
+            author: "Autor del Blog",
+            category: "css",
+            tags: ["css", "grid", "flexbox", "layout", "desarrollo-web"],
+            image: "https://via.placeholder.com/400x250/6065FF/ffffff?text=CSS",
+            excerpt: "Una guía práctica sobre las diferencias entre CSS Grid y Flexbox, con ejemplos reales de cuándo usar cada tecnología de layout.",
+            url: "/blog/2024/01/10/css-grid-flexbox/"
         }
-        
-        const frontMatterText = match[1];
-        const markdownContent = match[2];
-        const frontMatter = {};
-        
-        frontMatterText.split('\n').forEach(line => {
-            const colonIndex = line.indexOf(':');
-            if (colonIndex > 0) {
-                const key = line.substring(0, colonIndex).trim();
-                const value = line.substring(colonIndex + 1).trim().replace(/^["']|["']$/g, '');
-                frontMatter[key] = value;
-            }
-        });
-        
-        return { frontMatter, content: markdownContent };
-    }
+    ];
 
-    // Funció per extreure excerpt del contingut
-    function extractExcerpt(content, maxLength = 150) {
-        let plainText = content
-            .replace(/^#{1,6}\s+/gm, '')
-            .replace(/\*\*(.*?)\*\*/g, '$1')
-            .replace(/\*(.*?)\*/g, '$1')
-            .replace(/`(.*?)`/g, '$1')
-            .replace(/\[(.*?)\]\(.*?\)/g, '$1')
-            .replace(/^\s*[-*+]\s+/gm, '')
-            .replace(/^\s*\d+\.\s+/gm, '')
-            .replace(/\n\s*\n/g, ' ')
-            .trim();
+    // Funció per formatar data
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const months = [
+            'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
+            'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'
+        ];
         
-        if (plainText.length > maxLength) {
-            plainText = plainText.substring(0, maxLength) + '...';
-        }
-        
-        return plainText;
-    }
-
-    // Funció per carregar un fitxer markdown
-    async function loadMarkdownFile(filename) {
-        try {
-            console.log('Intentant carregar:', postsDirectory + filename);
-            const response = await fetch(postsDirectory + filename);
-            
-            console.log('Resposta status:', response.status, 'per a', filename);
-            
-            if (!response.ok) {
-                console.error(`Error carregant ${filename}: ${response.status}`);
-                return null;
-            }
-            
-            const content = await response.text();
-            console.log('Contingut carregat per a', filename, '- Longitud:', content.length);
-            
-            const { frontMatter, content: markdownContent } = parseFrontMatter(content);
-            console.log('Front matter:', frontMatter);
-            
-            const dateMatch = filename.match(/^(\d{4}-\d{2}-\d{2})/);
-            const date = frontMatter.date || (dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0]);
-            
-            const slug = filename.replace(/^\d{4}-\d{2}-\d{2}-/, '').replace(/\.md$/, '');
-            
-            // Generar imatge per defecte basada en el títol
-            const defaultImage = `https://via.placeholder.com/400x250/6065FF/ffffff?text=${encodeURIComponent(frontMatter.title || 'Post')}`;
-            
-            const post = {
-                slug,
-                title: frontMatter.title || slug.replace(/-/g, ' '),
-                date: date,
-                author: frontMatter.author || 'Autor',
-                category: frontMatter.tags ? frontMatter.tags.split(',')[0].trim() : 'General',
-                tags: frontMatter.tags ? frontMatter.tags.split(',').map(t => t.trim()) : [],
-                image: frontMatter.image || defaultImage,
-                excerpt: frontMatter.excerpt || extractExcerpt(markdownContent),
-                content: markdownContent,
-                filename: filename
-            };
-            
-            console.log('Post creat:', post.title);
-            return post;
-            
-        } catch (error) {
-            console.error(`Error carregant ${filename}:`, error);
-            return null;
-        }
-    }
-
-    // Funció per carregar tots els posts
-    async function loadAllPosts() {
-        const container = document.getElementById('posts-container');
-        container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-        
-        console.log('Iniciant càrrega de posts...');
-        console.log('Fitxers a carregar:', postFiles);
-        
-        try {
-            const promises = postFiles.map(loadMarkdownFile);
-            const posts = await Promise.all(promises);
-            
-            console.log('Posts carregats:', posts);
-            console.log('Posts no nuls:', posts.filter(p => p !== null));
-            
-            blogPosts = posts
-                .filter(post => post !== null)
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(0, 6);
-            
-            console.log('Posts finals a mostrar:', blogPosts.length);
-            
-            if (blogPosts.length === 0) {
-                console.warn('No s\'han pogut carregar cap post!');
-            }
-            
-            renderPosts();
-        } catch (error) {
-            console.error('Error carregant posts:', error);
-            container.innerHTML = `
-                <div class="post-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
-                    <h3>Error carregant els posts</h3>
-                    <p>Comprova la consola del navegador per més detalls</p>
-                    <p style="color: red; font-family: monospace; margin-top: 1rem;">${error.message}</p>
-                </div>
-            `;
-        }
+        return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
     }
 
     // Funció per renderitzar posts
@@ -266,17 +173,14 @@
         const container = document.getElementById('posts-container');
         container.innerHTML = '';
 
-        console.log('Renderitzant', blogPosts.length, 'posts');
+        blogPosts = postsData
+            .sort((a, b) => new Date(b.date) - new Date(a.date))
+            .slice(0, 6);
 
         if (blogPosts.length === 0) {
             container.innerHTML = `
                 <div class="post-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
                     <h3>No hi ha posts disponibles</h3>
-                    <p>Els fitxers no s'han pogut carregar. Comprova la consola del navegador.</p>
-                    <p style="margin-top: 1rem;"><strong>Fitxers esperats:</strong></p>
-                    <ul style="list-style: none; padding: 0;">
-                        ${postFiles.map(f => `<li style="margin: 0.5rem 0;">posts/${f}</li>`).join('')}
-                    </ul>
                 </div>
             `;
             return;
@@ -299,23 +203,12 @@
                     </div>
                     <h3 class="post-title">${post.title}</h3>
                     <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="post.html?slug=${post.slug}" class="read-more">Read more</a>
+                    <a href="${post.url}" class="read-more">Read more</a>
                 </div>
             `;
 
             container.appendChild(postElement);
         });
-    }
-
-    // Funció per formatar data
-    function formatDate(dateString) {
-        const date = new Date(dateString);
-        const months = [
-            'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
-            'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'
-        ];
-        
-        return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
     }
 
     // Funcionalitat de navegació suau
@@ -334,8 +227,7 @@
 
     // Inicialitzar la pàgina
     document.addEventListener('DOMContentLoaded', () => {
-        console.log('DOM carregat, iniciant...');
-        loadAllPosts();
+        renderPosts();
     });
 </script>
 </body>
