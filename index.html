@@ -119,44 +119,6 @@
     <script>
     let blogPosts = [];
 
-    // Dades dels posts (ho pots generar automàticament amb Jekyll)
-    // Alternativament, crea un fitxer posts.json amb Jekyll
-    const postsData = [
-        {
-            slug: "chatgpt5",
-            title: "GPT-5… és el que esperàvem?",
-            date: "2025-11-08",
-            author: "Raquel",
-            category: "GenAI",
-            tags: ["GenAI", "GPT"],
-            image: "assets/images/gpt-5.jpg",
-            excerpt: "El nou llançament de ChatGPT-5 presenta novetats però no són tant novedoses",
-            url: "/blog/2025/11/08/chatgpt5/"
-        },
-        {
-            slug: "guia-markdown",
-            title: "Guía completa de Markdown para bloggers",
-            date: "2024-01-12",
-            author: "Autor del Blog",
-            category: "Markdown",
-            tags: ["markdown", "tutorial", "escritura", "blogging"],
-            image: "https://via.placeholder.com/400x250/6065FF/ffffff?text=Markdown",
-            excerpt: "Aprende todo lo que necesitas saber sobre Markdown para crear posts de blog profesionales y bien formateados.",
-            url: "/blog/2024/01/12/guia-markdown/"
-        },
-        {
-            slug: "css-grid-flexbox",
-            title: "CSS Grid vs Flexbox: Cuándo usar cada uno",
-            date: "2024-01-10",
-            author: "Autor del Blog",
-            category: "Css",
-            tags: ["css", "grid", "flexbox", "layout", "desarrollo-web"],
-            image: "https://via.placeholder.com/400x250/6065FF/ffffff?text=CSS",
-            excerpt: "Una guía práctica sobre las diferencias entre CSS Grid y Flexbox, con ejemplos reales de cuándo usar cada tecnología de layout.",
-            url: "/blog/2024/01/10/css-grid-flexbox/"
-        }
-    ];
-
     // Funció per formatar data
     function formatDate(dateString) {
         const date = new Date(dateString);
@@ -168,19 +130,45 @@
         return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
     }
 
+    // Funció per carregar posts des de Jekyll
+    async function loadAllPosts() {
+        const container = document.getElementById('posts-container');
+        container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+        
+        try {
+            const response = await fetch('/posts.json');
+            if (!response.ok) {
+                throw new Error('No s\'ha pogut carregar posts.json');
+            }
+            
+            const posts = await response.json();
+            console.log('Posts carregats:', posts);
+            
+            blogPosts = posts.slice(0, 4); // Només 4 posts per la graella 2x2
+            
+            renderPosts();
+        } catch (error) {
+            console.error('Error carregant posts:', error);
+            container.innerHTML = `
+                <div class="post-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
+                    <h3>Error carregant els posts</h3>
+                    <p>${error.message}</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">Assegura't que tens el fitxer <code>posts.json</code> a l'arrel i que Jekyll està processat correctament.</p>
+                </div>
+            `;
+        }
+    }
+
     // Funció per renderitzar posts
     function renderPosts() {
         const container = document.getElementById('posts-container');
         container.innerHTML = '';
 
-        blogPosts = postsData
-            .sort((a, b) => new Date(b.date) - new Date(a.date))
-            .slice(0, 6);
-
         if (blogPosts.length === 0) {
             container.innerHTML = `
                 <div class="post-card" style="grid-column: 1 / -1; text-align: center; padding: 3rem;">
                     <h3>No hi ha posts disponibles</h3>
+                    <p>Afegeix posts a la carpeta _posts/</p>
                 </div>
             `;
             return;
@@ -203,7 +191,7 @@
                     </div>
                     <h3 class="post-title">${post.title}</h3>
                     <p class="post-excerpt">${post.excerpt}</p>
-                    <a href="${post.url}" class="read-more">Llegeix més -></a>
+                    <a href="${post.url}" class="read-more">Read more</a>
                 </div>
             `;
 
@@ -227,7 +215,7 @@
 
     // Inicialitzar la pàgina
     document.addEventListener('DOMContentLoaded', () => {
-        renderPosts();
+        loadAllPosts();
     });
 </script>
 </body>
