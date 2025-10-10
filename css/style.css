@@ -134,7 +134,7 @@ nav {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--electric-blue);
+    background: #3F43A9;
     transition: width 0.3s ease;
 }
 
@@ -404,7 +404,7 @@ section {
 }
 
 .read-more {
-    color: var(--electric-blue);
+    color: #6065FF;
     padding: 0;
     background: none;
     border: none;
@@ -419,7 +419,7 @@ section {
 }
 
 .read-more:hover {
-    color: var(--dark-blue);
+    color: #3F43A9;
     background: none;
 }
 
