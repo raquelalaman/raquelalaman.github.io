@@ -312,11 +312,10 @@ section {
     text-align: center;
 }
 
-/* Blog Posts en graella 2x3 centrada */
-/* Blog Posts en graella 2x3 centrada */
+/* Blog Posts en graella 2x2 centrada */
 .blog-posts {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
     width: 100%;
     max-width: 1000px;
@@ -332,6 +331,7 @@ section {
     border: none;
     display: flex;
     flex-direction: column;
+    grid-template-columns: 180px 1fr;
 }
 
 .post-card:hover {
@@ -360,7 +360,6 @@ section {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(45deg, rgba(0, 102, 255, 0.3), rgba(0, 82, 204, 0.3));
 }
 
 .post-content {
