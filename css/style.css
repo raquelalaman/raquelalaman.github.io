@@ -329,9 +329,9 @@ section {
     box-shadow: var(--shadow);
     transition: all 0.3s ease;
     border: none;
-    display: flex;
-    flex-direction: column;
+    display: grid;
     grid-template-columns: 180px 1fr;
+    border: 1px solid var(--medium-gray);
 }
 
 .post-card:hover {
@@ -340,9 +340,9 @@ section {
 }
 
 .post-image {
-    width: 100%;
+    width: 180px;
     height: 200px;
-    background: linear-gradient(45deg, var(--electric-blue), var(--dark-blue));
+    min-height: 180px;
     position: relative;
     overflow: hidden;
 }
