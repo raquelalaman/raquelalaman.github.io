@@ -191,6 +191,12 @@ section {
     align-items: stretch;
 }
 
+.about-content-full{
+    display: block;
+    padding: 3rem;
+    width: 100%;
+}
+
 .about-text {
     padding: 3rem;
     display: flex;
