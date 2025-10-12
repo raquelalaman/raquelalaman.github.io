@@ -8,7 +8,7 @@ layout: null
     "title": "{{ post.title | escape }}",
     "date": "{{ post.date | date: '%Y-%m-%d' }}",
     "author": "{{ post.author | default: 'Autor' }}",
-    "category": "{{ post.category | default: 'General' }}",
+    "category": "{{ post.category }}",
     "tags": {{ post.tags | jsonify }},
     "image": "{{ post.image | default: 'https://via.placeholder.com/400x250/6065FF/ffffff?text=Post' }}",
     "excerpt": "{{ post.excerpt | strip_html | strip_newlines | escape }}",
