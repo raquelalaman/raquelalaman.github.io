@@ -42,14 +42,12 @@
         <article class="post-full">
             <div class="post-full-content">
                 <!-- Metadades del post -->
-                <div class="post-header">
-                    <div class="post-meta">
-                        <span class="post-tag">{{ page.category | default: page.tags[0] | default: 'General' }}</span>
-                        <span class="post-date">{{ page.date | date: "%-d %B, %Y" }}</span>
-                        {% if page.author %}
-                        <span class="post-author">per {{ page.author }}</span>
-                        {% endif %}
-                    </div>
+                <div class="post-meta">
+                    <span class="post-tag">{{ page.category | default: page.tags[0] | default: 'General' }}</span>
+                    <span class="post-date">{{ page.date | date: "%-d %B, %Y" }}</span>
+                    {% if page.author %}
+                    <span class="post-author">per {{ page.author }}</span>
+                    {% endif %}
                 </div>
 
                 <!-- Contingut del post -->
