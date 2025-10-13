@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - Code thinking</title>
+    <meta name="description" content="{{ page.excerpt | strip_html }}">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Highlight.js para sintaxis de código -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-content">
+                <ul class="nav-links">
+                    <li><a href="{{ '/' | relative_url }}">Inici</a></li>
+                    <li><a href="{{ '/#about' | relative_url }}">Qui soc</a></li>
+                    <li><a href="{{ '/#projects' | relative_url }}">Projectes</a></li>
+                    <li><a href="{{ '/blog.html' | relative_url }}">Blog</a></li>
+                    <li><a href="{{ '/#contact' | relative_url }}">Contacte</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="logo">
+            <a href="{{ '/' | relative_url }}"><img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Logo"/></a>
+        </div>
+        <div class="header-content">
+            <h1><a href="{{ '/' | relative_url }}">Code thinking</a></h1>
+            <p class="subtitle">Explorant idees i compartint coneixement</p>
+        </div>
+    </header>
+
+    <main>
+        <article class="post-full">
+            <div class="post-full-content">
+                <!-- Metadades del post -->
+                <div class="post-header">
+                    <div class="post-meta">
+                        <span class="post-tag">{{ page.category | default: page.tags[0] | default: 'General' }}</span>
+                        <span class="post-date">{{ page.date | date: "%-d %B, %Y" }}</span>
+                        {% if page.author %}
+                        <span class="post-author">per {{ page.author }}</span>
+                        {% endif %}
+                    </div>
+                    <h1 class="post-title">{{ page.title }}</h1>
+                </div>
+
+                <!-- Contingut del post -->
+                <div class="post-content-markdown">
+                    {{ content }}
+                </div>
+
+                <!-- Navegació entre posts -->
+                <div class="post-navigation">
+                    {% if page.previous.url %}
+                    <a href="{{ page.previous.url | relative_url }}" class="nav-previous">
+                        ← {{ page.previous.title }}
+                    </a>
+                    {% endif %}
+                    
+                    <a href="{{ '/blog.html' | relative_url }}" class="nav-all">
+                        Tots els posts
+                    </a>
+                    
+                    {% if page.next.url %}
+                    <a href="{{ page.next.url | relative_url }}" class="nav-next">
+                        {{ page.next.title }} →
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" title="GitHub">GH</a>
+                <a href="#" title="Twitter">TW</a>
+                <a href="#" title="LinkedIn">IN</a>
+                <a href="#" title="Email">@</a>
+            </div>
+            <p>&copy; 2025 Code thinking. Creat amb GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Highlight code blocks
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightElement(block);
+            });
+        });
+    </script>
+</body>
+</html>
