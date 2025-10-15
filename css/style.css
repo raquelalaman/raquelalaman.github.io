@@ -438,7 +438,6 @@ section {
     text-align: center;
     font-size: 2.5rem;
     font-weight: 300;
-    margin-bottom: 2rem;
     color: var(--text-dark);
 }
 
@@ -450,8 +449,6 @@ section {
 
 /* Secció de reptes reals amb fons fosc */
 .reptes-section {
-    background: #1a1a1a;
-    padding: 4rem 0;
     margin: 0 -2rem;
     color: var(--white);
 }
