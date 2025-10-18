@@ -846,7 +846,131 @@ section {
         grid-template-columns: 1fr;
     }
 }
+/* ============================================
+   CSS AFEGIT PER SECCIÓ DE CONTACTE
+   ============================================ */
 
+/* Secció de contacte */
+.contact-section {
+    background: var(--light-gray);
+    padding: 5rem 0;
+    margin: 0 -2rem;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.contact-image {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contact-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.contact-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+.contact-content p {
+    font-size: 1.2rem;
+    color: var(--dark-gray);
+    line-height: 1.6;
+}
+
+.contact-icons {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.contact-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--text-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-icon:hover {
+    background: #6065FF;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(96, 101, 255, 0.3);
+}
+
+.contact-icon i {
+    font-size: 1.8rem;
+}
+
+/* Responsive per contacte */
+@media (max-width: 968px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+    
+    .contact-image {
+        order: 2;
+    }
+    
+    .contact-content {
+        order: 1;
+        text-align: center;
+    }
+    
+    .contact-icons {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-section {
+        margin: 0 -1.5rem;
+        padding: 3rem 0;
+    }
+    
+    .contact-content h2 {
+        font-size: 2.2rem;
+    }
+    
+    .contact-content p {
+        font-size: 1rem;
+    }
+    
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
 /* ============================================
    FI DEL CSS AFEGIT
    ============================================ */
