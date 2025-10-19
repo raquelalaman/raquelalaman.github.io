@@ -29,13 +29,30 @@
                             <p class="newsletter-subtitle">Vols saber-ne més? Envia'm un missatge!</p>
 
                             <div class="newsletter-form">
-                                <input 
-                                    type="email" 
-                                    id="newsletter-email" 
-                                    placeholder="Adreça de correu electrònic *" 
-                                    required
-                                    class="newsletter-input"
-                                >
+                                <!-- Campo Nombre -->
+                                <div class="newsletter-input-wrapper">
+                                    <input 
+                                        type="text" 
+                                        id="newsletter-name" 
+                                        placeholder="El teu nom *" 
+                                        required
+                                        class="newsletter-input"
+                                    >
+                                    <span id="newsletter-name-error" class="newsletter-error"></span>
+                                </div>
+
+                                <!-- Campo Email -->
+                                <div class="newsletter-input-wrapper">
+                                    <input 
+                                        type="email" 
+                                        id="newsletter-email" 
+                                        placeholder="Adreça de correu electrònic *" 
+                                        required
+                                        class="newsletter-input"
+                                    >
+                                    <span id="newsletter-email-error" class="newsletter-error"></span>
+                                </div>
+
                                 <button id="newsletter-submit" class="newsletter-button">
                                     Subscriu-te!
                                 </button>
@@ -49,7 +66,7 @@
                         <!-- Mensaje de éxito (oculto inicialmente) -->
                         <div id="newsletter-success" class="newsletter-success" style="display: none;">
                             <div class="newsletter-success-icon">✓</div>
-                            <h3 class="newsletter-success-title">Gràcies!</h3>
+                            <h3 class="newsletter-success-title">Gràcies, <span id="success-name"></span>!</h3>
                             <p class="newsletter-success-text">T'hem subscrit correctament. Aviat rebràs notícies!</p>
                         </div>
                     </div>
@@ -116,7 +133,6 @@
 
             .newsletter-header {
                 height: 8rem;
-                background: linear-gradient(to right, #f59e0b, #ea580c);
                 position: relative;
             }
 
@@ -125,13 +141,6 @@
                 position: absolute;
                 inset: 0;
                 opacity: 0.2;
-                background-image: repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 10px,
-                    rgba(255, 255, 255, 0.1) 10px,
-                    rgba(255, 255, 255, 0.1) 20px
-                );
             }
 
             .newsletter-content {
@@ -172,6 +181,10 @@
                 gap: 1rem;
             }
 
+            .newsletter-input-wrapper {
+                position: relative;
+            }
+
             .newsletter-input {
                 width: 100%;
                 padding: 0.75rem 1rem;
@@ -186,6 +199,34 @@
                 outline: none;
                 border-color: #f59e0b;
                 box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+            }
+
+            .newsletter-input.error {
+                border-color: #ef4444;
+                background-color: #fef2f2;
+            }
+
+            .newsletter-input.error:focus {
+                border-color: #ef4444;
+                box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+            }
+
+            .newsletter-error {
+                display: none;
+                color: #ef4444;
+                font-size: 0.875rem;
+                margin-top: 0.25rem;
+                animation: shake 0.3s ease-in-out;
+            }
+
+            .newsletter-error.show {
+                display: block;
+            }
+
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
             }
 
             .newsletter-button {
@@ -208,6 +249,12 @@
 
             .newsletter-button:active {
                 transform: scale(0.98);
+            }
+
+            .newsletter-button:disabled {
+                background-color: #9ca3af;
+                cursor: not-allowed;
+                transform: none;
             }
 
             .newsletter-privacy {
@@ -252,6 +299,65 @@
         return style;
     }
 
+    // Función para validar el email
+    function validateEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    // Función para mostrar error en un campo específico
+    function showError(fieldId, message) {
+        const input = document.getElementById(fieldId);
+        const errorSpan = document.getElementById(fieldId + '-error');
+        
+        input.classList.add('error');
+        errorSpan.textContent = message;
+        errorSpan.classList.add('show');
+    }
+
+    // Función para limpiar error de un campo específico
+    function clearError(fieldId) {
+        const input = document.getElementById(fieldId);
+        const errorSpan = document.getElementById(fieldId + '-error');
+        
+        input.classList.remove('error');
+        errorSpan.classList.remove('show');
+    }
+
+    // Función para enviar a Google Sheets
+    async function saveToGoogleSheets(name, email) {
+        // 🔴 Google Apps Script
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwt_XApJn3K-A0mcjNsilK9fCzqmyU6WDLGq_mvj_hrO1I8qjXrCiHrUmDKusy1YTETDQ/exec';
+        
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    name: name,
+                    email: email,
+                    date: new Date().toISOString(),
+                    timestamp: new Date().toLocaleString('ca-ES', { 
+                        timeZone: 'Europe/Madrid',
+                        dateStyle: 'short',
+                        timeStyle: 'short'
+                    })
+                })
+            });
+            
+            console.log('✅ Dades enviades a Google Sheets');
+            console.log('📧 Nom:', name);
+            console.log('📧 Email:', email);
+            return true;
+        } catch (error) {
+            console.error('❌ Error al enviar a Google Sheets:', error);
+            return false;
+        }
+    }
+
     // Función para mostrar el popup
     function showPopup() {
         const overlay = document.getElementById('newsletter-overlay');
@@ -274,25 +380,64 @@
     }
 
     // Función para manejar el envío
-    function handleSubmit() {
-        const email = document.getElementById('newsletter-email').value;
+    async function handleSubmit() {
+        const nameInput = document.getElementById('newsletter-name');
+        const emailInput = document.getElementById('newsletter-email');
+        const submitBtn = document.getElementById('newsletter-submit');
         
-        if (email && email.includes('@')) {
-            // Guardar que el usuario se ha suscrito
-            localStorage.setItem('newsletter_subscribed', 'true');
-            
-            // Mostrar mensaje de éxito
-            document.getElementById('newsletter-form-container').style.display = 'none';
-            document.getElementById('newsletter-success').style.display = 'block';
-            
-            // Cerrar después de 2 segundos
-            setTimeout(() => {
-                hidePopup();
-            }, 2000);
-            
-            // Aquí puedes agregar código para enviar el email a tu servidor
-            console.log('Email registrado:', email);
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        
+        let hasErrors = false;
+        
+        // Limpiar errores previos
+        clearError('newsletter-name');
+        clearError('newsletter-email');
+        
+        // Validar nombre
+        if (!name) {
+            showError('newsletter-name', 'Si us plau, introdueix el teu nom');
+            hasErrors = true;
+        } else if (name.length < 2) {
+            showError('newsletter-name', 'El nom ha de tenir almenys 2 caràcters');
+            hasErrors = true;
         }
+        
+        // Validar email
+        if (!email) {
+            showError('newsletter-email', 'Si us plau, introdueix el teu correu electrònic');
+            hasErrors = true;
+        } else if (!validateEmail(email)) {
+            showError('newsletter-email', 'Si us plau, introdueix un correu electrònic vàlid');
+            hasErrors = true;
+        }
+        
+        // Si hay errores, no continuar
+        if (hasErrors) {
+            return;
+        }
+        
+        // Deshabilitar el botón mientras se envía
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Enviant...';
+        
+        // Enviar a Google Sheets
+        await saveToGoogleSheets(name, email);
+        
+        // Guardar que el usuario se ha suscrito
+        localStorage.setItem('newsletter_subscribed', 'true');
+        localStorage.setItem('newsletter_user_name', name);
+        localStorage.setItem('newsletter_user_email', email);
+        
+        // Mostrar mensaje de éxito con el nombre
+        document.getElementById('success-name').textContent = name;
+        document.getElementById('newsletter-form-container').style.display = 'none';
+        document.getElementById('newsletter-success').style.display = 'block';
+        
+        // Cerrar después de 2.5 segundos
+        setTimeout(() => {
+            hidePopup();
+        }, 2500);
     }
 
     // Función para inicializar el popup
@@ -317,6 +462,7 @@
         const closeBtn = document.getElementById('newsletter-close');
         const overlay = document.getElementById('newsletter-overlay');
         const submitBtn = document.getElementById('newsletter-submit');
+        const nameInput = document.getElementById('newsletter-name');
         const emailInput = document.getElementById('newsletter-email');
 
         closeBtn.addEventListener('click', () => {
@@ -333,11 +479,22 @@
 
         submitBtn.addEventListener('click', handleSubmit);
 
+        // Permitir enviar con Enter en ambos campos
+        nameInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSubmit();
+            }
+        });
+
         emailInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 handleSubmit();
             }
         });
+
+        // Limpiar error cuando el usuario empiece a escribir
+        nameInput.addEventListener('input', () => clearError('newsletter-name'));
+        emailInput.addEventListener('input', () => clearError('newsletter-email'));
 
         // Mostrar el popup después de 1 segundo
         setTimeout(showPopup, 1000);
