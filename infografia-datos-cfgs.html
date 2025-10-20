@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos Educativos CFGS - Análisis Completo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2d3748;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #667eea;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        
+        .legend {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        
+        .legend-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+        
+        .icon-rentable { background: #48bb78; color: white; }
+        .icon-costoso { background: #f56565; color: white; }
+        .icon-medio { background: #ed8936; color: white; }
+        .icon-privacidad-alta { background: #e53e3e; color: white; }
+        .icon-privacidad-media { background: #ed8936; color: white; }
+        .icon-privacidad-baja { background: #48bb78; color: white; }
+        
+        .data-table {
+            overflow-x: auto;
+            margin-bottom: 40px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+            font-size: 0.9em;
+            vertical-align: top;
+        }
+        
+        tbody tr:hover {
+            background: #f7fafc;
+        }
+        
+        .categoria-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .entrada { background: #bee3f8; color: #2c5282; }
+        .contexto { background: #c6f6d5; color: #22543d; }
+        .proceso { background: #feebc8; color: #7c2d12; }
+        .resultado { background: #e9d8fd; color: #44337a; }
+        
+        .status-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-right: 8px;
+        }
+        
+        .tipo-variable {
+            font-size: 0.85em;
+            color: #4a5568;
+            line-height: 1.5;
+        }
+        
+        .tipo-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        
+        .numerica { background: #bee3f8; color: #2c5282; }
+        .categorica { background: #fbb6ce; color: #702459; }
+        
+        .privacidad-box {
+            display: flex;
+            align-items: start;
+            gap: 8px;
+        }
+        
+        .dato-nombre {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+        }
+        
+        @media (max-width: 1200px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            table {
+                font-size: 0.85em;
+            }
+            
+            th, td {
+                padding: 10px;
+            }
+        }
+        
+        .category-section {
+            margin-bottom: 40px;
+        }
+        
+        .category-title {
+            font-size: 1.8em;
+            color: #2d3748;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+        }
+        
+        .category-title.entrada { border-color: #4299e1; }
+        .category-title.contexto { border-color: #48bb78; }
+        .category-title.proceso { border-color: #ed8936; }
+        .category-title.resultado { border-color: #9f7aea; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Análisis de Datos Educativos en CFGS</h1>
+        <p class="subtitle">Ciclo Formativo de Grado Superior - Evaluación Completa de Variables</p>
+        
+        <div class="legend">
+            <div style="font-weight: 600; width: 100%; text-align: center; margin-bottom: 10px;">Leyenda de Indicadores</div>
+            <div class="legend-item">
+                <div class="legend-icon icon-rentable">✓</div>
+                <span>Tratamiento Rentable</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon icon-medio">⚠</div>
+                <span>Tratamiento Medio</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon icon-costoso">✗</div>
+                <span>Tratamiento Costoso</span>
+            </div>
+            <div style="width: 100%; border-top: 1px solid #e2e8f0; margin: 10px 0;"></div>
+            <div class="legend-item">
+                <div class="legend-icon icon-privacidad-alta">🔒</div>
+                <span>Privacidad Alta</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon icon-privacidad-media">🔓</div>
+                <span>Privacidad Media</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-icon icon-privacidad-baja">✓</div>
+                <span>Privacidad Baja</span>
+            </div>
+        </div>
+
+        <!-- DATOS DE ENTRADA -->
+        <div class="category-section">
+            <h2 class="category-title entrada">📥 Datos de Entrada</h2>
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 25%">Dato / Variable</th>
+                            <th style="width: 15%">Rentabilidad</th>
+                            <th style="width: 25%">Tipo de Variable</th>
+                            <th style="width: 35%">Privacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Expediente académico previo</div>
+                                <span class="categoria-badge entrada">Entrada</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge numerica">Numérica continua</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Nota media (0-10)</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-media">🔓</span>
+                                    <div><strong>Media:</strong> Requiere pseudonimización. Sustituir nombre por ID de estudiante.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Vía de acceso al ciclo</div>
+                                <span class="categoria-badge entrada">Entrada</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica nominal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Bachillerato/CFGM/Prueba acceso</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> No compromete privacidad significativamente.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Formación complementaria y certificaciones</div>
+                                <span class="categoria-badge entrada">Entrada</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-medio">⚠</span>
+                                Medio
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge numerica">Numérica discreta</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Número de certificaciones (0, 1, 2...)</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Agregado como número no compromete privacidad.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Competencias digitales previas</div>
+                                <span class="categoria-badge entrada">Entrada</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica ordinal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Básico/Medio/Avanzado</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Evaluación no sensible.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Conocimientos técnicos específicos</div>
+                                <span class="categoria-badge entrada">Entrada</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge numerica">Numérica continua</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Puntuación prueba inicial (0-10)</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Dato académico estándar.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Nivel de idiomas</div>
+                                <span class="categoria-badge entrada">Entrada</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica ordinal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">A1/A2/B1/B2/C1/C2</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Información académica no sensible.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Experiencia laboral relacionada</div>
+                                <span class="categoria-badge entrada">Entrada</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica nominal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Sí/No o tipo de experiencia</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-media">🔓</span>
+                                    <div><strong>Media:</strong> No detallar empresa específica, solo si tiene o no experiencia.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Expectativas profesionales</div>
+                                <span class="categoria-badge entrada">Entrada</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-medio">⚠</span>
+                                Medio
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica nominal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Emplearse/Continuar estudios/Emprender</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Información voluntaria y genérica.</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- DATOS DE CONTEXTO -->
+        <div class="category-section">
+            <h2 class="category-title contexto">🌍 Datos de Contexto</h2>
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 25%">Dato / Variable</th>
+                            <th style="width: 15%">Rentabilidad</th>
+                            <th style="width: 25%">Tipo de Variable</th>
+                            <th style="width: 35%">Privacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Situación socioeconómica familiar</div>
+                                <span class="categoria-badge contexto">Contexto</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica ordinal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Baja/Media/Alta</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-alta">🔒</span>
+                                    <div><strong>Alta:</strong> Dato muy sensible. Requiere anonimización estricta y consentimiento informado.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Apoyo familiar educativo</div>
+                                <span class="categoria-badge contexto">Contexto</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-medio">⚠</span>
+                                Medio
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica ordinal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Bajo/Medio/Alto</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-media">🔓</span>
+                                    <div><strong>Media:</strong> Información familiar sensible. Pseudonimizar.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Tiempo de desplazamiento</div>
+                                <span class="categoria-badge contexto">Contexto</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge numerica">Numérica continua</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Minutos (15, 30, 60...)</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> No revela ubicación exacta si se expresa en rangos.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Compatibilidad con trabajo</div>
+                                <span class="categoria-badge contexto">Contexto</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica nominal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">No trabaja/Jornada parcial/Jornada completa</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-media">🔓</span>
+                                    <div><strong>Media:</strong> No especificar empresa. Solo situación laboral general.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Acceso a recursos tecnológicos</div>
+                                <span class="categoria-badge contexto">Contexto</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica ordinal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Limitado/Básico/Completo</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-media">🔓</span>
+                                    <div><strong>Media:</strong> Puede revelar situación económica. Agregar datos.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Disponibilidad para FCT</div>
+                                <span class="categoria-badge contexto">Contexto</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica nominal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Total/Parcial/Limitada</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Información académica estándar.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Necesidades educativas específicas</div>
+                                <span class="categoria-badge contexto">Contexto</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica nominal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Sí/No (tipo de adaptación)</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-alta">🔒</span>
+                                    <div><strong>Alta:</strong> Datos de salud protegidos. Requiere consentimiento expreso y anonimización.</div>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- DATOS DE PROCESO -->
+        <div class="category-section">
+            <h2 class="category-title proceso">⚙️ Datos de Proceso</h2>
+            <div class="data-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width: 25%">Dato / Variable</th>
+                            <th style="width: 15%">Rentabilidad</th>
+                            <th style="width: 25%">Tipo de Variable</th>
+                            <th style="width: 35%">Privacidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Asistencia a clases</div>
+                                <span class="categoria-badge proceso">Proceso</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge numerica">Numérica discreta</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Número de faltas (0, 1, 2...)</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Dato administrativo estándar. Pseudonimizar ID estudiante.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Participación en actividades prácticas</div>
+                                <span class="categoria-badge proceso">Proceso</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge categorica">Categórica ordinal</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Baja/Media/Alta</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Evaluación académica ordinaria.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Entregas de trabajos (puntualidad)</div>
+                                <span class="categoria-badge proceso">Proceso</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge numerica">Numérica continua</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Porcentaje entregas a tiempo (0-100%)</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-baja">✓</span>
+                                    <div><strong>Baja:</strong> Métrica académica estándar.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Uso del aula virtual</div>
+                                <span class="categoria-badge proceso">Proceso</span>
+                            </td>
+                            <td>
+                                <span class="status-icon icon-rentable">✓</span>
+                                Rentable
+                            </td>
+                            <td>
+                                <div class="tipo-variable">
+                                    <span class="tipo-badge numerica">Numérica discreta</span>
+                                    <div style="margin-top: 4px; font-size: 0.8em;">Número de accesos/semana</div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="privacidad-box">
+                                    <span class="status-icon icon-privacidad-media">🔓</span>
+                                    <div><strong>Media:</strong> Datos de navegación. Pseudonimizar y no almacenar IPs.</div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dato-nombre">Trabajo en equipo
