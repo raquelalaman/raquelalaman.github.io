@@ -338,7 +338,7 @@ section {
     display: flex;
     gap: 20px;
     height: 600px;
-    margin-bottom: 40px;
+    margin: 10px 0;
 }
 
 /* Cada secció de l'acordió */
