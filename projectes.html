@@ -21,6 +21,206 @@
     <!-- Highlight.js para sintaxis de código -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 50px;
+            font-size: 1.1rem;
+        }
+
+        /* Contenidor de l'acordió */
+        .accordion-container {
+            display: flex;
+            gap: 20px;
+            height: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* Cada secció de l'acordió */
+        .accordion-section {
+            flex: 1;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: flex 0.5s ease;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .accordion-section.rd {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .accordion-section.apps {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .accordion-section.col {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .accordion-section.active {
+            flex: 3;
+        }
+
+        /* Títol vertical de la secció */
+        .accordion-header {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-90deg);
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            white-space: nowrap;
+            transition: all 0.5s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .accordion-section.active .accordion-header {
+            transform: translate(-50%, -280px) rotate(0deg);
+            font-size: 2.2rem;
+        }
+
+        /* Contingut de l'acordió */
+        .accordion-content {
+            opacity: 0;
+            padding: 80px 30px 30px;
+            color: white;
+            height: 100%;
+            overflow-y: auto;
+            transition: opacity 0.5s ease;
+        }
+
+        .accordion-section.active .accordion-content {
+            opacity: 1;
+        }
+
+        .description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Targetes de projectes */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .project-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        .project-card .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .accordion-container {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .accordion-section {
+                height: 80px;
+            }
+
+            .accordion-section.active {
+                height: auto;
+                min-height: 500px;
+            }
+
+            .accordion-header {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            .accordion-section.active .accordion-header {
+                transform: translate(-50%, -200px) rotate(0deg);
+            }
+        }
+
+        /* Scrollbar personalitzada */
+        .accordion-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .accordion-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .accordion-content::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+        }
+
+        .accordion-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -44,35 +244,154 @@
         </div>
     </header>
     <main>
-        <!-- Títol fora del fons fosc -->
-        <h2 class="reptes-section-title">Quan la tecnologia resol <span class="highlight">reptes reals</span></h2>
+        <div class="container">
+        <h1>Projectes</h1>
+        <p class="subtitle">Explora els diferents projectes en els quals participo</p>
 
-        <!-- Secció amb fons fosc (només les targetes) -->
-        <section class="reptes-section">
-            <div class="reptes-grid">
-                <!-- Targeta 1: NeuroneLabs -->
-                <article class="repte-card">
-                    <div class="repte-image">
-                        <img src="assets/images/neuronelabs.jpg" alt="NeuroneLabs">
+        <div class="accordion-container">
+            <!-- Secció 1: R+D en Salut Digital -->
+            <div class="accordion-section rd active" data-section="rd">
+                <h2 class="accordion-header">R+D en Salut Digital</h2>
+                <div class="accordion-content">
+                    <p class="description">
+                        Investigació i desenvolupament d'aplicacions per a la gestió i anàlisi de dades en neuropediatria, neurociència i bioinformàtica amb IA i Machine Learning.
+                    </p>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <h3>Anàlisi de Dades Neuropediàtriques</h3>
+                            <p>Sistema d'anàlisi automatitzada de dades clíniques per a la detecció primerenca de trastorns neurològics infantils.</p>
+                            <div class="tags">
+                                <span class="tag">Machine Learning</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">Healthcare</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Plataforma de Neurociència</h3>
+                            <p>Eina col·laborativa per a la recerca en neurociència amb integració de Big Data i visualització interactiva.</p>
+                            <div class="tags">
+                                <span class="tag">Big Data</span>
+                                <span class="tag">Visualització</span>
+                                <span class="tag">Cloud</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Model Predictiu IA</h3>
+                            <p>Desenvolupament de models d'intel·ligència artificial per predir l'evolució de patologies neurològiques.</p>
+                            <div class="tags">
+                                <span class="tag">Deep Learning</span>
+                                <span class="tag">TensorFlow</span>
+                                <span class="tag">Research</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="repte-content">
-                        <h3>NeuroneLabs</h3>
-                        <p>Startup col·laborativa especialitzada en el desenvolupament d'aplicacions de gestió i anàlisi de dades per a la recerca en el camp de la neuropediatria i la neurociència.</p>
-                    </div>
-                </article>
-
-                <!-- Targeta 2: Connecting the growing brain -->
-                <article class="repte-card">
-                    <div class="repte-image">
-                        <img src="assets/images/connecting-brain.jpg" alt="Connecting the growing brain">
-                    </div>
-                    <div class="repte-content">
-                        <h3>Connecting the growing brain</h3>
-                        <p>És un portal per a la difusió de la neuropediatria. Aquest web, en el qual he participat escrivint articles de divulgació científica, té com a objectiu apropar la neurociència a les famílies.</p>
-                    </div>
-                </article>
+                </div>
             </div>
-        </section>
+
+            <!-- Secció 2: Desenvolupament d'Aplicacions -->
+            <div class="accordion-section apps" data-section="apps">
+                <h2 class="accordion-header">Desenvolupament d'Aplicacions</h2>
+                <div class="accordion-content">
+                    <p class="description">
+                        Creació d'aplicacions web, multiplataforma i serious games per a la salut, l'educació i la investigació científica.
+                    </p>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <h3>App Web de Gestió Clínica</h3>
+                            <p>Aplicació web per a la gestió integral de pacients amb interfície intuïtiva i accessible.</p>
+                            <div class="tags">
+                                <span class="tag">React</span>
+                                <span class="tag">Node.js</span>
+                                <span class="tag">PostgreSQL</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Serious Game Educatiu</h3>
+                            <p>Joc interactiu per a l'educació en salut mental infantil amb mecàniques d'aprenentatge gamificat.</p>
+                            <div class="tags">
+                                <span class="tag">Unity</span>
+                                <span class="tag">C#</span>
+                                <span class="tag">Gamification</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>App Multiplataforma</h3>
+                            <p>Aplicació mòbil i desktop per al seguiment de tractaments neurològics amb sincronització en temps real.</p>
+                            <div class="tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">Cross-platform</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secció 3: Col·laboracions -->
+            <div class="accordion-section col" data-section="col">
+                <h2 class="accordion-header">Col·laboracions</h2>
+                <div class="accordion-content">
+                    <p class="description">
+                        Participació en publicacions científiques, divulgatives i projectes col·laboratius amb institucions de recerca i mitjans especialitzats.
+                    </p>
+                    <div class="projects-grid">
+                        <div class="project-card">
+                            <h3>Publicació en Revista Científica</h3>
+                            <p>Article sobre l'ús de Machine Learning en el diagnòstic de trastorns neurològics publicat a revistes indexades.</p>
+                            <div class="tags">
+                                <span class="tag">Research Paper</span>
+                                <span class="tag">Peer-reviewed</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Col·laboració amb Hospital</h3>
+                            <p>Projecte conjunt amb servei de neuropediatria per implementar eines digitals en la pràctica clínica.</p>
+                            <div class="tags">
+                                <span class="tag">Healthcare</span>
+                                <span class="tag">Innovation</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Divulgació Tecnològica</h3>
+                            <p>Articles i ponències sobre la intersecció entre tecnologia, IA i salut en diferents mitjans especialitzats.</p>
+                            <div class="tags">
+                                <span class="tag">Outreach</span>
+                                <span class="tag">Tech Blog</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <h3>Consorcis de Recerca</h3>
+                            <p>Participació en projectes europeus de recerca en salut digital i bioinformàtica.</p>
+                            <div class="tags">
+                                <span class="tag">EU Project</span>
+                                <span class="tag">Consortium</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funcionalitat de l'acordió
+        const sections = document.querySelectorAll('.accordion-section');
+
+        sections.forEach(section => {
+            section.addEventListener('click', function() {
+                // Si la secció ja està activa, no fer res
+                if (this.classList.contains('active')) {
+                    return;
+                }
+
+                // Eliminar la classe active de totes les seccions
+                sections.forEach(s => s.classList.remove('active'));
+
+                // Afegir la classe active a la secció clicada
+                this.classList.add('active');
+            });
+        });
+    </script>
     </main>
 
     <footer>
@@ -88,5 +407,6 @@
     </footer>
 </body>
 </html>
+
 
 
