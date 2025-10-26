@@ -44,7 +44,7 @@
                 <!-- Metadades del post -->
                 <div class="post-meta">
                     <span class="post-tag">{{ page.category | default: page.tags[0] | default: 'General' }}</span>
-                    <span class="post-date">{{ page.date | date: "%-d %B, %Y" }}</span>
+                    <span class="post-date" data-date="{{ page.date | date: '%Y-%m-%d' }}"></span>
                     {% if page.author %}
                     <span class="post-author">per {{ page.author }}</span>
                     {% endif %}
@@ -90,11 +90,29 @@
     </footer>
 
     <script>
-        // Highlight code blocks
+        // Funció per formatar data en català
+        function formatDateCatalan(dateString) {
+            const date = new Date(dateString);
+            const months = [
+                'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
+                'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre'
+            ];
+            
+            return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
+        }
+
+        // Funció per amagar blocs
         document.addEventListener('DOMContentLoaded', () => {
+            // Highlight sintaxi
             document.querySelectorAll('pre code').forEach((block) => {
                 hljs.highlightElement(block);
             });
+
+            // Formatar data en català
+            const dateElement = document.querySelector('.post-date');
+            if (dateElement && dateElement.dataset.date) {
+                dateElement.textContent = formatDateCatalan(dateElement.dataset.date);
+            }
         });
     </script>
 </body>
