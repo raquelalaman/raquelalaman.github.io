@@ -354,15 +354,15 @@ section {
 }
 
 .accordion-section.rd {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #6065FF 0%, #3F43A9 100%);
 }
 
 .accordion-section.apps {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(135deg, #4a4e9e 0%, #2c3e50 100%);
 }
 
 .accordion-section.col {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #3F43A9 0%, #1e293b 100%);
 }
 
 .accordion-section.active {
