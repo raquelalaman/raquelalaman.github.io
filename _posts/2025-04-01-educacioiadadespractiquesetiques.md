@@ -2,8 +2,8 @@
 title: "Educació i IA: dades i pràctiques ètiques"
 date: "2025-04-01"
 author: "Raquel"
-excerpt: "Ja fa uns quants anys que la IA forma part de les nostres vides,..."
-category: "Educació"
+excerpt: "Les dades formen part de la nostra vida quotidiana, des dels valors que indiquem ..."
+category: "Educació, Formació"
 tags: "Artificial, dades, data, educació, ètica, IA, Intel·ligència"
 image: "assets/images/ethical.jpg"
 ---
