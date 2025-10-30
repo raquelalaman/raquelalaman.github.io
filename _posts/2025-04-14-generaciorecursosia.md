@@ -3,7 +3,7 @@ title: "Generació de recursos docents amb IA"
 date: "2025-04-14"
 author: "Raquel"
 excerpt: "Ja fa uns quants anys que la IA forma part de les nostres vides,..."
-category: "Articles"
+category: "Educació"
 tags: "activitat ensenyament-aprenentatge, Artificial, educació, FP, IA, Intel·ligència"
 image: "assets/images/gpt-5.jpg"
 ---
