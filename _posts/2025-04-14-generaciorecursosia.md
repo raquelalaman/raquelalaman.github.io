@@ -5,7 +5,7 @@ author: "Raquel"
 excerpt: "Ja fa uns quants anys que la IA forma part de les nostres vides,..."
 category: "Educació"
 tags: "activitat ensenyament-aprenentatge, Artificial, educació, FP, IA, Intel·ligència"
-image: "assets/images/gpt-5.jpg"
+image: "assets/images/activitat_ia_generativa_educacio.png"
 ---
 
 # Generació de recursos docents amb IA
