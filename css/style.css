@@ -333,12 +333,26 @@ section {
     font-size: 1.1rem;
 }
 
+.container h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+}
+
+.container .subtitle {
+    text-align: center;
+    color: #7f8c8d;
+    margin-bottom: 50px;
+    font-size: 1.1rem;
+}
+
 /* Contenidor de l'acordió */
 .accordion-container {
     display: flex;
     gap: 20px;
     height: 600px;
-    margin: 10px 0;
+    margin-bottom: 40px;
 }
 
 /* Cada secció de l'acordió */
@@ -407,6 +421,13 @@ section {
     line-height: 1.6;
     margin-bottom: 30px;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* Targetes de projectes */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
 }
 
 /* Targetes de projectes */
@@ -730,7 +751,6 @@ section {
 .accordion-content::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.6);
 }
-
 /* ============================================
    CSS AFEGIT PER VÍDEOS RESPONSIVE
    ============================================ */
