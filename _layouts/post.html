@@ -45,6 +45,7 @@
                 <div class="post-meta">
                     <span class="post-tag">{{ page.category | default: page.tags[0] | default: 'General' }}</span>
                     <span class="post-date" data-date="{{ page.date | date: '%Y-%m-%d' }}"></span>
+                    <span class="post-reading-time"></span>
                     {% if page.author %}
                     <span class="post-author">per {{ page.author }}</span>
                     {% endif %}
@@ -100,7 +101,22 @@
             
             return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
         }
+        // Funció per calcular el temps de lectura
+        function calculateReadingTime() {
+            const content = document.querySelector('.post-content-markdown');
+            if (!content) return 0;
 
+            // Comptar paraules
+            const text = content.innerText || content.textContent;
+            const wordCount = text.trim().split(/\s+/).length;
+            
+            // Velocitat de lectura mitjana: 200 paraules per minut
+            const wordsPerMinute = 200;
+            const readingTime = Math.ceil(wordCount / wordsPerMinute);
+            
+            return readingTime;
+        }
+        
         // Funció per amagar blocs
         document.addEventListener('DOMContentLoaded', () => {
             // Highlight sintaxi
