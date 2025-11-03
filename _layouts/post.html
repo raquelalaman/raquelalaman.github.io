@@ -90,7 +90,7 @@
         </div>
     </footer>
 
-    <script>
+     <script>
         // Funció per formatar data en català
         function formatDateCatalan(dateString) {
             const date = new Date(dateString);
@@ -101,6 +101,7 @@
             
             return `${date.getDate()} ${months[date.getMonth()]}, ${date.getFullYear()}`;
         }
+
         // Funció per calcular el temps de lectura
         function calculateReadingTime() {
             const content = document.querySelector('.post-content-markdown');
@@ -116,8 +117,8 @@
             
             return readingTime;
         }
-        
-        // Funció per amagar blocs
+
+        // Highlight code blocks
         document.addEventListener('DOMContentLoaded', () => {
             // Highlight sintaxi
             document.querySelectorAll('pre code').forEach((block) => {
@@ -128,6 +129,13 @@
             const dateElement = document.querySelector('.post-date');
             if (dateElement && dateElement.dataset.date) {
                 dateElement.textContent = formatDateCatalan(dateElement.dataset.date);
+            }
+
+            // Mostrar temps de lectura
+            const readingTimeElement = document.querySelector('.post-reading-time');
+            if (readingTimeElement) {
+                const minutes = calculateReadingTime();
+                readingTimeElement.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 4px;"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>${minutes} min de lectura`;
             }
         });
     </script>
