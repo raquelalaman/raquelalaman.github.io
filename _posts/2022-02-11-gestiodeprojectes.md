@@ -2,7 +2,7 @@
 title: "Gestió de projectes"
 date: "2022-02-11"
 author: "Raquel"
-excerpt: "Quins són els elements que composen l’acta d’un projecte? A continuació deixo una infografia (desenvolupada amb l’eina interactiva Genia.ly) dels seus punts principals, prenent com..."
+excerpt: "Hola a tothom! Aquesta setmana hem començat amb el Bloc 1, on treballem els conceptes bàsics de la Gestió de Projectes. A continuació podeu veure..."
 category: "Educació, Formació"
 tags: "activitat ensenyament-aprenentatge, Diari d'Aprenentatge, formació"
 image: "assets/images/mapa-gestio-projectes.jpg"
