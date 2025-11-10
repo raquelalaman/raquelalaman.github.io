@@ -2,7 +2,7 @@
 title: "Quins són els beneficis de la RV a l'aula?"
 date: "2019-03-30"
 author: "Raquel"
-excerpt: "El passat dimarts 26 de març, vam poder veure a youtube el #DIRECTOeduca (si la vols veure, aquí tens el vídeo) amb en Xavier Riba,..."
+excerpt: "Després de treballar amb les diferents tecnologies de RV i RA, cal avaluar quins són els beneficis i quins els inconvenients del seu ús a..."
 category: "Educació"
 tags: "conclusions, Ensenyament, RV"
 image: "assets/images/dafo_rv_aules.jpg"
