@@ -12,8 +12,8 @@ image: "assets/images/activitats_uf.jpg"
 
 En aquest apartat es pot consultar el disseny de les activitats per a la Unitat Formativa "UF2. Programació de PLC", dins del mòdul "M2. Sistemes Seqüencials Programables", pertanyent al CFGS Automatització i Robòtica Industrial.
 
-- [Disseny de l'activitat](https://raquelalaman.github.io/assets/disseny_activitat_uf.pdf)
-- [Presentació de la Unitat Formativa](https://raquelalaman.github.io/assets/Presentacion-Activitat-UF.pdf)
+- [Disseny de l'activitat](https://raquelalaman.github.io/assets/documents/disseny_activitat_uf.pdf)
+- [Presentació de la Unitat Formativa](https://raquelalaman.github.io/assets/documents/Presentacion-Activitat-UF.pdf)
 - Vídeo presentació del CFGS:
 
 <iframe width="560" height="315" src="https://vimeo.com/305319038?fl=pl&fe=vl" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

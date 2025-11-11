@@ -18,4 +18,4 @@ I, finalment, aquesta és la meva proposta: un  videojoc en RV amb Javascript.
 
 ![Exemple de visualització de l'execució del videojoc](https://raquelalaman.github.io/assets/images/rv_activitat_resultat.jpg)
 
-És un exemple, per tal que els alumnes puguin tenir una guia per començar. Podeu veure el [mini-tutorial](https://www.loom.com/share/f819d019a8694c17a30a14d8a82a9054) de JavaScript a CoSpaces (fet amb l'eina Loom), [provar](https://cospac.es/MmqJ) el joc i veure la [documentació](https://raquelalaman.github.io/assets/rv-modul-3.pdf) de l'activitat als enllaços.
+És un exemple, per tal que els alumnes puguin tenir una guia per començar. Podeu veure el [mini-tutorial](https://www.loom.com/share/f819d019a8694c17a30a14d8a82a9054) de JavaScript a CoSpaces (fet amb l'eina Loom), [provar](https://cospac.es/MmqJ) el joc i veure la [documentació](https://raquelalaman.github.io/assets/documents/rv-modul-3.pdf) de l'activitat als enllaços.
