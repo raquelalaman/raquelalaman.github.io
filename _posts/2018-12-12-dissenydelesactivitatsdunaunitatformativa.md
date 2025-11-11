@@ -5,7 +5,7 @@ author: "Raquel"
 excerpt: "En aquest apartat es pot consultar el disseny de les activitats per a la Unitat Formativa «UF2. Programació..."
 category: "Educació"
 tags: "activitat ensenyament-aprenentatge, robòtica, UF, unidad formativa, unitat formativa"
-image: "assets/images/actividades_uf.jpg"
+image: "assets/images/activitats_uf.jpg"
 ---
 
 # Disseny de les activitats d'una Unitat Formativa

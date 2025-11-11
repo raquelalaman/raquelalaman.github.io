@@ -5,7 +5,7 @@ author: "Raquel"
 excerpt: "En la asignatura de Innovació docent i iniciació a la recerca educativa a la Formació Professional, del Màster en Formació del Professorat d’Educació Secundària Obligatòria..."
 category: "Educació"
 tags: "3D, ABP, actividtat, activitat ensenyament-aprenentatge, arduino, cicles formatius, FP, microbit, programació, projecte"
-image: "assets/images/activitats_uf.jpg"
+image: "assets/images/innovaabp.png"
 ---
 
 # Innovació a la FP
