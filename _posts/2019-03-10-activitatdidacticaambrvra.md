@@ -5,7 +5,7 @@ author: "Raquel"
 excerpt: "Aquesta setmana, continuant amb el curs de Realitat Virtual a l’Aula (curs per a docents del XTEC), hem de fer una proposta d’activitat relacionada amb..."
 category: "Educació"
 tags: "activitat ensenyament-aprenentatge, CoSpaces, educació, Ensenyament, formació, informàtica, JavaScript, Loom, programació, realidad virtual, realitat virtual, RV, virtual reality"
-image: "assets/images/neuroeducacio.jpg"
+image: "assets/images/rv_activitat.jpg"
 ---
 
 # Activitat didàctica amb RV/RA
