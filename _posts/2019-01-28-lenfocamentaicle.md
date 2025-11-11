@@ -1,6 +1,6 @@
 ---
 title: "L'enfocament AICLE"
-date: "2019-01-298"
+date: "2019-01-28"
 author: "Raquel"
 excerpt: "En aquesta lesson plan proposo una activitat per introduir la llengua anglesa a la formació professional, concretament en la Unitat Formativa «UF5: fonaments d’HTML i..."
 category: "Educació"
