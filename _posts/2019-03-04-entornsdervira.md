@@ -18,8 +18,9 @@ D'una banda, UniteAR és molt senzilla d'utilitzar (i gratuïta) però només pe
 
 Per a veure el contingut AR, cal instal·lar la seva aplicació al mòbil i escanejar la imatge (UniteAR) o el codi (Zappar).
 
-![RA amb UniteAR](https://raquelalaman.github.io/assets/images/ra_unitR.jpg)
-![RA amb Zappar](https://raquelalaman.github.io/assets/images/ra_zappar.png)
+<img src="https://raquelalaman.github.io/assets/images/ra_unitR.jpg" alt="RA amb UniteAR" width="300" height="200">
+<img src="https://raquelalaman.github.io/assets/images/ra_zappar.png" alt="RA amb Zappar" width="300" height="200">
+<img src="https://raquelalaman.github.io/assets/images/ra_result.png" alt="Resultat RA amb Zappar" width="300" height="200">
 ![Resultat RA amb Zappar](https://raquelalaman.github.io/assets/images/ra_result.png)
 
 En el cas de la RV, he utilitzat les aplicacions Roundme i Poly Tour Creator (també gratuïtes), que permeten realitzar tours virtuals 360.
