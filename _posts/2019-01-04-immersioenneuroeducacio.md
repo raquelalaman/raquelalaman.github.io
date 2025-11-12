@@ -1,6 +1,6 @@
 ---
 title: "Immersió en neuroeducació"
-date: "2019-03-30"
+date: "2019-04-01"
 author: "Raquel"
 excerpt: "docents, lectures, neurociencia, neuroeducació, propostes, readings..."
 category: "Educació"
