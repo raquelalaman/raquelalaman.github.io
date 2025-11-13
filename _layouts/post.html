@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }} - Code thinking</title>
     <meta name="description" content="{{ page.excerpt | strip_html }}">
-    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
     
     <!-- CSS -->
     <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
@@ -91,7 +90,7 @@
         </div>
     </footer>
 
-     <script>
+    <script>
         // Funció per formatar data en català
         function formatDateCatalan(dateString) {
             const date = new Date(dateString);
@@ -121,10 +120,15 @@
 
         // Highlight code blocks
         document.addEventListener('DOMContentLoaded', () => {
-            // Highlight sintaxi
-            document.querySelectorAll('pre code').forEach((block) => {
-                hljs.highlightElement(block);
-            });
+            // Highlight sintaxi (només si hljs està disponible i hi ha blocs de codi)
+            if (typeof hljs !== 'undefined') {
+                const codeBlocks = document.querySelectorAll('pre code');
+                if (codeBlocks.length > 0) {
+                    codeBlocks.forEach((block) => {
+                        hljs.highlightElement(block);
+                    });
+                }
+            }
 
             // Formatar data en català
             const dateElement = document.querySelector('.post-date');
