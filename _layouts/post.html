@@ -105,7 +105,7 @@
         // Funció per calcular el temps de lectura
         function calculateReadingTime() {
             const content = document.querySelector('.post-content-markdown');
-            if (!content) return 0;
+            if (!content) return 1;
 
             // Comptar paraules
             const text = content.innerText || content.textContent;
@@ -115,7 +115,8 @@
             const wordsPerMinute = 200;
             const readingTime = Math.ceil(wordCount / wordsPerMinute);
             
-            return readingTime;
+            // Mínim 1 minut
+            return readingTime > 0 ? readingTime : 1;
         }
 
         // Highlight code blocks
