@@ -3,33 +3,33 @@
 (function() {
     'use strict';
 
-    // Función para crear el HTML del popup
+    // Funció per crear el HTML del popup
     function createPopupHTML() {
         return `
             <!-- Overlay -->
             <div id="newsletter-overlay" class="newsletter-overlay">
                 <!-- Modal -->
                 <div id="newsletter-modal" class="newsletter-modal">
-                    <!-- Botón cerrar -->
-                    <button id="newsletter-close" class="newsletter-close" aria-label="Cerrar">
+                    <!-- Botó tancar -->
+                    <button id="newsletter-close" class="newsletter-close" aria-label="Tancar">
                         <i class="fas fa-times"></i>
                     </button>
 
-                    <!-- Fondo decorativo -->
+                    <!-- Fons decoratiu -->
                     <div class="newsletter-header"></div>
 
                     <div class="newsletter-content">
-                        <!-- Icono de café -->
+                        <!-- Icona de bústia -->
                         <div class="newsletter-icon">
-                            <span>☕</span>
+                            <span>📬</span>
                         </div>
 
                         <div id="newsletter-form-container">
-                            <h2 class="newsletter-title">Fem un cafè!</h2>
-                            <p class="newsletter-subtitle">Vols saber-ne més? Envia'm un missatge!</p>
+                            <h2 class="newsletter-title">Subscriu-te!</h2>
+                            <p class="newsletter-subtitle">Vols conèixer les darreres novetats en IA? I com aplicar-les a l'aula? Busques tutorials i propostes d'activitats? </p>
 
                             <div class="newsletter-form">
-                                <!-- Campo Nombre -->
+                                <!-- Camp Nom -->
                                 <div class="newsletter-input-wrapper">
                                     <input 
                                         type="text" 
@@ -41,7 +41,7 @@
                                     <span id="newsletter-name-error" class="newsletter-error"></span>
                                 </div>
 
-                                <!-- Campo Email -->
+                                <!-- Camp Email -->
                                 <div class="newsletter-input-wrapper">
                                     <input 
                                         type="email" 
@@ -54,7 +54,7 @@
                                 </div>
 
                                 <button id="newsletter-submit" class="newsletter-button">
-                                    Subscriu-te!
+                                    Subscriu-me!
                                 </button>
                             </div>
 
@@ -63,7 +63,7 @@
                             </p>
                         </div>
 
-                        <!-- Mensaje de éxito (oculto inicialmente) -->
+                        <!-- Missatge d'èxito (ocult inicialment) -->
                         <div id="newsletter-success" class="newsletter-success" style="display: none;">
                             <div class="newsletter-success-icon">✓</div>
                             <h3 class="newsletter-success-title">Gràcies, <span id="success-name"></span>!</h3>
@@ -75,7 +75,7 @@
         `;
     }
 
-    // Función para crear los estilos CSS
+    // Funció per crear els estils CSS
     function createStyles() {
         const style = document.createElement('style');
         style.textContent = `
@@ -299,13 +299,13 @@
         return style;
     }
 
-    // Función para validar el email
+    // Funció per validar l'email
     function validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
 
-    // Función para mostrar error en un campo específico
+    // Funció per mostrar error en un camp específic
     function showError(fieldId, message) {
         const input = document.getElementById(fieldId);
         const errorSpan = document.getElementById(fieldId + '-error');
@@ -315,7 +315,7 @@
         errorSpan.classList.add('show');
     }
 
-    // Función para limpiar error de un campo específico
+    // Funció per netejar error d'un camp específic
     function clearError(fieldId) {
         const input = document.getElementById(fieldId);
         const errorSpan = document.getElementById(fieldId + '-error');
@@ -324,7 +324,7 @@
         errorSpan.classList.remove('show');
     }
 
-    // Función para enviar a Google Sheets
+    // Funció per enviar a Google Sheets
     async function saveToGoogleSheets(name, email) {
         // 🔴 Google Apps Script
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwt_XApJn3K-A0mcjNsilK9fCzqmyU6WDLGq_mvj_hrO1I8qjXrCiHrUmDKusy1YTETDQ/exec';
@@ -358,7 +358,7 @@
         }
     }
 
-    // Función para mostrar el popup
+    // Funció per mostrar el popup
     function showPopup() {
         const overlay = document.getElementById('newsletter-overlay');
         if (overlay) {
@@ -368,7 +368,7 @@
         }
     }
 
-    // Función para ocultar el popup
+    // Funció per amagar el popup
     function hidePopup() {
         const overlay = document.getElementById('newsletter-overlay');
         if (overlay) {
@@ -379,7 +379,7 @@
         }
     }
 
-    // Función para manejar el envío
+    // Funció per gestionar l'enviament
     async function handleSubmit() {
         const nameInput = document.getElementById('newsletter-name');
         const emailInput = document.getElementById('newsletter-email');
@@ -390,16 +390,16 @@
         
         let hasErrors = false;
         
-        // Limpiar errores previos
+        // Netejar errors previs
         clearError('newsletter-name');
         clearError('newsletter-email');
         
-        // Validar nombre
+        // Validar nom
         if (!name) {
             showError('newsletter-name', 'Si us plau, introdueix el teu nom');
             hasErrors = true;
         } else if (name.length < 2) {
-            showError('newsletter-name', 'El nom ha de tenir almenys 2 caràcters');
+            showError('newsletter-name', 'El nom ha de tenir mínim 2 caràcters');
             hasErrors = true;
         }
         
@@ -412,37 +412,37 @@
             hasErrors = true;
         }
         
-        // Si hay errores, no continuar
+        // Si hi ha errors, no continuar
         if (hasErrors) {
             return;
         }
         
-        // Deshabilitar el botón mientras se envía
+        // Deshabilitar el botó mentre s'envia
         submitBtn.disabled = true;
         submitBtn.textContent = 'Enviant...';
         
         // Enviar a Google Sheets
         await saveToGoogleSheets(name, email);
         
-        // Guardar que el usuario se ha suscrito
+        // Guardar que l'usuari s'ha subscrit
         localStorage.setItem('newsletter_subscribed', 'true');
         localStorage.setItem('newsletter_user_name', name);
         localStorage.setItem('newsletter_user_email', email);
         
-        // Mostrar mensaje de éxito con el nombre
+        // Mostrar missatge d'èxit amb el nom
         document.getElementById('success-name').textContent = name;
         document.getElementById('newsletter-form-container').style.display = 'none';
         document.getElementById('newsletter-success').style.display = 'block';
         
-        // Cerrar después de 2.5 segundos
+        // Tancar després de 2.5 segoms
         setTimeout(() => {
             hidePopup();
         }, 2500);
     }
 
-    // Función para inicializar el popup
+    // Función per inicialitzar el popup
     function init() {
-        // Verificar si el usuario ya interactuó con el popup
+        // Verificar si l'usuari ja va interactuar amb el popup
         const hasSubscribed = localStorage.getItem('newsletter_subscribed');
         const hasClosed = localStorage.getItem('newsletter_closed');
         
@@ -450,7 +450,7 @@
             return; // No mostrar el popup
         }
 
-        // Agregar estilos
+        // Agregar estils
         document.head.appendChild(createStyles());
 
         // Agregar HTML del popup
@@ -479,7 +479,7 @@
 
         submitBtn.addEventListener('click', handleSubmit);
 
-        // Permitir enviar con Enter en ambos campos
+        // Permetre enviar amb Enter en ambdós camps
         nameInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 handleSubmit();
@@ -492,15 +492,15 @@
             }
         });
 
-        // Limpiar error cuando el usuario empiece a escribir
+        // Netejar error quan l'usuari comenci a escriure
         nameInput.addEventListener('input', () => clearError('newsletter-name'));
         emailInput.addEventListener('input', () => clearError('newsletter-email'));
 
-        // Mostrar el popup después de 1 segundo
+        // Mostrar el popup després de 1 segon
         setTimeout(showPopup, 1000);
     }
 
-    // Inicializar cuando el DOM esté listo
+    // Inicialitzar quan el DOM estigui llest
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', init);
     } else {
