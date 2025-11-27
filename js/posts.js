@@ -24,12 +24,14 @@ async function loadAllPosts() {
         
         const posts = await response.json();
         console.log('Posts carregats:', posts);
+        console.log('Nombre total de posts:', posts.length);
         
         // Ordenar posts per data (més recents primer)
         posts.sort((a, b) => new Date(b.date) - new Date(a.date));
         
         // Agafar els 6 posts més recents per la graella 3x2
         blogPosts = posts.slice(0, 6);
+        console.log('Posts a mostrar:', blogPosts.length);
         
         renderPosts();
     } catch (error) {
