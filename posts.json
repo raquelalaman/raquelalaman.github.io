@@ -2,7 +2,7 @@
 layout: null
 ---
 [
-  {% for post in site.posts limit:4 %}
+  {% for post in site.posts limit:6 %}
   {
     "slug": "{{ post.slug }}",
     "title": "{{ post.title | escape }}",
