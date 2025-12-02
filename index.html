@@ -118,32 +118,7 @@
             <p>&copy; 2025 Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
         </div>
     </footer>
-    <script>
-// Sobreescriu la funció loadAllPosts
-async function loadAllPosts() {
-    const container = document.getElementById('posts-container');
-    container.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-    
-    try {
-        const response = await fetch('/posts.json');
-        const posts = await response.json();
-        
-        // Ordenar i agafar 6 posts
-        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-        blogPosts = posts.slice(0, 6);
-        
-        console.log('FORÇAT: Mostrant', blogPosts.length, 'posts');
-        renderPosts();
-    } catch (error) {
-        console.error('Error:', error);
-    }
-}
-
-// Recarregar
-loadAllPosts();
-</script>
-    <!-- Scripts -->
-    
+    <script src="js/posts.js"></script>
     <script src="js/newsletter-popup.js"></script>
 </body>
 </html>
