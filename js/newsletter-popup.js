@@ -25,9 +25,17 @@
                         </div>
 
                         <div id="newsletter-form-container">
-                            <h2 class="newsletter-title">Subscriu-te!</h2>
-                            <p class="newsletter-subtitle">Vols conèixer les darreres novetats en IA? I com aplicar-les a l'aula? Busques tutorials i propostes d'activitats? </p>
-
+                            <h3>No et perdis cap reflexió! 💡</h3>
+                            <p class="newsletter-subtitle">Uneix-te a la comunitat de <strong>Code thinking</strong></p>
+                            <p class="newsletter-description">
+                                Subscriu-te i rep directament al teu email:
+                            </p>
+                            <ul class="newsletter-benefits">
+                                <li><i class="fas fa-check-circle"></i> Articles nous sobre tecnologia i innovació</li>
+                                <li><i class="fas fa-check-circle"></i> Recursos exclusius i tutorials</li>
+                                <li><i class="fas fa-check-circle"></i> Novetats sobre projectes de R+D en salut digital</li>
+                                <li><i class="fas fa-check-circle"></i> Sense spam, només contingut de valor</li>
+                            </ul>
                             <div class="newsletter-form">
                                 <!-- Camp Nom -->
                                 <div class="newsletter-input-wrapper">
