@@ -15,15 +15,7 @@
                         <i class="fas fa-times"></i>
                     </button>
 
-                    <!-- Fons decoratiu -->
-                    <div class="newsletter-header"></div>
-
                     <div class="newsletter-content">
-                        <!-- Icona de bústia -->
-                        <div class="newsletter-icon">
-                            <i class="fas fa-envelope-open-text"></i>
-                        </div>
-
                         <div id="newsletter-form-container">
                             <h3>No et perdis cap reflexió! 💡</h3>
                             <p class="newsletter-subtitle">Uneix-te a la comunitat de <strong>Code thinking</strong></p>
