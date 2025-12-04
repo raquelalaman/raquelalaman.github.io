@@ -3,27 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code thinking</title>
-    <meta name="description" content="Code thinking">
+    
+    <!-- SEO Basics -->
+    <title>Code thinking - Raquel Alamán | Tecnologia, Salut Digital i Innovació</title>
+    <meta name="description" content="Blog de Raquel Alamán sobre desenvolupament d'aplicacions, R+D en salut digital, intel·ligència artificial i tecnologia aplicada a la investigació científica.">
+    <meta name="keywords" content="salut digital, desenvolupament aplicacions, IA, machine learning, neuropediatria, bioinformàtica, Raquel Alamán">
+    <meta name="author" content="Raquel Alamán">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raquelalaman.github.io/">
+    <meta property="og:title" content="Code thinking - Raquel Alamán">
+    <meta property="og:description" content="Explorant idees i compartint coneixement sobre tecnologia, salut digital i innovació.">
+    <meta property="og:image" content="https://raquelalaman.github.io/assets/images/og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://raquelalaman.github.io/">
+    <meta property="twitter:title" content="Code thinking - Raquel Alamán">
+    <meta property="twitter:description" content="Explorant idees i compartint coneixement sobre tecnologia, salut digital i innovació.">
+    <meta property="twitter:image" content="https://raquelalaman.github.io/assets/images/og-image.jpg">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
     
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- Font Awesome para iconos -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Marked.js para procesar markdown -->
+    <!-- Marked.js -->
     <script src="https://cdn.jsdelivr.net/npm/marked@9.1.2/marked.min.js"></script>
     
-    <!-- Highlight.js para sintaxis de código -->
+    <!-- Highlight.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
 </head>
 <body>
+    <!-- Botó Scroll to Top -->
+    <button id="scrollToTop" class="scroll-to-top" aria-label="Tornar a dalt">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Toggle Mode Fosc -->
+    <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Canviar mode fosc/clar">
+        <i class="fas fa-moon"></i>
+    </button>
+
     <header>
         <nav>
             <div class="nav-content">
@@ -37,13 +68,16 @@
             </div>
         </nav>
         <div class="logo">
-            <a href="https://raquelalaman.github.io/"><img src="assets/images/logo.png" alt="Logo"/></a>
+            <a href="https://raquelalaman.github.io/">
+                <img src="assets/images/logo.png" alt="Code thinking - Logo de Raquel Alamán"/>
+            </a>
         </div>
         <div class="header-content">
             <h1><a href="https://raquelalaman.github.io/">Code thinking</a></h1>
             <p class="subtitle">Explorant idees i compartint coneixement</p>
         </div>
     </header>
+    
     <main>
         <!-- Secció Qui soc -->
         <section class="about-section" id="about">
@@ -51,54 +85,57 @@
                 <div class="about-text">
                     <h2>Qui soc?</h2>
                     <p>De les dades a la innovació. Del coneixement al futur.</p>
-                    <p>Combino la meva experiència en docència en formació professional d’informàtica amb la investigació tecnològica d’avantguarda, contribuint tant a la innovació com a la formació del talent digital del futur. Forma part de la comunitat!</p>
+                    <p>Combino la meva experiència en docència en formació professional d'informàtica amb la investigació tecnològica d'avantguarda, contribuint tant a la innovació com a la formació del talent digital del futur. Forma part de la comunitat!</p>
                     <a href="qui-soc.html" class="about-btn">Coneix-me!</a>
                 </div>
                 <div class="about-image">
-                    <img src="assets/images/coneix-me.jpg" alt="Qui soc">
+                    <img src="assets/images/coneix-me.jpg" alt="Raquel Alamán - Desenvolupadora i investigadora">
                 </div>
             </div>
         </section>
+        
         <!-- Secció Projectes -->
         <section class="projects-section" id="projects">
             <h2 class="section-title">Projectes</h2>
             <p class="section-subtitle">Coneix els diferents <a class="go-to" href="projectes.html">projectes</a> en els quals participo.</p>
             <div class="projects-grid">
                 <a href="projectes.html" style="text-decoration: none; color: inherit;">
-                <article class="project-card">
-                    <div class="project-image">
-                        <img src="assets/images/rd_salut.png" alt="R+D en Salut Digital">
-                        <div class="project-overlay">
-                            <h3>R+D en Salut Digital</h3>
-                    </div>
-                </article>
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/rd_salut.png" alt="Projectes de R+D en Salut Digital">
+                            <div class="project-overlay">
+                                <h3>R+D en Salut Digital</h3>
+                            </div>
+                        </div>
+                    </article>
                 </a>
                 <a href="projectes.html" style="text-decoration: none; color: inherit;">
-                <article class="project-card">
-                    <div class="project-image">
-                        <img src="assets/images/desenvolupament_apps.png" alt="Desenvolupament d'Aplicacions">
-                        <div class="project-overlay">
-                            <h3>Desenvolupament d'Aplicacions</h3>
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/desenvolupament_apps.png" alt="Desenvolupament d'Aplicacions Web i Mòbil">
+                            <div class="project-overlay">
+                                <h3>Desenvolupament d'Aplicacions</h3>
+                            </div>
                         </div>
-                    </div>
-                </article>
+                    </article>
                 </a>
                 <a href="projectes.html" style="text-decoration: none; color: inherit;">
-                <article class="project-card">
-                    <div class="project-image">
-                        <img src="assets/images/col_laboracions.png" alt="Col·laboracions">
-                        <div class="project-overlay">
-                            <h3>Col·laboracions</h3> 
+                    <article class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/col_laboracions.png" alt="Col·laboracions en Recerca i Divulgació">
+                            <div class="project-overlay">
+                                <h3>Col·laboracions</h3> 
+                            </div>
                         </div>
-                    </div>
-                </article>
+                    </article>
                 </a>
             </div>
         </section>
+        
         <!-- Secció Blog -->
         <section class="blog-section" id="blog">
             <h2 class="section-title">Reflexions digitals</h2>
-            <p class="section-subtitle">Descobreix les meves últimes <a  class="go-to" href="https://raquelalaman.github.io/blog.html">reflexions</a> sobre els reptes i oportunitats que planteja la transformació digital en àmbits com la investigació, l’educació i el desenvolupament tecnològic.</p>
+            <p class="section-subtitle">Descobreix les meves últimes <a class="go-to" href="https://raquelalaman.github.io/blog.html">reflexions</a> sobre els reptes i oportunitats que planteja la transformació digital en àmbits com la investigació, l'educació i el desenvolupament tecnològic.</p>
             <div class="blog-posts" id="posts-container">
                 <div class="loading">
                     <div class="spinner"></div>
@@ -110,14 +147,32 @@
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://github.com/raquelalaman" title="GitHub">GH</a>
-                <a href="https://www.linkedin.com/in/raquelalaman/" title="LinkedIn">IN</a>
-                <a href="mailto:ralaman@xtec.cat" title="Email">@</a>
+                <a href="https://github.com/raquelalaman" title="GitHub de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://twitter.com/raquelalaman" title="Twitter de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://linkedin.com/in/raquelalaman" title="LinkedIn de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:hola@raquelalaman.com" title="Email de contacte">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-            <p>&copy; 2025 Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
+            <p>&copy; <span id="current-year"></span> Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
         </div>
     </footer>
+    
+    <!-- Scripts -->
     <script src="js/posts.js"></script>
+    <script src="js/dark-mode.js"></script>
+    <script src="js/scroll-to-top.js"></script>
     <script src="js/newsletter-popup.js"></script>
+    
+    <script>
+        // Any dinàmic al footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
