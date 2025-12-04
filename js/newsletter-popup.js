@@ -21,7 +21,7 @@
                     <div class="newsletter-content">
                         <!-- Icona de bústia -->
                         <div class="newsletter-icon">
-                            <span>📬</span>
+                            <i class="fas fa-envelope-open-text"></i>
                         </div>
 
                         <div id="newsletter-form-container">
@@ -62,18 +62,20 @@
                                 </div>
 
                                 <button id="newsletter-submit" class="newsletter-button">
-                                    Subscriu-me!
+                                    Subscriu-me! <i class="fas fa-paper-plane"></i>
                                 </button>
                             </div>
 
                             <p class="newsletter-privacy">
-                                No compartirem mai les teves dades. Pots donar-te de baixa en qualsevol moment.
+                                <i class="fas fa-lock"></i> No compartirem mai les teves dades. Pots donar-te de baixa en qualsevol moment.
                             </p>
                         </div>
 
-                        <!-- Missatge d'èxito (ocult inicialment) -->
+                        <!-- Missatge d'èxit (ocult inicialment) -->
                         <div id="newsletter-success" class="newsletter-success" style="display: none;">
-                            <div class="newsletter-success-icon">✓</div>
+                            <div class="newsletter-success-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
                             <h3 class="newsletter-success-title">Gràcies, <span id="success-name"></span>!</h3>
                             <p class="newsletter-success-text">T'hem subscrit correctament. Aviat rebràs notícies!</p>
                         </div>
@@ -90,14 +92,15 @@
             .newsletter-overlay {
                 position: fixed;
                 inset: 0;
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
                 z-index: 9998;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 padding: 1rem;
                 opacity: 0;
-                transition: opacity 0.5s ease-out;
+                transition: opacity 0.3s ease-out;
             }
 
             .newsletter-overlay.show {
@@ -106,14 +109,15 @@
 
             .newsletter-modal {
                 background: white;
-                border-radius: 0.5rem;
-                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-                max-width: 28rem;
+                border-radius: 16px;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+                max-width: 500px;
                 width: 100%;
+                max-height: 85vh;
+                overflow-y: auto;
                 position: relative;
-                overflow: hidden;
-                transform: scale(0.95);
-                transition: transform 0.5s ease-out;
+                transform: scale(0.9);
+                transition: transform 0.3s ease-out;
             }
 
             .newsletter-overlay.show .newsletter-modal {
@@ -124,69 +128,108 @@
                 position: absolute;
                 top: 1rem;
                 right: 1rem;
-                background: none;
+                background: rgba(255, 255, 255, 0.9);
                 border: none;
-                color: #6b7280;
+                color: #64748b;
                 cursor: pointer;
                 font-size: 1.5rem;
                 z-index: 10;
-                transition: color 0.2s;
+                transition: all 0.2s;
                 padding: 0.5rem;
                 line-height: 1;
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
             .newsletter-close:hover {
-                color: #374151;
+                background: white;
+                color: #1e293b;
+                transform: rotate(90deg);
             }
 
             .newsletter-header {
-                height: 8rem;
+                height: 120px;
+                background: linear-gradient(135deg, #6065FF 0%, #3F43A9 100%);
                 position: relative;
-            }
-
-            .newsletter-header::after {
-                content: '';
-                position: absolute;
-                inset: 0;
-                opacity: 0.2;
+                border-radius: 16px 16px 0 0;
             }
 
             .newsletter-content {
-                padding: 0 2rem 2rem 2rem;
+                padding: 0 2.5rem 2.5rem 2.5rem;
                 margin-top: -2rem;
             }
 
             .newsletter-icon {
                 background: white;
                 border-radius: 50%;
-                width: 4rem;
-                height: 4rem;
+                width: 70px;
+                height: 70px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
                 margin: 0 auto 1.5rem;
                 font-size: 2rem;
+                color: #6065FF;
             }
 
-            .newsletter-title {
-                font-size: 1.875rem;
+            .newsletter-content h3 {
+                font-size: 1.75rem;
                 font-weight: 700;
-                color: #1f2937;
+                color: #1e293b;
                 text-align: center;
-                margin-bottom: 0.75rem;
+                margin-bottom: 0.5rem;
+                line-height: 1.3;
             }
 
             .newsletter-subtitle {
-                color: #4b5563;
+                color: #64748b;
                 text-align: center;
                 margin-bottom: 1.5rem;
+                font-size: 1.05rem;
+                line-height: 1.5;
+            }
+
+            .newsletter-description {
+                color: #64748b;
+                text-align: center;
+                margin-bottom: 1rem;
+                font-size: 0.95rem;
+            }
+
+            .newsletter-benefits {
+                list-style: none;
+                padding: 0;
+                margin: 0 0 1.5rem 0;
+                text-align: left;
+            }
+
+            .newsletter-benefits li {
+                padding: 0.6rem 0;
+                color: #1e293b;
+                display: flex;
+                align-items: flex-start;
+                gap: 0.75rem;
+                font-size: 0.95rem;
+                line-height: 1.5;
+            }
+
+            .newsletter-benefits li i {
+                color: #6065FF;
+                font-size: 1.1rem;
+                margin-top: 0.15rem;
+                flex-shrink: 0;
             }
 
             .newsletter-form {
                 display: flex;
                 flex-direction: column;
                 gap: 1rem;
+                margin-top: 1.5rem;
             }
 
             .newsletter-input-wrapper {
@@ -195,18 +238,19 @@
 
             .newsletter-input {
                 width: 100%;
-                padding: 0.75rem 1rem;
-                border: 1px solid #d1d5db;
-                border-radius: 0.375rem;
+                padding: 0.875rem 1rem;
+                border: 2px solid #e2e8f0;
+                border-radius: 8px;
                 font-size: 1rem;
                 transition: all 0.2s;
                 box-sizing: border-box;
+                font-family: inherit;
             }
 
             .newsletter-input:focus {
                 outline: none;
-                border-color: #f59e0b;
-                box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
+                border-color: #6065FF;
+                box-shadow: 0 0 0 3px rgba(96, 101, 255, 0.1);
             }
 
             .newsletter-input.error {
@@ -223,7 +267,7 @@
                 display: none;
                 color: #ef4444;
                 font-size: 0.875rem;
-                margin-top: 0.25rem;
+                margin-top: 0.35rem;
                 animation: shake 0.3s ease-in-out;
             }
 
@@ -239,69 +283,174 @@
 
             .newsletter-button {
                 width: 100%;
-                background-color: #1f2937;
+                background: #6065FF;
                 color: white;
-                font-weight: 500;
-                padding: 0.75rem 1rem;
-                border-radius: 0.375rem;
+                font-weight: 600;
+                padding: 0.875rem 1.5rem;
+                border-radius: 8px;
                 border: none;
                 cursor: pointer;
                 transition: all 0.2s;
                 font-size: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
             }
 
             .newsletter-button:hover {
-                background-color: #374151;
-                transform: scale(1.02);
+                background: #3F43A9;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(96, 101, 255, 0.4);
             }
 
             .newsletter-button:active {
-                transform: scale(0.98);
+                transform: translateY(0);
             }
 
             .newsletter-button:disabled {
-                background-color: #9ca3af;
+                background: #94a3b8;
                 cursor: not-allowed;
                 transform: none;
             }
 
             .newsletter-privacy {
-                font-size: 0.75rem;
-                color: #6b7280;
+                font-size: 0.8rem;
+                color: #64748b;
                 text-align: center;
-                margin-top: 1rem;
+                margin-top: 1.25rem;
+                line-height: 1.5;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .newsletter-privacy i {
+                color: #6065FF;
+                font-size: 0.9rem;
             }
 
             .newsletter-success {
                 text-align: center;
-                padding: 2rem 0;
+                padding: 2rem 0 1rem;
             }
 
             .newsletter-success-icon {
                 font-size: 4rem;
-                margin-bottom: 1rem;
+                margin-bottom: 1.25rem;
                 color: #10b981;
             }
 
             .newsletter-success-title {
                 font-size: 1.5rem;
                 font-weight: 700;
-                color: #1f2937;
-                margin-bottom: 0.5rem;
+                color: #1e293b;
+                margin-bottom: 0.75rem;
             }
 
             .newsletter-success-text {
-                color: #4b5563;
+                color: #64748b;
+                font-size: 1rem;
+                line-height: 1.5;
             }
 
+            /* Mode fosc */
+            [data-theme="dark"] .newsletter-modal {
+                background: #1e293b;
+            }
+
+            [data-theme="dark"] .newsletter-content h3 {
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] .newsletter-subtitle,
+            [data-theme="dark"] .newsletter-description,
+            [data-theme="dark"] .newsletter-benefits li,
+            [data-theme="dark"] .newsletter-privacy {
+                color: #cbd5e1;
+            }
+
+            [data-theme="dark"] .newsletter-input {
+                background: #334155;
+                border-color: #475569;
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] .newsletter-input::placeholder {
+                color: #94a3b8;
+            }
+
+            [data-theme="dark"] .newsletter-close {
+                background: rgba(30, 41, 59, 0.9);
+                color: #cbd5e1;
+            }
+
+            [data-theme="dark"] .newsletter-close:hover {
+                background: #1e293b;
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] .newsletter-success-title {
+                color: #f1f5f9;
+            }
+
+            [data-theme="dark"] .newsletter-success-text {
+                color: #cbd5e1;
+            }
+
+            /* Responsive */
             @media (max-width: 640px) {
                 .newsletter-modal {
-                    margin: 1rem;
+                    max-height: 90vh;
                 }
 
-                .newsletter-title {
+                .newsletter-content {
+                    padding: 0 1.5rem 1.5rem 1.5rem;
+                }
+
+                .newsletter-content h3 {
                     font-size: 1.5rem;
                 }
+
+                .newsletter-benefits {
+                    font-size: 0.9rem;
+                }
+
+                .newsletter-benefits li {
+                    padding: 0.5rem 0;
+                }
+            }
+
+            /* Scrollbar personalitzada */
+            .newsletter-modal::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            .newsletter-modal::-webkit-scrollbar-track {
+                background: #f1f5f9;
+            }
+
+            .newsletter-modal::-webkit-scrollbar-thumb {
+                background: #cbd5e1;
+                border-radius: 4px;
+            }
+
+            .newsletter-modal::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+
+            [data-theme="dark"] .newsletter-modal::-webkit-scrollbar-track {
+                background: #1e293b;
+            }
+
+            [data-theme="dark"] .newsletter-modal::-webkit-scrollbar-thumb {
+                background: #475569;
+            }
+
+            [data-theme="dark"] .newsletter-modal::-webkit-scrollbar-thumb:hover {
+                background: #64748b;
             }
         `;
         return style;
@@ -427,7 +576,7 @@
         
         // Deshabilitar el botó mentre s'envia
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Enviant...';
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviant...';
         
         // Enviar a Google Sheets
         await saveToGoogleSheets(name, email);
@@ -442,14 +591,17 @@
         document.getElementById('newsletter-form-container').style.display = 'none';
         document.getElementById('newsletter-success').style.display = 'block';
         
-        // Tancar després de 2.5 segoms
+        // Tancar després de 3 segons
         setTimeout(() => {
             hidePopup();
-        }, 2500);
+        }, 3000);
     }
 
-    // Función per inicialitzar el popup
+    // Funció per inicialitzar el popup
     function init() {
+        // MODE DEBUG: Descomenta per veure sempre el popup
+        // localStorage.clear();
+        
         // Verificar si l'usuari ja va interactuar amb el popup
         const hasSubscribed = localStorage.getItem('newsletter_subscribed');
         const hasClosed = localStorage.getItem('newsletter_closed');
@@ -504,8 +656,21 @@
         nameInput.addEventListener('input', () => clearError('newsletter-name'));
         emailInput.addEventListener('input', () => clearError('newsletter-email'));
 
-        // Mostrar el popup després de 1 segon
-        setTimeout(showPopup, 1000);
+        // Mostrar el popup després de 10 segons
+        setTimeout(showPopup, 10000);
+        
+        // O quan fa scroll al 50%
+        let scrollTriggered = false;
+        window.addEventListener('scroll', () => {
+            if (scrollTriggered) return;
+            
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            
+            if (scrollPercent > 50) {
+                scrollTriggered = true;
+                showPopup();
+            }
+        });
     }
 
     // Inicialitzar quan el DOM estigui llest
