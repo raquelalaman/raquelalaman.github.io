@@ -1632,3 +1632,183 @@ body {
         font-size: 1rem;
     }
 }
+/* ============================================
+   CORRECCIONS MODE FOSC - POSTS I CONTACTE
+   ============================================ */
+
+/* Mode fosc per contingut dels posts */
+[data-theme="dark"] .post-full {
+    background: #1e293b;
+}
+
+[data-theme="dark"] .post-full-content {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .post-content-markdown {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .post-content-markdown h1,
+[data-theme="dark"] .post-content-markdown h2,
+[data-theme="dark"] .post-content-markdown h3,
+[data-theme="dark"] .post-content-markdown h4,
+[data-theme="dark"] .post-content-markdown h5,
+[data-theme="dark"] .post-content-markdown h6 {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .post-content-markdown p,
+[data-theme="dark"] .post-content-markdown li {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .post-content-markdown a {
+    color: #818cf8;
+}
+
+[data-theme="dark"] .post-content-markdown a:hover {
+    color: #a5b4fc;
+    border-bottom-color: #a5b4fc;
+}
+
+[data-theme="dark"] .post-content-markdown code {
+    background: #334155;
+    color: #a5b4fc;
+}
+
+[data-theme="dark"] .post-content-markdown pre {
+    background: #0f172a;
+    border: 1px solid #334155;
+}
+
+[data-theme="dark"] .post-content-markdown blockquote {
+    background: #334155;
+    border-left-color: #6065FF;
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .post-content-markdown table {
+    border-color: #334155;
+}
+
+[data-theme="dark"] .post-content-markdown table th,
+[data-theme="dark"] .post-content-markdown table td {
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .post-content-markdown table th {
+    background: #334155;
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .post-content-markdown hr {
+    border-color: #334155;
+}
+
+[data-theme="dark"] .post-content-markdown strong {
+    color: #f1f5f9;
+}
+
+/* Navegació entre posts en mode fosc */
+[data-theme="dark"] .post-navigation {
+    border-top-color: #334155;
+}
+
+[data-theme="dark"] .nav-previous,
+[data-theme="dark"] .nav-next,
+[data-theme="dark"] .nav-all {
+    color: #818cf8;
+    border-color: #6065FF;
+}
+
+[data-theme="dark"] .nav-previous:hover,
+[data-theme="dark"] .nav-next:hover,
+[data-theme="dark"] .nav-all:hover {
+    background: #6065FF;
+    color: #ffffff;
+}
+
+/* Secció de contacte en mode fosc */
+[data-theme="dark"] .contact-section {
+    background: #0f172a;
+}
+
+[data-theme="dark"] .contact-content h2 {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .contact-content p {
+    color: #cbd5e1;
+}
+
+/* Targetes de blog en mode fosc */
+[data-theme="dark"] .blog-posts .post-card {
+    background: #1e293b;
+    border-color: #334155;
+}
+
+[data-theme="dark"] .blog-posts .post-title {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .blog-posts .post-excerpt {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .blog-posts .post-date {
+    color: #94a3b8;
+}
+
+/* Metadades del post en mode fosc */
+[data-theme="dark"] .post-meta {
+    color: #94a3b8;
+}
+
+[data-theme="dark"] .post-date,
+[data-theme="dark"] .post-reading-time,
+[data-theme="dark"] .post-author {
+    color: #94a3b8;
+}
+
+/* Correcció per imatges en mode fosc */
+[data-theme="dark"] .post-content-markdown img {
+    opacity: 0.9;
+}
+
+/* Secció "Qui soc" en mode fosc */
+[data-theme="dark"] .about-text h2 {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .about-text p {
+    color: #cbd5e1;
+}
+
+/* Projectes en mode fosc */
+[data-theme="dark"] .section-title {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .section-subtitle {
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .section-subtitle a {
+    color: #818cf8;
+}
+
+/* Reptes reals en mode fosc */
+[data-theme="dark"] .reptes-section-title {
+    color: #f1f5f9;
+}
+
+[data-theme="dark"] .reptes-section-title .highlight {
+    color: #818cf8;
+}
+
+/* Accordió de projectes en mode fosc */
+[data-theme="dark"] .description {
+    color: #e2e8f0;
+}
