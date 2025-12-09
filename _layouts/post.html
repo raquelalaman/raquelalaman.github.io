@@ -10,10 +10,13 @@
     <!-- CSS -->
     <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
     
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- Highlight.js para sintaxis de código -->
+    <!-- Highlight.js -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
 </head>
@@ -27,20 +30,23 @@
     <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Canviar mode fosc/clar">
         <i class="fas fa-moon"></i>
     </button>
+
     <header>
         <nav>
             <div class="nav-content">
                 <ul class="nav-links">
                     <li><a href="{{ '/' | relative_url }}">Inici</a></li>
                     <li><a href="{{ '/qui-soc.html' | relative_url }}">Qui soc</a></li>
-                    <li><a href="{{ '/#projects' | relative_url }}">Projectes</a></li>
-                    <li><a href="{{ '/blog.html' | relative_url }}">Blog</a></li>
-                    <li><a href="{{ '/#contact' | relative_url }}">Contacte</a></li>
+                    <li><a href="{{ '/projectes.html' | relative_url }}">Projectes</a></li>
+                    <li><a href="{{ '/blog.html' | relative_url }}" class="active">Blog</a></li>
+                    <li><a href="{{ '/contacte.html' | relative_url }}">Contacte</a></li>
                 </ul>
             </div>
         </nav>
         <div class="logo">
-            <a href="{{ '/' | relative_url }}"><img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Logo"/></a>
+            <a href="{{ '/' | relative_url }}">
+                <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="Code thinking - Logo de Raquel Alamán"/>
+            </a>
         </div>
         <div class="header-content">
             <h1><a href="{{ '/' | relative_url }}">Code thinking</a></h1>
@@ -91,17 +97,27 @@
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://github.com/raquelalaman" title="GitHub">GH</a>
-                <a href="https://www.linkedin.com/in/raquelalaman/" title="LinkedIn">IN</a>
-                <a href="mailto:ralaman@xtec.cat" title="Email">@</a>
+                <a href="https://github.com/raquelalaman" title="GitHub de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/raquelalaman/" title="LinkedIn de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:ralaman@xtec.cat" title="Email de contacte">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-            <p>&copy; 2025 Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
+            <p>&copy; <span id="current-year"></span> Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
         </div>
     </footer>
+    
     <!-- Scripts -->
     <script src="{{ '/js/dark-mode.js' | relative_url }}"></script>
     <script src="{{ '/js/scroll-to-top.js' | relative_url }}"></script>
     <script>
+        // Any dinàmic al footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
         // Funció per formatar data en català
         function formatDateCatalan(dateString) {
             const date = new Date(dateString);
@@ -132,6 +148,10 @@
 
         // Highlight code blocks
         document.addEventListener('DOMContentLoaded', () => {
+            // Debug: Verificar que els botons existeixen
+            console.log('darkModeToggle:', document.getElementById('darkModeToggle'));
+            console.log('scrollToTop:', document.getElementById('scrollToTop'));
+            
             // Highlight sintaxi (només si hljs està disponible i hi ha blocs de codi)
             if (typeof hljs !== 'undefined') {
                 const codeBlocks = document.querySelectorAll('pre code');
