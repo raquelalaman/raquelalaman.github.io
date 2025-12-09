@@ -98,9 +98,10 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                padding: 1rem;
+                padding: 2rem 1rem;
                 opacity: 0;
                 transition: opacity 0.3s ease-out;
+                overflow-y: auto;
             }
 
             .newsletter-overlay.show {
@@ -111,13 +112,14 @@
                 background: white;
                 border-radius: 16px;
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                max-width: 460px;
+                max-width: 440px;
                 width: 100%;
-                max-height: none;
-                overflow: visible;
+                max-height: 90vh;
+                overflow-y: auto;
                 position: relative;
                 transform: scale(0.9);
                 transition: transform 0.3s ease-out;
+                margin: auto;
             }
 
             .newsletter-overlay.show .newsletter-modal {
@@ -152,84 +154,84 @@
             }
 
             .newsletter-header {
-                height: 80px;
+                height: 70px;
                 background: linear-gradient(135deg, #6065FF 0%, #3F43A9 100%);
                 position: relative;
                 border-radius: 16px 16px 0 0;
             }
 
             .newsletter-content {
-                padding: 0 1.75rem 1.75rem 1.75rem;
-                margin-top: -1.5rem;
+                padding: 0 1.5rem 1.5rem 1.5rem;
+                margin-top: -1.4rem;
             }
 
             .newsletter-icon {
                 background: white;
                 border-radius: 50%;
-                width: 56px;
-                height: 56px;
+                width: 52px;
+                height: 52px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-                margin: 0 auto 0.9rem;
-                font-size: 1.6rem;
+                margin: 0 auto 0.75rem;
+                font-size: 1.5rem;
                 color: #6065FF;
             }
 
             .newsletter-content h3 {
-                font-size: 1.4rem;
+                font-size: 1.3rem;
                 font-weight: 700;
                 color: #1e293b;
                 text-align: center;
-                margin-bottom: 0.35rem;
-                line-height: 1.3;
+                margin-bottom: 0.3rem;
+                line-height: 1.25;
             }
 
             .newsletter-subtitle {
                 color: #64748b;
                 text-align: center;
-                margin-bottom: 0.85rem;
-                font-size: 0.9rem;
-                line-height: 1.4;
+                margin-bottom: 0.7rem;
+                font-size: 0.875rem;
+                line-height: 1.3;
             }
 
             .newsletter-description {
                 color: #64748b;
                 text-align: center;
-                margin-bottom: 0.65rem;
-                font-size: 0.85rem;
+                margin-bottom: 0.55rem;
+                font-size: 0.8rem;
             }
 
             .newsletter-benefits {
                 list-style: none;
                 padding: 0;
-                margin: 0 0 0.85rem 0;
+                margin: 0 0 0.75rem 0;
                 text-align: left;
             }
 
             .newsletter-benefits li {
-                padding: 0.35rem 0;
+                padding: 0.3rem 0;
                 color: #1e293b;
                 display: flex;
                 align-items: flex-start;
-                gap: 0.55rem;
-                font-size: 0.825rem;
-                line-height: 1.35;
+                gap: 0.5rem;
+                font-size: 0.8rem;
+                line-height: 1.3;
             }
 
             .newsletter-benefits li i {
                 color: #6065FF;
-                font-size: 0.95rem;
-                margin-top: 0.08rem;
+                font-size: 0.9rem;
+                margin-top: 0.05rem;
                 flex-shrink: 0;
             }
 
             .newsletter-form {
                 display: flex;
                 flex-direction: column;
-                gap: 0.65rem;
-                margin-top: 0.85rem;
+                gap: 0.6rem;
+                margin-top: 0.75rem;
             }
 
             .newsletter-input-wrapper {
