@@ -109,11 +109,11 @@
 
             .newsletter-modal {
                 background: white;
-                border-radius: 16px;
+                border-radius: 12px;
                 box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-                max-width: 480px;
+                max-width: 420px;
                 width: 100%;
-                max-height: 90vh;
+                max-height: 85vh;
                 overflow-y: auto;
                 position: relative;
                 transform: scale(0.9);
@@ -126,110 +126,111 @@
 
             .newsletter-close {
                 position: absolute;
-                top: 1rem;
-                right: 1rem;
-                background: rgba(255, 255, 255, 0.9);
+                top: 0.75rem;
+                right: 0.75rem;
+                background: white;
                 border: none;
                 color: #64748b;
                 cursor: pointer;
-                font-size: 1.5rem;
+                font-size: 1.25rem;
                 z-index: 10;
                 transition: all 0.2s;
-                padding: 0.5rem;
+                padding: 0.35rem;
                 line-height: 1;
                 border-radius: 50%;
-                width: 40px;
-                height: 40px;
+                width: 32px;
+                height: 32px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             }
 
             .newsletter-close:hover {
-                background: white;
+                background: #f1f5f9;
                 color: #1e293b;
                 transform: rotate(90deg);
             }
 
             .newsletter-header {
-                height: 100px;
+                height: 60px;
                 background: linear-gradient(135deg, #6065FF 0%, #3F43A9 100%);
                 position: relative;
-                border-radius: 16px 16px 0 0;
+                border-radius: 12px 12px 0 0;
             }
 
             .newsletter-content {
-                padding: 0 2rem 2rem 2rem;
-                margin-top: -1.75rem;
+                padding: 0 1.5rem 1.5rem 1.5rem;
+                margin-top: -1.25rem;
             }
 
             .newsletter-icon {
                 background: white;
                 border-radius: 50%;
-                width: 60px;
-                height: 60px;
+                width: 48px;
+                height: 48px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-                margin: 0 auto 1rem;
-                font-size: 1.75rem;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                margin: 0 auto 0.65rem;
+                font-size: 1.4rem;
                 color: #6065FF;
             }
 
             .newsletter-content h3 {
-                font-size: 1.5rem;
+                font-size: 1.25rem;
                 font-weight: 700;
                 color: #1e293b;
                 text-align: center;
-                margin-bottom: 0.4rem;
-                line-height: 1.3;
+                margin-bottom: 0.25rem;
+                line-height: 1.2;
             }
 
             .newsletter-subtitle {
                 color: #64748b;
                 text-align: center;
-                margin-bottom: 1rem;
-                font-size: 0.95rem;
-                line-height: 1.4;
+                margin-bottom: 0.65rem;
+                font-size: 0.85rem;
+                line-height: 1.3;
             }
 
             .newsletter-description {
                 color: #64748b;
                 text-align: center;
-                margin-bottom: 0.75rem;
-                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+                font-size: 0.8rem;
             }
 
             .newsletter-benefits {
                 list-style: none;
                 padding: 0;
-                margin: 0 0 1rem 0;
+                margin: 0 0 0.7rem 0;
                 text-align: left;
             }
 
             .newsletter-benefits li {
-                padding: 0.4rem 0;
+                padding: 0.28rem 0;
                 color: #1e293b;
                 display: flex;
                 align-items: flex-start;
-                gap: 0.6rem;
-                font-size: 0.875rem;
-                line-height: 1.4;
+                gap: 0.45rem;
+                font-size: 0.78rem;
+                line-height: 1.25;
             }
 
             .newsletter-benefits li i {
                 color: #6065FF;
-                font-size: 1rem;
-                margin-top: 0.1rem;
+                font-size: 0.85rem;
+                margin-top: 0.05rem;
                 flex-shrink: 0;
             }
 
             .newsletter-form {
                 display: flex;
                 flex-direction: column;
-                gap: 0.75rem;
-                margin-top: 1rem;
+                gap: 0.55rem;
+                margin-top: 0.7rem;
             }
 
             .newsletter-input-wrapper {
@@ -238,10 +239,10 @@
 
             .newsletter-input {
                 width: 100%;
-                padding: 0.75rem 1rem;
+                padding: 0.6rem 0.8rem;
                 border: 2px solid #e2e8f0;
-                border-radius: 8px;
-                font-size: 0.95rem;
+                border-radius: 6px;
+                font-size: 0.85rem;
                 transition: all 0.2s;
                 box-sizing: border-box;
                 font-family: inherit;
@@ -266,8 +267,8 @@
             .newsletter-error {
                 display: none;
                 color: #ef4444;
-                font-size: 0.875rem;
-                margin-top: 0.35rem;
+                font-size: 0.8rem;
+                margin-top: 0.3rem;
                 animation: shake 0.3s ease-in-out;
             }
 
@@ -286,17 +287,17 @@
                 background: #6065FF;
                 color: white;
                 font-weight: 600;
-                padding: 0.75rem 1.5rem;
-                border-radius: 8px;
+                padding: 0.6rem 1.1rem;
+                border-radius: 6px;
                 border: none;
                 cursor: pointer;
                 transition: all 0.2s;
-                font-size: 0.95rem;
+                font-size: 0.85rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 0.5rem;
-                margin-top: 0.25rem;
+                gap: 0.35rem;
+                margin-top: 0.1rem;
             }
 
             .newsletter-button:hover {
@@ -316,44 +317,44 @@
             }
 
             .newsletter-privacy {
-                font-size: 0.75rem;
+                font-size: 0.65rem;
                 color: #64748b;
                 text-align: center;
-                margin-top: 1rem;
-                line-height: 1.4;
+                margin-top: 0.65rem;
+                line-height: 1.25;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 0.4rem;
+                gap: 0.25rem;
             }
 
             .newsletter-privacy i {
                 color: #6065FF;
-                font-size: 0.85rem;
+                font-size: 0.7rem;
             }
 
             .newsletter-success {
                 text-align: center;
-                padding: 1.5rem 0 1rem;
+                padding: 0.9rem 0 0.7rem;
             }
 
             .newsletter-success-icon {
-                font-size: 3.5rem;
-                margin-bottom: 1rem;
+                font-size: 2.75rem;
+                margin-bottom: 0.65rem;
                 color: #10b981;
             }
 
             .newsletter-success-title {
-                font-size: 1.4rem;
+                font-size: 1.15rem;
                 font-weight: 700;
                 color: #1e293b;
-                margin-bottom: 0.5rem;
+                margin-bottom: 0.35rem;
             }
 
             .newsletter-success-text {
                 color: #64748b;
-                font-size: 0.95rem;
-                line-height: 1.4;
+                font-size: 0.85rem;
+                line-height: 1.25;
             }
 
             /* Mode fosc */
@@ -403,30 +404,30 @@
             /* Responsive */
             @media (max-width: 640px) {
                 .newsletter-modal {
-                    max-height: 92vh;
-                    max-width: 95%;
+                    max-width: 90%;
+                    max-height: 90vh;
                 }
 
                 .newsletter-content {
-                    padding: 0 1.5rem 1.5rem 1.5rem;
+                    padding: 0 1.25rem 1.25rem 1.25rem;
                 }
 
                 .newsletter-content h3 {
-                    font-size: 1.35rem;
+                    font-size: 1.15rem;
                 }
 
                 .newsletter-benefits {
-                    font-size: 0.85rem;
+                    font-size: 0.75rem;
                 }
 
                 .newsletter-benefits li {
-                    padding: 0.35rem 0;
+                    padding: 0.25rem 0;
                 }
             }
 
-            /* Scrollbar personalitzada */
+            /* Scrollbar personalitzada (per si de cas en pantalles molt petites) */
             .newsletter-modal::-webkit-scrollbar {
-                width: 8px;
+                width: 6px;
             }
 
             .newsletter-modal::-webkit-scrollbar-track {
@@ -435,7 +436,7 @@
 
             .newsletter-modal::-webkit-scrollbar-thumb {
                 background: #cbd5e1;
-                border-radius: 4px;
+                border-radius: 3px;
             }
 
             .newsletter-modal::-webkit-scrollbar-thumb:hover {
