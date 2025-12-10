@@ -126,16 +126,16 @@
 
             .newsletter-close {
                 position: absolute;
-                top: 0.75rem;
-                right: 0.75rem;
+                top: 0.5rem;
+                right: 0.5rem;
                 background: white;
                 border: none;
                 color: #64748b;
                 cursor: pointer;
-                font-size: 1.25rem;
-                z-index: 10;
+                font-size: 1.5rem;
+                z-index: 1000;
                 transition: all 0.2s;
-                padding: 0.35rem;
+                padding: 0.25rem;
                 line-height: 1;
                 border-radius: 50%;
                 width: 32px;
@@ -143,17 +143,17 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             }
 
             .newsletter-close:hover {
                 background: #f1f5f9;
                 color: #1e293b;
-                transform: rotate(90deg);
+                transform: rotate(90deg) scale(1.1);
             }
 
             .newsletter-header {
-                height: 60px;
+                height: 55px;
                 background: linear-gradient(135deg, #6065FF 0%, #3F43A9 100%);
                 position: relative;
                 border-radius: 12px 12px 0 0;
@@ -161,21 +161,23 @@
 
             .newsletter-content {
                 padding: 0 1.5rem 1.5rem 1.5rem;
-                margin-top: -1.25rem;
+                margin-top: -1.1rem;
             }
 
             .newsletter-icon {
                 background: white;
                 border-radius: 50%;
-                width: 48px;
-                height: 48px;
+                width: 46px;
+                height: 46px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
                 margin: 0 auto 0.65rem;
-                font-size: 1.4rem;
+                font-size: 1.35rem;
                 color: #6065FF;
+                position: relative;
+                z-index: 1;
             }
 
             .newsletter-content h3 {
@@ -627,36 +629,57 @@
         const nameInput = document.getElementById('newsletter-name');
         const emailInput = document.getElementById('newsletter-email');
 
-        closeBtn.addEventListener('click', () => {
-            localStorage.setItem('newsletter_closed', 'true');
-            hidePopup();
-        });
+        // Debug
+        console.log('Botó tancar:', closeBtn);
+        console.log('Overlay:', overlay);
 
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('Botó tancar clickat!');
                 localStorage.setItem('newsletter_closed', 'true');
                 hidePopup();
-            }
-        });
+            });
+        }
 
-        submitBtn.addEventListener('click', handleSubmit);
+        if (overlay) {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    console.log('Overlay clickat!');
+                    localStorage.setItem('newsletter_closed', 'true');
+                    hidePopup();
+                }
+            });
+        }
+
+        if (submitBtn) {
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                handleSubmit();
+            });
+        }
 
         // Permetre enviar amb Enter en ambdós camps
-        nameInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleSubmit();
-            }
-        });
+        if (nameInput) {
+            nameInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSubmit();
+                }
+            });
+            nameInput.addEventListener('input', () => clearError('newsletter-name'));
+        }
 
-        emailInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                handleSubmit();
-            }
-        });
-
-        // Netejar error quan l'usuari comenci a escriure
-        nameInput.addEventListener('input', () => clearError('newsletter-name'));
-        emailInput.addEventListener('input', () => clearError('newsletter-email'));
+        if (emailInput) {
+            emailInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    handleSubmit();
+                }
+            });
+            emailInput.addEventListener('input', () => clearError('newsletter-email'));
+        }
 
         // Mostrar el popup després de 10 segons
         setTimeout(showPopup, 10000);
