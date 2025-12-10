@@ -7,7 +7,7 @@
     function createPopupHTML() {
         return `
             <!-- Overlay -->
-            <div id="newsletter-overlay" class="newsletter-overlay" style="display: none;">
+            <div id="newsletter-overlay" class="newsletter-overlay">
                 <!-- Modal -->
                 <div id="newsletter-modal" class="newsletter-modal">
                     <!-- Botó tancar -->
@@ -25,7 +25,7 @@
                         </div>
 
                         <div id="newsletter-form-container">
-                            <h3>No et perdis cap reflexió! </h3>
+                            <h3>No et perdis cap reflexió! 💡</h3>
                             <p class="newsletter-subtitle">Uneix-te a la comunitat de <strong>Code thinking</strong></p>
                             <p class="newsletter-description">
                                 Subscriu-te i rep directament al teu email:
@@ -85,7 +85,7 @@
         `;
     }
 
-    // [... els estils CSS es mantenen iguals ...]
+    // Funció per crear els estils CSS
     function createStyles() {
         const style = document.createElement('style');
         style.textContent = `
@@ -133,7 +133,7 @@
                 color: #64748b;
                 cursor: pointer;
                 font-size: 1.5rem;
-                z-index: 10000;
+                z-index: 1000;
                 transition: all 0.2s;
                 padding: 0.25rem;
                 line-height: 1;
@@ -427,7 +427,7 @@
                 }
             }
 
-            /* Scrollbar personalitzada */
+            /* Scrollbar personalitzada (per si de cas en pantalles molt petites) */
             .newsletter-modal::-webkit-scrollbar {
                 width: 6px;
             }
@@ -471,11 +471,9 @@
         const input = document.getElementById(fieldId);
         const errorSpan = document.getElementById(fieldId + '-error');
         
-        if (input && errorSpan) {
-            input.classList.add('error');
-            errorSpan.textContent = message;
-            errorSpan.classList.add('show');
-        }
+        input.classList.add('error');
+        errorSpan.textContent = message;
+        errorSpan.classList.add('show');
     }
 
     // Funció per netejar error d'un camp específic
@@ -483,14 +481,13 @@
         const input = document.getElementById(fieldId);
         const errorSpan = document.getElementById(fieldId + '-error');
         
-        if (input && errorSpan) {
-            input.classList.remove('error');
-            errorSpan.classList.remove('show');
-        }
+        input.classList.remove('error');
+        errorSpan.classList.remove('show');
     }
 
     // Funció per enviar a Google Sheets
     async function saveToGoogleSheets(name, email) {
+        // 🔴 Google Apps Script
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwt_XApJn3K-A0mcjNsilK9fCzqmyU6WDLGq_mvj_hrO1I8qjXrCiHrUmDKusy1YTETDQ/exec';
         
         try {
@@ -513,7 +510,7 @@
             });
             
             console.log('✅ Dades enviades a Google Sheets');
-            console.log('📝 Nom:', name);
+            console.log('📧 Nom:', name);
             console.log('📧 Email:', email);
             return true;
         } catch (error) {
@@ -526,12 +523,9 @@
     function showPopup() {
         const overlay = document.getElementById('newsletter-overlay');
         if (overlay) {
-            overlay.style.display = 'flex';
-            // Forçar reflow per a l'animació
-            overlay.offsetHeight;
             setTimeout(() => {
                 overlay.classList.add('show');
-            }, 10);
+            }, 100);
         }
     }
 
@@ -542,7 +536,7 @@
             overlay.classList.remove('show');
             setTimeout(() => {
                 overlay.style.display = 'none';
-            }, 300);
+            }, 500);
         }
     }
 
@@ -551,8 +545,6 @@
         const nameInput = document.getElementById('newsletter-name');
         const emailInput = document.getElementById('newsletter-email');
         const submitBtn = document.getElementById('newsletter-submit');
-        
-        if (!nameInput || !emailInput || !submitBtn) return;
         
         const name = nameInput.value.trim();
         const email = emailInput.value.trim();
@@ -599,15 +591,9 @@
         localStorage.setItem('newsletter_user_email', email);
         
         // Mostrar missatge d'èxit amb el nom
-        const successName = document.getElementById('success-name');
-        const formContainer = document.getElementById('newsletter-form-container');
-        const successContainer = document.getElementById('newsletter-success');
-        
-        if (successName && formContainer && successContainer) {
-            successName.textContent = name;
-            formContainer.style.display = 'none';
-            successContainer.style.display = 'block';
-        }
+        document.getElementById('success-name').textContent = name;
+        document.getElementById('newsletter-form-container').style.display = 'none';
+        document.getElementById('newsletter-success').style.display = 'block';
         
         // Tancar després de 3 segons
         setTimeout(() => {
@@ -625,8 +611,7 @@
         const hasClosed = localStorage.getItem('newsletter_closed');
         
         if (hasSubscribed || hasClosed) {
-            console.log('ℹ️ Popup no mostrat: usuari ja ha interactuat');
-            return;
+            return; // No mostrar el popup
         }
 
         // Agregar estils
@@ -640,61 +625,40 @@
         // Event listeners
         const closeBtn = document.getElementById('newsletter-close');
         const overlay = document.getElementById('newsletter-overlay');
-        const modal = document.getElementById('newsletter-modal');
         const submitBtn = document.getElementById('newsletter-submit');
         const nameInput = document.getElementById('newsletter-name');
         const emailInput = document.getElementById('newsletter-email');
 
-        console.log('✅ Popup inicialitzat correctament');
+        // Debug
+        console.log('Botó tancar:', closeBtn);
+        console.log('Overlay:', overlay);
 
-        // Botó tancar
         if (closeBtn) {
             closeBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                console.log('❌ Botó tancar clickat');
+                console.log('Botó tancar clickat!');
                 localStorage.setItem('newsletter_closed', 'true');
                 hidePopup();
             });
         }
 
-        // Click fora del modal
         if (overlay) {
             overlay.addEventListener('click', (e) => {
                 if (e.target === overlay) {
-                    console.log('❌ Click fora del modal');
+                    console.log('Overlay clickat!');
                     localStorage.setItem('newsletter_closed', 'true');
                     hidePopup();
                 }
             });
         }
 
-        // Evitar que el click al modal tanqui l'overlay
-        if (modal) {
-            modal.addEventListener('click', (e) => {
-                e.stopPropagation();
-            });
-        }
-
-        // Botó submit
         if (submitBtn) {
             submitBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 handleSubmit();
             });
         }
-
-        // Tecla Escape per tancar
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                const overlay = document.getElementById('newsletter-overlay');
-                if (overlay && overlay.classList.contains('show')) {
-                    console.log('❌ Tecla Escape premuda');
-                    localStorage.setItem('newsletter_closed', 'true');
-                    hidePopup();
-                }
-            }
-        });
 
         // Permetre enviar amb Enter en ambdós camps
         if (nameInput) {
@@ -718,10 +682,7 @@
         }
 
         // Mostrar el popup després de 10 segons
-        setTimeout(() => {
-            console.log('⏰ Mostrant popup després de 10 segons');
-            showPopup();
-        }, 10000);
+        setTimeout(showPopup, 10000);
         
         // O quan fa scroll al 50%
         let scrollTriggered = false;
@@ -732,7 +693,6 @@
             
             if (scrollPercent > 50) {
                 scrollTriggered = true;
-                console.log('📜 Mostrant popup per scroll >50%');
                 showPopup();
             }
         });
