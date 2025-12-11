@@ -22,7 +22,6 @@
 
   <main class="wrap grid">
 
-    <!-- Columna esquerra -->
     <section class="card">
       <h2>Què inclou la guia</h2>
       <ul>
@@ -39,7 +38,6 @@
       </ul>
     </section>
 
-    <!-- Columna dreta: FORMULARI Google Sheets -->
     <aside class="card">
       <h2>Descarrega-la ara</h2>
 
@@ -53,7 +51,6 @@
           <input id="email" name="email" type="email" placeholder="elteucorreu@domini.com" required />
         </div>
 
-        <!-- Honeypot -->
         <input type="text" name="website" id="website" style="position:absolute;left:-9999px" tabindex="-1" />
 
         <label class="consent">
@@ -61,7 +58,7 @@
           <span>Accepto rebre la guia i comunicacions puntuals. Puc donar-me de baixa en qualsevol moment.</span>
         </label>
 
-        <button class="btn" type="submit">Descarregar la guia</button>
+        <button class="btn" id="submit-btn" type="submit">Descarregar la guia</button>
         <p id="error" class="error">Revisa els camps obligatoris.</p>
       </form>
     </aside>
@@ -86,55 +83,73 @@
     </details>
   </section>
   
-  <!-- SCRIPT: Enviament a Google Sheets  -->
   <script>
-// Enviament JSON al Google Apps Script
-const form = document.getElementById("signup");
-form.addEventListener("submit", async function(e) {
-  e.preventDefault();
+    const form = document.getElementById("signup");
+    const submitBtn = document.getElementById("submit-btn");
 
-  const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const consent = document.getElementById("consent").checked;
-  const errorBox = document.getElementById("error");
-  const honeypot = document.getElementById("website").value;
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
 
-  errorBox.style.display = "none";
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const consent = document.getElementById("consent").checked;
+      const errorBox = document.getElementById("error");
+      const honeypot = document.getElementById("website").value;
 
-  // Validació bàsica
-  if (!name || !email || !/.+@.+\..+/.test(email) || !consent || honeypot) {
-    errorBox.style.display = "block";
-    return;
-  }
+      errorBox.style.display = "none";
 
-  const payload = {
-    name: name,
-    email: email,
-    timestamp: new Date().toLocaleString("ca-ES")
-  };
+      // Validació bàsica
+      if (!name || name.length < 2 || !email || !/.+@.+\..+/.test(email) || !consent || honeypot) {
+        errorBox.style.display = "block";
+        errorBox.textContent = "Revisa els camps: nom (mínim 2 lletres) i correu vàlid.";
+        return;
+      }
 
-  try {
-    const response = await fetch("https://script.google.com/macros/s/AKfycbwt_XApJn3K-A0mcjNsilK9fCzqmyU6WDLGq_mvj_hrO1I8qjXrCiHrUmDKusy1YTETDQ/exec", {
-      method: "POST",
-      mode: "cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload)
+      // Preparació de dades igual que al popup
+      const payload = {
+        name: name,
+        email: email,
+        date: new Date().toISOString(),
+        timestamp: new Date().toLocaleString('ca-ES', { 
+            timeZone: 'Europe/Madrid',
+            dateStyle: 'short',
+            timeStyle: 'short'
+        })
+      };
+
+      // Feedback visual
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Enviant...";
+
+      try {
+        // Petició amb mode: 'no-cors' tal com es fa al popup
+        await fetch("https://script.google.com/macros/s/AKfycbwt_XApJn3K-A0mcjNsilK9fCzqmyU6WDLGq_mvj_hrO1I8qjXrCiHrUmDKusy1YTETDQ/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+
+        // Amb 'no-cors' la resposta és opaca (no podem llegir el JSON), 
+        // per tant assumim èxit si no salta el catch.
+        
+        // Guardem preferència local (opcional, com fa el popup)
+        localStorage.setItem('newsletter_subscribed', 'true');
+        
+        // Redirecció a pàgina d'agraïment
+        window.location.href = "gracies.html";
+
+      } catch (err) {
+        console.error("Error enviant formulari:", err);
+        errorBox.style.display = "block";
+        errorBox.textContent = "Hi ha hagut un error de connexió. Torna-ho a provar.";
+        
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+      }
     });
-
-    const result = await response.json();
-
-    if (result.result === "success") {
-      window.location.href = "gracies.html";
-    } else {
-      console.error(result.error);
-      alert("Hi ha hagut un error guardant les dades.");
-    }
-  } catch (err) {
-    console.error(err);
-    alert("No s'ha pogut enviar el formulari.");
-  }
-});
-</script>
+  </script>
 
 </body>
 </html>
