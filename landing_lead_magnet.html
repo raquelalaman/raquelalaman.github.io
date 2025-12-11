@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia gratuïta: 5 eines per innovar a l’aula d’informàtica</title>
+  <meta name="description" content="Descarrega la guia gratuïta i aprèn 5 eines per innovar a l’aula d’informàtica." />
+
+  <!-- Estils inspirats en raquelalaman.github.io -->
+  <style>:root{--bg:#ffffff;--panel:#ffffff;--text:#1a1a1a;--text-soft:#444;--accent:#0a84ff;--radius:10px;--shadow:0 1px 4px rgba(0,0,0,0.08);--font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.65;-webkit-font-smoothing:antialiased}.wrap{max-width:760px;margin:0 auto;padding:24px}h1,h2,h3{color:var(--text);font-weight:600;letter-spacing:-.02em}h1{font-size:2rem;margin-bottom:12px}h2{font-size:1.4rem;margin-top:4px}.subtitle,p,li{color:var(--text-soft);font-size:1rem}.card{background:var(--panel);padding:24px;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px;border:1px solid #eaeaea}.btn{background:var(--accent);color:#fff;font-weight:600;padding:12px 20px;border-radius:var(--radius);border:none;cursor:pointer;display:inline-block;text-decoration:none;transition:.15s;width:100%;text-align:center;font-size:1rem;box-shadow:0 2px 6px rgba(10,132,255,.25)}.btn:hover{filter:brightness(1.08)}.form{display:flex;flex-direction:column;gap:14px}.form input[type=text],.form input[type=email]{padding:12px;width:100%;border-radius:var(--radius);border:1px solid #d0d0d0;background:#fafafa;color:var(--text);transition:.15s}.form input:focus{border-color:var(--accent);background:#fff;outline:none}.consent{font-size:.9rem;display:flex;gap:10px;align-items:flex-start;color:var(--text-soft)}.error{color:#c00;font-weight:600;display:none;margin-top:6px}details{background:#fafafa;padding:14px 18px;border-radius:var(--radius);margin:12px 0;border:1px solid #e0e0e0}summary{cursor:pointer;font-weight:600;color:var(--accent);font-size:.95rem}.grid{display:grid;grid-template-columns:2fr 1.2fr;gap:24px}@media(max-width:820px){.grid{grid-template-columns:1fr}.btn{font-size:1.05rem}}</style>
+</head>
+<body>
+
+  <header class="wrap">
+  <div style="text-align:center; margin-bottom:24px;">
+    <img src="assets/images/logo.png" alt="Raquel Alamán" style="width:110px; height:110px; border-radius:50%; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,0.15);" />
+  </div>
+
+  <div class="card">
+    <h1>5 eines gratuïtes per innovar a l’aula d’informàtica</h1>
+    <p class="subtitle">Descarrega la mini-guia pràctica (PDF) i uneix-te al butlletí de <strong>Raquel Alamán – Pensaments en codi</strong>.</p>
+  </div>
+</header>
+
+  <main class="wrap grid">
+
+    <!-- Columna esquerra -->
+    <section class="card">
+      <h2>Què inclou la guia</h2>
+      <ul>
+        <li>5 eines gratuïtes amb aplicacions reals a DAM/DAW.</li>
+        <li>Exemples d’activitats i possibles seqüències.</li>
+        <li>Recomanacions per començar a aplicar-les demà mateix.</li>
+      </ul>
+
+      <h2>Com funciona</h2>
+      <ul>
+        <li>Omple el formulari.</li>
+        <li>La teva informació s’enviarà automàticament al full de càlcul de Google.</li>
+        <li>Rebràs al correu l’enllaç directe de descàrrega.</li>
+      </ul>
+    </section>
+
+    <!-- Columna dreta: FORMULARI Google Sheets -->
+    <aside class="card">
+      <h2>Descarrega-la ara</h2>
+
+      <form id="sheetForm" class="form" method="post">
+        <div>
+          <label for="name">Nom</label>
+          <input id="name" name="name" type="text" placeholder="El teu nom" required />
+        </div>
+        <div>
+          <label for="email">Correu electrònic</label>
+          <input id="email" name="email" type="email" placeholder="elteucorreu@domini.com" required />
+        </div>
+
+        <!-- Honeypot -->
+        <input type="text" name="website" id="website" style="position:absolute;left:-9999px" tabindex="-1" />
+
+        <label class="consent">
+          <input id="consent" type="checkbox" required />
+          <span>Accepto rebre la guia i comunicacions puntuals. Puc donar-me de baixa en qualsevol moment.</span>
+        </label>
+
+        <button class="btn" type="submit">Descarregar la guia</button>
+        <p id="error" class="error">Revisa els camps obligatoris.</p>
+      </form>
+    </aside>
+  </main>
+
+  <section class="wrap card">
+    <h2>Preguntes freqüents</h2>
+
+    <details>
+      <summary>La guia és realment gratuïta?</summary>
+      <p>Sí. És 100% gratuïta.</p>
+    </details>
+
+    <details>
+      <summary>On s’emmagatzemen les dades?</summary>
+      <p>En un Google Sheet privat, igual que al popup de subscripció del blog.</p>
+    </details>
+
+    <details>
+      <summary>Com rebré la guia?</summary>
+      <p>Just després d’enviar el formulari, rebràs un correu amb l’enllaç de descàrrega.</p>
+    </details>
+  </section>
+
+
+  <!-- SCRIPT: Enviament a Google Sheets (idèntic al popup adjunt) -->
+  <script>
+    const scriptURL = "REEMPLAÇA_AMB_LA_TEVA_GOOGLE_APPS_SCRIPT_URL";
+    const form = document.getElementById("sheetForm");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const honeypot = document.getElementById("website").value;
+      if(honeypot) return; // Bot detectat
+
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const consent = document.getElementById("consent").checked;
+
+      if(!name || !email || !consent){
+        document.getElementById("error").style.display = "block";
+        return;
+      }
+
+      try {
+        await fetch(scriptURL, {
+          method: "POST",
+          mode: "no-cors",
+          body: new FormData(form)
+        });
+
+        window.location.href = "gracies.html";
+      } catch (err) {
+        alert("Hi ha hagut un error. Torna-ho a provar més tard.");
+      }
+    });
+  </script>
+
+</body>
+</html>
