@@ -94,7 +94,7 @@
                 inset: 0;
                 background-color: rgba(0, 0, 0, 0.7);
                 backdrop-filter: blur(5px);
-                z-index: 9998;
+                z-index: -1;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -102,13 +102,15 @@
                 opacity: 0;
                 visibility: hidden;
                 pointer-events: none;
-                transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+                transition: opacity 0.3s ease-out, visibility 0.3s ease-out, z-index 0s 0.3s;
             }
 
             .newsletter-overlay.show {
+                z-index: 9998;
                 opacity: 1;
                 visibility: visible;
                 pointer-events: auto;
+                transition: opacity 0.3s ease-out, visibility 0.3s ease-out, z-index 0s 0s;
             }
 
             .newsletter-modal {
@@ -702,10 +704,14 @@
         });
     }
 
-    // Inicialitzar quan el DOM estigui llest
+    // Inicialitzar quan el DOM estigui llest i els posts carregats
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', () => {
+            // Esperar 2 segons després del DOMContentLoaded per deixar carregar els posts
+            setTimeout(init, 2000);
+        });
     } else {
-        init();
+        // Si ja està carregat, esperar 2 segons
+        setTimeout(init, 2000);
     }
 })();
