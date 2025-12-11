@@ -100,11 +100,15 @@
                 justify-content: center;
                 padding: 1rem;
                 opacity: 0;
-                transition: opacity 0.3s ease-out;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
             }
 
             .newsletter-overlay.show {
                 opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
             }
 
             .newsletter-modal {
