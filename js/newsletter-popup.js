@@ -704,47 +704,12 @@
         });
     }
 
-    // Funció per esperar que els posts es carreguin
-    function waitForPosts() {
-        return new Promise((resolve) => {
-            // Comprovar si el contenidor de posts existeix
-            const postsContainer = document.getElementById('posts-container');
-            
-            if (!postsContainer) {
-                // No estem a la pàgina principal, inicialitzar immediatament
-                resolve();
-                return;
-            }
-            
-            // Comprovar cada 100ms si els posts s'han carregat
-            const checkInterval = setInterval(() => {
-                const loading = postsContainer.querySelector('.loading');
-                const posts = postsContainer.querySelectorAll('.post-card');
-                
-                // Si ja no hi ha spinner i hi ha posts, hem acabat
-                if ((!loading || loading.style.display === 'none') && posts.length > 0) {
-                    clearInterval(checkInterval);
-                    console.log('✅ Posts carregats, inicialitzant popup...');
-                    resolve();
-                }
-            }, 100);
-            
-            // Timeout de seguretat: després de 10 segons, inicialitzar igualment
-            setTimeout(() => {
-                clearInterval(checkInterval);
-                console.log('⏱️ Timeout: inicialitzant popup després de 10s');
-                resolve();
-            }, 10000);
-        });
-    }
-
-    // Inicialitzar després que els posts s'hagin carregat
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', async () => {
-            await waitForPosts();
+    // Inicialitzar el popup DESPRÉS que tot s'hagi carregat
+    window.addEventListener('load', () => {
+        // Esperar 1 segon més després del load complet
+        setTimeout(() => {
+            console.log('🚀 Inicialitzant popup després del load complet');
             init();
-        });
-    } else {
-        waitForPosts().then(init);
-    }
+        }, 1000);
+    });
 })();
