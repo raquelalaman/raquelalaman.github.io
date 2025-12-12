@@ -1,260 +1,328 @@
-# 📝 Tema de Blog para GitHub Pages
+# raquelalaman.github.io
 
-Un tema moderno y responsive para crear blogs personales usando GitHub Pages. Lee automáticamente archivos Markdown del repositorio y los presenta en un formato atractivo y fácil de navegar.
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-success)](https://raquelalaman.github.io)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## 🎯 Características Principales
+**Lloc web personal i professional de Raquel Alamán** - Enginyera informàtica, docent, investigadora i coordinadora de formació professional en desenvolupament d'aplicacions.
 
-### ✨ Funcionalidades Implementadas
-- **📱 Diseño 100% responsive** - Se adapta a cualquier dispositivo
-- **🎨 Paleta de colores moderna** - Azul eléctrico (#0066ff), blanco y gris claro
-- **📖 Lectura automática de Markdown** - Carga posts desde la carpeta `posts/`
-- **🔍 Navegación intuitiva** - Home, posts individuales, archivo y acerca de
-- **💻 Resaltado de sintaxis** - Para bloques de código usando Highlight.js
-- **🏷️ Sistema de etiquetas** - Organización por categorías
-- **📄 Paginación automática** - Para listas largas de posts
-- **⚡ Carga dinámica** - Sin recargas de página
-- **🎭 Animaciones suaves** - Transiciones CSS elegantes
+🌐 **URL del lloc**: [https://raquelalaman.github.io](https://raquelalaman.github.io)
 
-### 🏗️ Arquitectura del Proyecto
+---
+
+## 📋 Sobre el Projecte
+
+Aquest repositori conté el codi font del meu lloc web personal, desenvolupat com una Single Page Application (SPA) moderna i responsive. El lloc combina la meva trajectòria professional, projectes de recerca, reflexions sobre tecnologia i educació, i un blog amb contingut sobre desenvolupament i innovació digital.
+
+### Característiques Principals
+
+- ✅ **Disseny 100% responsive** - Adaptat a mòbils, tablets i desktop
+- ✅ **Navegació dinàmica** - SPA sense recarregues de pàgina
+- ✅ **Blog integrat** - Sistema de publicació de posts en Markdown
+- ✅ **Multilingüe** - Contingut principal en català
+- ✅ **Optimitzat SEO** - Meta tags, estructura semàntica
+- ✅ **Rendiment optimitzat** - Càrrega ràpida i eficient
+- ✅ **Paleta de colors moderna** - Disseny professional amb azul elèctric (#0066ff)
+
+---
+
+## 🗂️ Estructura del Projecte
+
 ```
-├── index.html              # Página principal con toda la estructura
+raquelalaman.github.io/
+│
+├── index.html              # Pàgina principal
+├── qui-soc.html           # Secció "Qui soc?"
+├── projectes.html         # Projectes de recerca i desenvolupament
+├── blog.html              # Blog amb reflexions digitals
+│
 ├── css/
-│   └── style.css          # Estilos completos y responsive
+│   └── style.css          # Estils globals i responsive
+│
 ├── js/
-│   └── main.js            # JavaScript para funcionalidad dinámica
-├── posts/                 # Carpeta con archivos Markdown
+│   └── main.js            # JavaScript per funcionalitat dinàmica
+│
+├── posts/                 # Articles del blog en Markdown
 │   ├── 2024-01-15-bienvenido-blog.md
 │   ├── 2024-01-12-guia-markdown.md
 │   ├── 2024-01-10-css-grid-flexbox.md
 │   └── 2024-01-08-javascript-moderno.md
-├── _config.yml            # Configuración de GitHub Pages
-└── README.md              # Esta documentación
+│
+├── images/                # Recursos multimèdia
+│
+├── _config.yml           # Configuració GitHub Pages
+└── README.md             # Aquest document
 ```
 
-## 🚀 URLs Funcionales de Entrada
-
-### Páginas Principales
-- **`/` (Inicio)** - Lista paginada de posts recientes
-- **`/#post-section`** - Vista individual de post (carga dinámica)
-- **`/#about-section`** - Información sobre el blog
-- **`/#archive-section`** - Archivo completo de posts
-
-### Parámetros de Navegación
-- **Paginación**: Navegación automática por páginas de posts
-- **Búsqueda de posts**: Por nombre de archivo y metadatos
-- **Filtrado**: Por fechas y etiquetas (implementado en JavaScript)
-
-## 🛠️ Configuración e Instalación
-
-### Paso 1: Clonar o Descargar
-```bash
-git clone [URL_DEL_REPOSITORIO]
-cd tu-blog-github-pages
-```
-
-### Paso 2: Configurar GitHub Pages
-1. Sube los archivos a tu repositorio de GitHub
-2. Ve a **Settings > Pages** en tu repositorio
-3. Selecciona **Deploy from a branch**
-4. Escoge **main branch** y **/ (root)**
-5. Guarda la configuración
-
-### Paso 3: Personalizar
-Edita los siguientes archivos:
-
-**`_config.yml`**:
-```yaml
-title: "Tu Blog Personal"
-description: "Tu descripción aquí"
-author:
-  name: "Tu Nombre"
-  email: "tu@email.com"
-```
-
-**`index.html`** (líneas 15-16):
-```html
-<title>Tu Blog</title>
-<meta name="description" content="Tu descripción">
-```
-
-## 📝 Cómo Agregar Posts
-
-### Formato de Archivo
-Los posts deben seguir este formato de nombre:
-```
-YYYY-MM-DD-titulo-del-post.md
-```
-
-### Estructura del Post
-```markdown
----
-title: "Título del Post"
-date: "2024-01-15"
-author: "Tu Nombre"
-excerpt: "Breve descripción del contenido"
-tags: "tag1, tag2, tag3"
 ---
 
-# Tu contenido aquí
-
-Escribe tu post en **Markdown** normal...
-```
-
-### Front Matter Soportado
-- `title`: Título del post
-- `date`: Fecha en formato YYYY-MM-DD
-- `author`: Nombre del autor
-- `excerpt`: Resumen corto para la lista
-- `tags`: Etiquetas separadas por comas
-
-## 🎨 Personalización de Diseño
-
-### Colores Principales
-```css
-:root {
-    --electric-blue: #0066ff;      /* Azul eléctrico principal */
-    --electric-blue-dark: #0052cc; /* Azul más oscuro */
-    --electric-blue-light: #3385ff; /* Azul más claro */
-    --white: #ffffff;              /* Blanco */
-    --light-gray: #f5f7fa;         /* Gris claro */
-    --medium-gray: #e1e5e9;        /* Gris medio */
-    --dark-gray: #64748b;          /* Gris oscuro */
-}
-```
-
-### Tipografía
-- **Fuente**: Inter (Google Fonts)
-- **Tamaños**: Sistema escalable con rem
-- **Pesos**: 300, 400, 500, 600, 700
-
-### Responsive Breakpoints
-- **Móvil**: < 768px
-- **Tablet**: 768px - 1024px  
-- **Desktop**: > 1024px
-
-## 🔧 Tecnologías Utilizadas
+## 🚀 Tecnologies Utilitzades
 
 ### Frontend Core
-- **HTML5** - Estructura semántica
-- **CSS3** - Estilos modernos con Grid y Flexbox
-- **JavaScript ES6+** - Funcionalidad dinámica
+- **HTML5** - Estructura semàntica
+- **CSS3** - Estils moderns amb Grid i Flexbox
+- **JavaScript ES6+** - Funcionalitat dinàmica i interactiva
 
-### Librerías CDN
-- **Marked.js** - Procesamiento de Markdown
-- **Highlight.js** - Resaltado de sintaxis
-- **Font Awesome** - Iconos vectoriales
-- **Google Fonts** - Tipografía web
+### Llibreries Externes (CDN)
+- **[Marked.js](https://marked.js.org/)** - Parser de Markdown a HTML
+- **[Highlight.js](https://highlightjs.org/)** - Ressaltat de sintaxi per blocs de codi
+- **[Font Awesome](https://fontawesome.com/)** - Icones vectorials
+- **[Google Fonts](https://fonts.google.com/)** - Tipografia Inter
 
-### Servicios
-- **GitHub Pages** - Hosting estático gratuito
-- **GitHub API** - Carga automática de posts
-
-## 📊 Modelo de Datos
-
-### Estructura de Post
-```javascript
-{
-    id: "nombre-archivo-sin-extension",
-    title: "Título del Post",
-    date: "2024-01-15",
-    author: "Nombre del Autor",
-    excerpt: "Descripción corta...",
-    content: "Contenido completo en HTML",
-    tags: ["tag1", "tag2", "tag3"],
-    filename: "archivo-original.md"
-}
-```
-
-### Configuración Global
-```javascript
-const CONFIG = {
-    postsPerPage: 6,           // Posts por página
-    postsDirectory: 'posts',   // Carpeta de posts
-    githubRepo: 'auto',       // Detectado automáticamente
-    currentPage: 1,           // Página actual
-    totalPosts: 0,            // Total de posts
-    allPosts: []              // Array de todos los posts
-}
-```
-
-## 🔄 Características Próximas a Implementar
-
-### Funcionalidades Pendientes
-- [ ] **🔍 Buscador de posts** - Búsqueda por título y contenido
-- [ ] **🏷️ Filtro por etiquetas** - Navegación por categorías
-- [ ] **📱 PWA Support** - Instalable como app móvil
-- [ ] **🌙 Modo oscuro** - Toggle de tema claro/oscuro
-- [ ] **💬 Sistema de comentarios** - Integración con Disqus/utterances
-- [ ] **📈 Analytics** - Integración con Google Analytics
-- [ ] **🔗 Social sharing** - Botones para compartir en RRSS
-- [ ] **📑 Tabla de contenidos** - Para posts largos
-- [ ] **⏱️ Tiempo de lectura** - Estimación automática
-- [ ] **🔔 RSS Feed** - Suscripción automática
-
-### Mejoras Técnicas
-- [ ] **⚡ Service Worker** - Cache offline
-- [ ] **🗂️ Organización por fechas** - Archivo por año/mes
-- [ ] **🖼️ Lazy loading** - Para imágenes
-- [ ] **🔐 GitHub Actions** - Deploy automático
-- [ ] **📝 Plantillas de post** - Templates predefinidos
-
-## 🚀 Próximos Pasos Recomendados
-
-### Para el Desarrollo
-1. **Implementar búsqueda** usando Fuse.js o similar
-2. **Agregar modo oscuro** con CSS custom properties
-3. **Optimizar rendimiento** con lazy loading
-4. **Mejorar SEO** con meta tags dinámicos
-5. **Agregar PWA** con manifest y service worker
-
-### Para el Contenido
-1. **Escribir más posts** de ejemplo
-2. **Crear plantillas** para diferentes tipos de contenido
-3. **Documentar guías** de uso y personalización
-4. **Optimizar imágenes** para web
-5. **Crear contenido evergreen** que mantenga relevancia
-
-## 📚 Recursos y Enlaces
-
-### Documentación
-- [Markdown Guide](https://www.markdownguide.org/)
-- [GitHub Pages Docs](https://docs.github.com/es/pages)
-- [Jekyll Documentation](https://jekyllrb.com/docs/)
-
-### Herramientas Útiles
-- [Markdown Editor Online](https://dillinger.io/)
-- [Color Palette Generator](https://coolors.co/)
-- [Font Pairing Tool](https://fontjoy.com/)
-- [Image Optimization](https://tinypng.com/)
-
-## 🤝 Contribución
-
-### Cómo Contribuir
-1. Fork el repositorio
-2. Crea una branch para tu feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -am 'Agregar nueva funcionalidad'`)
-4. Push a la branch (`git push origin feature/nueva-funcionalidad`)
-5. Crear un Pull Request
-
-### Reportar Issues
-- Usa el template de issues de GitHub
-- Incluye capturas de pantalla si es necesario
-- Describe los pasos para reproducir el problema
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
-
-## 🙏 Agradecimientos
-
-- **Marked.js** - Por el excelente parser de Markdown
-- **Highlight.js** - Por el resaltado de sintaxis
-- **Font Awesome** - Por los iconos vectoriales
-- **GitHub** - Por el hosting gratuito con Pages
-- **La comunidad** - Por el feedback y contribuciones
+### Hosting i Deployment
+- **GitHub Pages** - Hosting estàtic gratuït
+- **GitHub API** - Càrrega automàtica de posts del blog
 
 ---
 
-**📧 Contacto**: Si tienes preguntas o sugerencias, no dudes en abrir un issue o contactar al autor.
+## 🎨 Paleta de Colors
 
-**⭐ ¿Te gusta el proyecto?** ¡Dale una estrella en GitHub y compártelo con otros desarrolladores!
+El disseny utilitza una paleta de colors moderna i professional:
+
+```css
+:root {
+    --electric-blue: #0066ff;       /* Azul elèctric principal */
+    --electric-blue-dark: #0052cc;  /* Azul més fosc (hovers) */
+    --electric-blue-light: #3385ff; /* Azul més clar (accents) */
+    --white: #ffffff;               /* Blanc pur */
+    --light-gray: #f5f7fa;          /* Gris clar (fons) */
+    --medium-gray: #e1e5e9;         /* Gris mitjà (separadors) */
+    --dark-gray: #64748b;           /* Gris fosc (text secundari) */
+    --black: #1e293b;               /* Gris molt fosc (text principal) */
+}
+```
+
+---
+
+## 📝 Com Afegir Posts al Blog
+
+### 1. Format del Nom de Fitxer
+
+Els posts han de seguir aquesta convenció:
+
+```
+YYYY-MM-DD-titol-del-post.md
+```
+
+**Exemple**: `2024-12-12-intel·ligencia-artificial-educacio.md`
+
+### 2. Estructura del Post (Front Matter)
+
+Cada post ha de començar amb metadades en format YAML:
+
+```markdown
+---
+title: "Títol del Post"
+date: "2024-12-12"
+author: "Raquel Alamán"
+excerpt: "Breu descripció del contingut que apareixerà a la llista de posts"
+tags: "intel·ligència artificial, educació, innovació"
+---
+
+# El teu contingut aquí
+
+Escriu el teu post utilitzant **Markdown** estàndard...
+```
+
+### 3. Camps Front Matter
+
+| Camp | Requerit | Descripció |
+|------|----------|------------|
+| `title` | Sí | Títol del post |
+| `date` | Sí | Data en format YYYY-MM-DD |
+| `author` | Sí | Nom de l'autor |
+| `excerpt` | Sí | Resum breu per a la llista |
+| `tags` | No | Etiquetes separades per comes |
+
+### 4. Pujar el Post
+
+1. Crea el fitxer `.md` a la carpeta `posts/`
+2. Fes commit i push al repositori
+3. GitHub Pages actualitzarà automàticament el lloc
+
+---
+
+## 🛠️ Instal·lació i Desenvolupament Local
+
+### Prerequisits
+
+No cal instal·lar dependències. Només necessites un navegador web modern.
+
+### Clonar el Repositori
+
+```bash
+git clone https://github.com/raquelalaman/raquelalaman.github.io.git
+cd raquelalaman.github.io
+```
+
+### Executar Localment
+
+**Opció 1: Servidor HTTP simple amb Python**
+```bash
+python -m http.server 8000
+```
+
+**Opció 2: Live Server de VS Code**
+- Instal·la l'extensió "Live Server"
+- Obre `index.html` i fes clic a "Go Live"
+
+Accedeix a `http://localhost:8000` al teu navegador.
+
+---
+
+## 📱 Responsive Design
+
+El lloc s'adapta a diferents mides de pantalla:
+
+| Dispositiu | Breakpoint | Característiques |
+|-----------|------------|------------------|
+| **Mòbil** | < 768px | Navegació hamburguesa, columna única |
+| **Tablet** | 768px - 1024px | Grid de 2 columnes |
+| **Desktop** | > 1024px | Grid de 3 columnes, navegació completa |
+
+---
+
+## 🎯 Funcionalitats Principals
+
+### Sistema de Navegació SPA
+- Navegació dinàmica sense recarregar la pàgina
+- URL hash routing (`#about-section`, `#projects-section`)
+- Transicions suaus entre seccions
+
+### Blog Dinàmic
+- Càrrega automàtica de posts des de la carpeta `posts/`
+- Renderització de Markdown a HTML
+- Paginació automàtica (6 posts per pàgina)
+- Sistema d'etiquetes per categoritzar contingut
+
+### Optimitzacions
+- Lazy loading d'imatges
+- Minificació de recursos
+- Cache de navegador optimitzat
+- Fonts web precarregades
+
+---
+
+## 🔜 Roadmap i Funcionalitats Futures
+
+### Alta Prioritat
+- [ ] **Cercador de posts** - Cerca per títol i contingut
+- [ ] **Filtre per etiquetes** - Navegació per categories
+- [ ] **Mode fosc** - Toggle de tema clar/fosc
+- [ ] **RSS Feed** - Subscripció automàtica per a lectors
+
+### Mitjana Prioritat
+- [ ] **Sistema de comentaris** - Integració amb Disqus o utterances
+- [ ] **Compartir a xarxes socials** - Botons per compartir posts
+- [ ] **Temps de lectura** - Estimació automàtica per post
+- [ ] **Taula de continguts** - Per a posts llargs
+
+### Millores Tècniques
+- [ ] **PWA Support** - Instal·lable com a app mòbil
+- [ ] **Service Worker** - Cache offline
+- [ ] **GitHub Actions** - Deploy automàtic amb CI/CD
+- [ ] **Analytics** - Integració amb Google Analytics
+
+---
+
+## 📚 Recursos i Referències
+
+### Documentació
+- [GitHub Pages Documentation](https://docs.github.com/es/pages)
+- [Markdown Guide](https://www.markdownguide.org/)
+- [HTML5 Best Practices](https://www.w3.org/TR/html5/)
+
+### Eines de Desenvolupament
+- [VS Code](https://code.visualstudio.com/) - Editor recomanat
+- [Dillinger](https://dillinger.io/) - Editor de Markdown online
+- [TinyPNG](https://tinypng.com/) - Optimització d'imatges
+- [Can I Use](https://caniuse.com/) - Compatibilitat de navegadors
+
+---
+
+## 🤝 Contribucions
+
+Tot i que aquest és un lloc web personal, les contribucions per millorar el codi són benvingudes!
+
+### Com Contribuir
+
+1. **Fork** el repositori
+2. Crea una **branch** per la teva feature:
+   ```bash
+   git checkout -b feature/millora-interessant
+   ```
+3. **Commit** els teus canvis:
+   ```bash
+   git commit -am 'Afegir nova funcionalitat'
+   ```
+4. **Push** a la branch:
+   ```bash
+   git push origin feature/millora-interessant
+   ```
+5. Obre un **Pull Request**
+
+### Reportar Issues
+
+Si trobes errors o tens suggeriments:
+- Obre un [issue a GitHub](https://github.com/raquelalaman/raquelalaman.github.io/issues)
+- Descriu el problema o la millora proposada
+- Inclou captures de pantalla si és necessari
+
+---
+
+## 👤 Sobre l'Autora
+
+**Raquel Alamán**  
+Enginyera Informàtica | Docent | Investigadora
+
+- 💼 Docent i coordinadora de cicles de desenvolupament a l'Institut Tecnològic de Barcelona (ITB)
+- 🔬 Investigadora en bioinformàtica i intel·ligència artificial
+- 🎓 Coordinadora del programa de mobilitat Erasmus+
+- 💻 Més de 15 anys d'experiència en desenvolupament web i gestió de projectes
+
+### Contacte
+
+- 🌐 Web: [raquelalaman.github.io](https://raquelalaman.github.io)
+- 📧 Email: [Contacta a través del web](https://raquelalaman.github.io/qui-soc.html)
+- 🐙 GitHub: [@raquelalaman](https://github.com/raquelalaman)
+
+---
+
+## 📄 Llicència
+
+Aquest projecte està sota la Llicència MIT. Consulta el fitxer [LICENSE](LICENSE) per a més detalls.
+
+```
+MIT License
+
+Copyright (c) 2024 Raquel Alamán
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction...
+```
+
+---
+
+## 🙏 Agraïments
+
+- **[GitHub Pages](https://pages.github.com/)** - Per l'hosting gratuït i fiable
+- **[Marked.js](https://marked.js.org/)** - Per l'excel·lent parser de Markdown
+- **[Highlight.js](https://highlightjs.org/)** - Per el ressaltat de sintaxi
+- **[Font Awesome](https://fontawesome.com/)** - Per les icones vectorials
+- **La comunitat de desenvolupadors** - Per la inspiració i el feedback constant
+
+---
+
+## 🌟 Donar Suport
+
+Si aquest projecte t'ha estat útil:
+- ⭐ Dona una estrella al repositori
+- 🔀 Comparteix-lo amb altres desenvolupadors
+- 📝 Obre issues amb suggeriments de millora
+- 🤝 Contribueix amb pull requests
+
+---
+
+**Fet amb ❤️ i ☕ per Raquel Alamán**
+
+*Última actualització: Desembre 2024*
