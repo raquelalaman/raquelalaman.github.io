@@ -202,28 +202,6 @@ El lloc s'adapta a diferents mides de pantalla:
 
 ---
 
-## 🔜 Roadmap i Funcionalitats Futures
-
-### Alta Prioritat
-- [ ] **Cercador de posts** - Cerca per títol i contingut
-- [ ] **Filtre per etiquetes** - Navegació per categories
-- [ ] **Mode fosc** - Toggle de tema clar/fosc
-- [ ] **RSS Feed** - Subscripció automàtica per a lectors
-
-### Mitjana Prioritat
-- [ ] **Sistema de comentaris** - Integració amb Disqus o utterances
-- [ ] **Compartir a xarxes socials** - Botons per compartir posts
-- [ ] **Temps de lectura** - Estimació automàtica per post
-- [ ] **Taula de continguts** - Per a posts llargs
-
-### Millores Tècniques
-- [ ] **PWA Support** - Instal·lable com a app mòbil
-- [ ] **Service Worker** - Cache offline
-- [ ] **GitHub Actions** - Deploy automàtic amb CI/CD
-- [ ] **Analytics** - Integració amb Google Analytics
-
----
-
 ## 📚 Recursos i Referències
 
 ### Documentació
