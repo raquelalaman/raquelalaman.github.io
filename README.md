@@ -303,4 +303,4 @@ Si aquest projecte t'ha estat útil:
 
 **Fet amb ❤️ i ☕ per Raquel Alamán**
 
-*Última actualització: Desembre 2024*
+*Última actualització: Desembre 2025*
