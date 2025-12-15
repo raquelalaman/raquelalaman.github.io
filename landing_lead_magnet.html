@@ -11,12 +11,12 @@
 
   <header class="wrap">
   <div style="text-align:center; margin-bottom:24px;">
-    <img src="assets/images/logo.png" alt="Raquel Alamán" style="width:110px; height:110px; border-radius:50%; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,0.15);" />
+    <a href="https://raquelalaman.github.io/"><img src="assets/images/logo.png" alt="Raquel Alamán" style="width:110px; height:110px; border-radius:50%; object-fit:cover; box-shadow:0 2px 8px rgba(0,0,0,0.15);" /></a>
   </div>
 
   <div class="card">
     <h1>5 eines gratuïtes per innovar a l’aula d’informàtica</h1>
-    <p class="subtitle">Descarrega la mini-guia pràctica (PDF) i uneix-te al butlletí de <strong>Raquel Alamán – Pensaments en codi</strong>.</p>
+    <p class="subtitle">Descarrega la mini-guia pràctica (PDF) i uneix-te al butlletí de <strong>Code thinking</strong>, on rebràs recursos, plantilles i tendències en digitalització educativa.</p>
   </div>
 </header>
 
@@ -25,16 +25,16 @@
     <section class="card">
       <h2>Què inclou la guia</h2>
       <ul>
-        <li>5 eines gratuïtes amb aplicacions reals a DAM/DAW.</li>
-        <li>Exemples d’activitats i possibles seqüències.</li>
-        <li>Recomanacions per començar a aplicar-les demà mateix.</li>
+        <li>5 eines gratuïtes amb aplicacions reals a l'aula.</li>
+        <li>Enllaços directes i exemples d’ús a classe.</li>
+        <li>Plantilles i consells aplicables per començar demà mateix.</li>
       </ul>
 
       <h2>Com funciona</h2>
       <ul>
         <li>Omple el formulari.</li>
-        <li>La teva informació s’enviarà automàticament al full de càlcul de Google.</li>
-        <li>Rebràs al correu l’enllaç directe de descàrrega.</li>
+        <li>Rebràs el PDF a l’instant al teu correu i accés a futurs recursos.</li>
+        <li>Complim el RGPD: podràs donar-te de baixa en qualsevol moment amb un sol clic.</li>
       </ul>
     </section>
 
@@ -74,12 +74,12 @@
 
     <details>
       <summary>On s’emmagatzemen les dades?</summary>
-      <p>En un Google Sheet privat, igual que al popup de subscripció del blog.</p>
+      <p>El tractament de les dades recollides mitjançant aquest formulari es regeix principalment pel Reglament General de Protecció de Dades (RGPD) de la Unió Europea</p>
     </details>
 
     <details>
       <summary>Com rebré la guia?</summary>
-      <p>Just després d’enviar el formulari, rebràs un correu amb l’enllaç de descàrrega.</p>
+      <p>Just després d’enviar el formulari, es mostrarà la pantalla on podràs descarregar la guia. A més, rebràs un correu amb l’enllaç de descàrrega.</p>
     </details>
   </section>
   
@@ -123,18 +123,15 @@
       submitBtn.textContent = "Enviant...";
 
       try {
-        // Petició amb mode: 'no-cors' tal com es fa al popup
+        // Petició amb mode: 'no-cors' 
         await fetch("https://script.google.com/macros/s/AKfycbwt_XApJn3K-A0mcjNsilK9fCzqmyU6WDLGq_mvj_hrO1I8qjXrCiHrUmDKusy1YTETDQ/exec", {
           method: "POST",
           mode: "no-cors",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload)
         });
-
-        // Amb 'no-cors' la resposta és opaca (no podem llegir el JSON), 
-        // per tant assumim èxit si no salta el catch.
         
-        // Guardem preferència local (opcional, com fa el popup)
+        // Guardem preferència local
         localStorage.setItem('newsletter_subscribed', 'true');
         
         // Redirecció a pàgina d'agraïment
