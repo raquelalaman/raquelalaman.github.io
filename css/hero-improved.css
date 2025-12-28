@@ -250,7 +250,7 @@
 .about-section-improved .about-content .btn,
 .about-section-improved .btn-primary {
     margin-top: 10px !important;
-    padding: 11px 28px !important; /* MÉS CURT */
+    padding: 11px 28px 11px 60px !important;
     font-size: 0.88rem !important;
     display: inline-block !important;
     width: auto !important;
