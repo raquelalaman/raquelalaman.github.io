@@ -5,11 +5,11 @@
 .hero-improved {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 100px 20px 80px;
+    padding: 80px 20px 60px;
     text-align: center;
     position: relative;
     overflow: hidden;
-    min-height: 85vh;
+    min-height: 60vh; /* REDUÏT de 85vh a 60vh */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -90,19 +90,19 @@
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    margin-bottom: 60px;
+    margin-bottom: 50px; /* REDUÏT de 60px a 50px */
     opacity: 0;
     animation: fadeInUp 0.8s ease 0.8s forwards;
 }
 
 .btn {
-    padding: 16px 40px;
+    padding: 14px 32px; /* REDUÏT de 16px 40px */
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
-    font-size: 1rem;
+    font-size: 0.95rem; /* REDUÏT de 1rem */
     cursor: pointer;
 }
 
@@ -186,7 +186,7 @@
 /* ============================================ */
 
 .about-section-improved {
-    padding: 80px 20px;
+    padding: 60px 20px; /* REDUÏT de 80px a 60px */
     background: #f8f9fa;
     transition: background-color 0.3s ease;
 }
@@ -199,28 +199,32 @@
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 50px; /* REDUÏT de 60px a 50px */
     align-items: center;
 }
 
 .about-content h2 {
-    font-size: 2.5rem;
+    font-size: 2.2rem; /* REDUÏT de 2.5rem */
     color: #667eea;
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* REDUÏT de 25px */
     font-weight: 700;
     transition: color 0.3s ease;
 }
 
 .about-content p {
-    font-size: 1.15rem;
+    font-size: 1.05rem; /* REDUÏT de 1.15rem */
     color: #555;
-    margin-bottom: 20px;
-    line-height: 1.8;
+    margin-bottom: 16px; /* REDUÏT de 20px */
+    line-height: 1.7; /* REDUÏT de 1.8 */
     transition: color 0.3s ease;
 }
 
 .about-content .btn {
     margin-top: 10px;
+    padding: 12px 28px; /* MÉS PETIT que els botons de la hero */
+    font-size: 0.9rem; /* MÉS PETIT */
+    display: inline-block; /* IMPORTANT per evitar que s'estiri */
+    width: auto; /* IMPORTANT */
 }
 
 .about-image {
@@ -237,6 +241,23 @@
 
 .about-image img:hover {
     transform: scale(1.03);
+}
+
+/* ============================================ */
+/* SECCIONS PROJECTES I BLOG */
+/* ============================================ */
+
+.projects-section,
+.blog-section {
+    padding: 60px 20px; /* REDUÏT de 80px a 60px */
+}
+
+.projects-section {
+    background: white;
+}
+
+.blog-section {
+    background: #f8f9fa;
 }
 
 /* ============================================ */
@@ -272,13 +293,21 @@ body.dark-mode .about-image img {
     box-shadow: 0 15px 40px rgba(0,0,0,0.5);
 }
 
+body.dark-mode .projects-section {
+    background: #16213e;
+}
+
+body.dark-mode .blog-section {
+    background: #1a1a2e;
+}
+
 /* ============================================ */
 /* RESPONSIVE */
 /* ============================================ */
 
 @media (max-width: 768px) {
     .hero-improved {
-        padding: 80px 20px 60px;
+        padding: 60px 20px 50px;
         min-height: auto;
     }
 
@@ -300,6 +329,7 @@ body.dark-mode .about-image img {
 
     .stats {
         gap: 40px;
+        margin-top: 30px;
     }
 
     .stat-number {
@@ -310,41 +340,62 @@ body.dark-mode .about-image img {
         font-size: 0.9rem;
     }
 
+    .about-section-improved {
+        padding: 50px 20px;
+    }
+
     .about-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
     }
 
     .about-content h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
         text-align: center;
     }
 
     .about-content p {
         font-size: 1rem;
+        text-align: center;
     }
 
     .about-content .btn {
         display: block;
         text-align: center;
-        max-width: 250px;
+        max-width: 200px;
         margin: 20px auto 0;
+        padding: 12px 24px;
+        font-size: 0.9rem;
     }
 
     .hero-buttons {
         flex-direction: column;
         align-items: center;
+        margin-bottom: 40px;
     }
 
-    .btn {
+    .hero-buttons .btn {
         width: 100%;
-        max-width: 300px;
+        max-width: 280px;
+    }
+
+    .projects-section,
+    .blog-section {
+        padding: 50px 20px;
     }
 }
 
 @media (max-width: 480px) {
+    .hero-improved {
+        padding: 50px 15px 40px;
+    }
+
     .hero-name {
         font-size: 2rem;
+    }
+
+    .hero-greeting {
+        font-size: 1.2rem;
     }
 
     .stats {
@@ -354,34 +405,14 @@ body.dark-mode .about-image img {
     .stat-number {
         font-size: 1.8rem;
     }
-}
 
-/* ============================================ */
-/* COMPATIBILITAT AMB ESTILS EXISTENTS */
-/* ============================================ */
+    .about-content h2 {
+        font-size: 1.6rem;
+    }
 
-/* Si tens classes de projectes, assegura't que funcionin amb mode fosc */
-body.dark-mode .projects-section {
-    background: #16213e;
-}
-
-body.dark-mode .section-title {
-    color: #e0e0e0;
-}
-
-body.dark-mode .section-subtitle {
-    color: #b8b8d1;
-}
-
-body.dark-mode .project-card {
-    background: #1a1a2e;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-}
-
-body.dark-mode .project-card:hover {
-    box-shadow: 0 15px 40px rgba(0,0,0,0.7);
-}
-
-body.dark-mode .blog-section {
-    background: #1a1a2e;
+    .about-content .btn {
+        max-width: 180px;
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
 }
