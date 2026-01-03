@@ -1,4 +1,6 @@
 // js/dark-mode.js
+// Toggle Mode Fosc/Clar amb suport per [data-theme="dark"] i .dark-mode
+
 const darkModeToggle = document.getElementById('darkModeToggle');
 const html = document.documentElement;
 const body = document.body;
@@ -8,7 +10,7 @@ const icon = darkModeToggle.querySelector('i');
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') {
     html.setAttribute('data-theme', 'dark');
-    body.classList.add('dark-mode'); // Per compatibilitat amb altres CSS
+    body.classList.add('dark-mode'); // Per compatibilitat
     icon.classList.remove('fa-moon');
     icon.classList.add('fa-sun');
 }
