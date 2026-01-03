@@ -1,16 +1,16 @@
 /* ============================================ */
-/* HERO SECTION */
+/* HERO SECTION MILLORADA - MÉS PERSONAL */
 /* Compatible amb [data-theme="dark"] i .dark-mode */
 /* ============================================ */
 
 .hero-improved {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
     color: white !important;
-    padding: 50px 20px 40px !important; /* MOLT REDUÏT */
+    padding: 50px 20px 40px !important;
     text-align: center;
     position: relative;
     overflow: hidden;
-    min-height: 45vh !important; /* MOLT REDUÏT (abans era 85vh) */
+    min-height: 45vh !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -98,7 +98,7 @@
     animation: fadeInUp 0.8s ease 0.8s forwards;
 }
 
-/* Forçar estils dels botons de la hero */
+/* Botons de la hero */
 .hero-improved .btn,
 .hero-buttons .btn {
     padding: 11px 26px !important;
@@ -197,12 +197,12 @@
 }
 
 /* ============================================ */
-/* QUI SOC - NOU GRID COMPLET */
+/* QUI SOC - VERSIÓ SIMPLE */
 /* ============================================ */
 
 .about-section-improved {
-    padding: 50px 20px !important;
-    background: #ffffff !important;
+    padding: 45px 20px !important;
+    background: #f8f9fa !important;
     transition: background-color 0.3s ease;
     margin: 0 !important;
 }
@@ -212,44 +212,30 @@
     margin: 0 auto;
 }
 
-/* GRID: 2 columnes × 2 files */
+/* Grid simple: 2 columnes */
 .about-grid {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
-    grid-template-rows: auto 1fr !important;
-    gap: 30px 50px !important;
-    align-items: start !important;
+    gap: 40px !important;
+    align-items: center !important;
 }
 
-/* ============================================ */
-/* FILA 1: TÍTOL - Ocupa les 2 columnes */
-/* ============================================ */
-
-.about-title {
-    grid-column: 1 / -1 !important; /* Des de col 1 fins al final */
-    grid-row: 1 !important;
+/* Contingut (text + botó) a l'esquerra */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
-.about-title h2,
-.about-section-improved .about-title h2 {
+.about-content h2 {
     font-size: 2rem !important;
     color: #667eea !important;
-    margin: 0 !important;
+    margin-bottom: 20px !important;
     font-weight: 700 !important;
     text-align: left !important;
 }
 
-/* ============================================ */
-/* FILA 2, COLUMNA 1: TEXT + BOTÓ */
-/* ============================================ */
-
-.about-text {
-    grid-column: 1 !important;
-    grid-row: 2 !important;
-}
-
-.about-text p,
-.about-section-improved .about-text p {
+.about-content p {
     font-size: 1rem !important;
     color: #64748b !important;
     margin-bottom: 15px !important;
@@ -257,13 +243,13 @@
     text-align: left !important;
 }
 
-.about-text p:last-of-type {
+.about-content p:last-of-type {
     margin-bottom: 20px !important;
 }
 
 /* Botó estil Hero */
-.about-text .btn,
-.about-section-improved .about-text .btn {
+.about-content .btn,
+.about-content .btn-primary {
     display: inline-block !important;
     padding: 11px 28px !important;
     font-size: 0.88rem !important;
@@ -277,24 +263,20 @@
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3) !important;
     cursor: pointer;
     width: auto !important;
-    max-width: none !important;
+    max-width: fit-content !important;
+    align-self: flex-start !important;
 }
 
-.about-text .btn:hover,
-.about-section-improved .about-text .btn:hover {
+.about-content .btn:hover,
+.about-content .btn-primary:hover {
     background: #5568d3 !important;
     transform: translateY(-3px) !important;
     box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4) !important;
     color: white !important;
 }
 
-/* ============================================ */
-/* FILA 2, COLUMNA 2: IMATGE */
-/* ============================================ */
-
+/* Imatge a la dreta */
 .about-image {
-    grid-column: 2 !important;
-    grid-row: 2 !important;
     text-align: center;
 }
 
@@ -312,7 +294,64 @@
 }
 
 /* ============================================ */
-/* MODE FOSC */
+/* REDUIR ESPAI ENTRE SECCIONS */
+/* ============================================ */
+
+.projects-section {
+    padding: 40px 0 !important;
+}
+
+.blog-section {
+    padding: 40px 0 !important;
+}
+
+main {
+    margin: 2rem auto !important;
+}
+
+/* ============================================ */
+/* MODE FOSC - HERO */
+/* ============================================ */
+
+[data-theme="dark"] .hero-improved,
+body.dark-mode .hero-improved {
+    background: linear-gradient(135deg, #4a5dc9 0%, #5a3b7a 100%) !important;
+}
+
+[data-theme="dark"] .hero-greeting,
+[data-theme="dark"] .hero-name,
+[data-theme="dark"] .hero-tagline,
+[data-theme="dark"] .hero-description,
+[data-theme="dark"] .stat-number,
+[data-theme="dark"] .stat-label,
+body.dark-mode .hero-greeting,
+body.dark-mode .hero-name,
+body.dark-mode .hero-tagline,
+body.dark-mode .hero-description,
+body.dark-mode .stat-number,
+body.dark-mode .stat-label {
+    color: white !important;
+}
+
+[data-theme="dark"] .hero-improved .btn-primary,
+[data-theme="dark"] .hero-buttons .btn-primary,
+body.dark-mode .hero-improved .btn-primary,
+body.dark-mode .hero-buttons .btn-primary {
+    background: white !important;
+    color: #4a5dc9 !important;
+}
+
+[data-theme="dark"] .hero-improved .btn-secondary,
+[data-theme="dark"] .hero-buttons .btn-secondary,
+body.dark-mode .hero-improved .btn-secondary,
+body.dark-mode .hero-buttons .btn-secondary {
+    background: transparent !important;
+    color: white !important;
+    border: 2px solid white !important;
+}
+
+/* ============================================ */
+/* MODE FOSC - QUI SOC */
 /* ============================================ */
 
 [data-theme="dark"] .about-section-improved,
@@ -320,33 +359,29 @@ body.dark-mode .about-section-improved {
     background: #1e293b !important;
 }
 
-[data-theme="dark"] .about-title h2,
-[data-theme="dark"] .about-section-improved .about-title h2,
-body.dark-mode .about-title h2,
-body.dark-mode .about-section-improved .about-title h2 {
+[data-theme="dark"] .about-content h2,
+body.dark-mode .about-content h2 {
     color: #a5b4fc !important;
 }
 
-[data-theme="dark"] .about-text p,
-[data-theme="dark"] .about-section-improved .about-text p,
-body.dark-mode .about-text p,
-body.dark-mode .about-section-improved .about-text p {
+[data-theme="dark"] .about-content p,
+body.dark-mode .about-content p {
     color: #cbd5e1 !important;
 }
 
-[data-theme="dark"] .about-text .btn,
-[data-theme="dark"] .about-section-improved .about-text .btn,
-body.dark-mode .about-text .btn,
-body.dark-mode .about-section-improved .about-text .btn {
+[data-theme="dark"] .about-content .btn,
+[data-theme="dark"] .about-content .btn-primary,
+body.dark-mode .about-content .btn,
+body.dark-mode .about-content .btn-primary {
     background: #a5b4fc !important;
     color: #1e293b !important;
     box-shadow: 0 4px 15px rgba(165, 180, 252, 0.3) !important;
 }
 
-[data-theme="dark"] .about-text .btn:hover,
-[data-theme="dark"] .about-section-improved .about-text .btn:hover,
-body.dark-mode .about-text .btn:hover,
-body.dark-mode .about-section-improved .about-text .btn:hover {
+[data-theme="dark"] .about-content .btn:hover,
+[data-theme="dark"] .about-content .btn-primary:hover,
+body.dark-mode .about-content .btn:hover,
+body.dark-mode .about-content .btn-primary:hover {
     background: #c7d2fe !important;
     color: #1e293b !important;
     box-shadow: 0 6px 25px rgba(165, 180, 252, 0.4) !important;
@@ -362,87 +397,7 @@ body.dark-mode .about-image img {
 /* ============================================ */
 
 @media (max-width: 768px) {
-    .about-section-improved {
-        padding: 40px 20px !important;
-    }
-
-    /* En mòbil: 1 columna, 3 files */
-    .about-grid {
-        grid-template-columns: 1fr !important;
-        grid-template-rows: auto auto auto !important;
-        gap: 25px !important;
-    }
-
-    /* Títol a fila 1, centrat */
-    .about-title {
-        grid-column: 1 !important;
-        grid-row: 1 !important;
-    }
-
-    .about-title h2,
-    .about-section-improved .about-title h2 {
-        font-size: 1.8rem !important;
-        text-align: center !important;
-    }
-
-    /* Text a fila 2 */
-    .about-text {
-        grid-column: 1 !important;
-        grid-row: 2 !important;
-    }
-
-    .about-text p,
-    .about-section-improved .about-text p {
-        font-size: 0.95rem !important;
-        text-align: center !important;
-    }
-
-    .about-text .btn,
-    .about-section-improved .about-text .btn {
-        display: block !important;
-        max-width: 220px !important;
-        margin: 0 auto !important;
-        text-align: center !important;
-    }
-
-    /* Imatge a fila 3 */
-    .about-image {
-        grid-column: 1 !important;
-        grid-row: 3 !important;
-    }
-}
-
-@media (max-width: 480px) {
-    .about-title h2,
-    .about-section-improved .about-title h2 {
-        font-size: 1.6rem !important;
-    }
-
-    .about-text .btn,
-    .about-section-improved .about-text .btn {
-        max-width: 200px !important;
-        padding: 11px 24px !important;
-        font-size: 0.85rem !important;
-    }
-}
-/* ============================================ */
-/* AJUSTOS PER SECCIONS SEGÜENTS */
-/* ============================================ */
-
-/* Reduir padding de projectes i blog */
-.projects-section {
-    padding: 45px 0 !important;
-}
-
-.blog-section {
-    padding: 45px 0 !important;
-}
-
-/* ============================================ */
-/* RESPONSIVE */
-/* ============================================ */
-
-@media (max-width: 768px) {
+    /* Hero */
     .hero-improved {
         padding: 45px 20px 35px !important;
         min-height: auto !important;
@@ -477,34 +432,6 @@ body.dark-mode .about-image img {
         font-size: 0.83rem !important;
     }
 
-    .about-section-improved {
-        padding: 35px 20px !important;
-    }
-
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 25px !important;
-    }
-
-    .about-section-improved .about-content h2 {
-        font-size: 1.8rem !important;
-        text-align: center;
-    }
-
-    .about-section-improved .about-content p {
-        font-size: 0.95rem !important;
-        text-align: center;
-    }
-
-    .about-section-improved .about-content .btn {
-        display: block !important;
-        text-align: center;
-        max-width: 220px !important;
-        margin: 18px auto 0 !important;
-        padding: 12px 28px !important;
-        font-size: 0.9rem !important;
-    }
-
     .hero-buttons {
         flex-direction: column;
         align-items: center;
@@ -518,9 +445,43 @@ body.dark-mode .about-image img {
         max-width: 240px !important;
     }
 
+    /* Qui soc */
+    .about-section-improved {
+        padding: 35px 20px !important;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+    }
+
+    .about-content h2 {
+        font-size: 1.8rem !important;
+        text-align: center !important;
+    }
+
+    .about-content p {
+        font-size: 0.95rem !important;
+        text-align: center !important;
+    }
+
+    .about-content .btn,
+    .about-content .btn-primary {
+        display: block !important;
+        max-width: 220px !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+        align-self: center !important;
+    }
+
+    /* Altres seccions */
     .projects-section,
     .blog-section {
         padding: 35px 0 !important;
+    }
+
+    main {
+        margin: 1.5rem auto !important;
     }
 }
 
@@ -545,13 +506,23 @@ body.dark-mode .about-image img {
         font-size: 1.65rem !important;
     }
 
-    .about-section-improved .about-content h2 {
+    .about-section-improved {
+        padding: 30px 20px !important;
+    }
+
+    .about-content h2 {
         font-size: 1.6rem !important;
     }
 
-    .about-section-improved .about-content .btn {
+    .about-content .btn,
+    .about-content .btn-primary {
         max-width: 200px !important;
         padding: 11px 24px !important;
         font-size: 0.85rem !important;
+    }
+
+    .projects-section,
+    .blog-section {
+        padding: 30px 0 !important;
     }
 }
