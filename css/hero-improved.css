@@ -529,3 +529,192 @@ body.dark-mode .about-image img {
         padding: 20px 0 !important;
     }
 }
+/* ============================================ */
+/* HEADER SIMPLIFICAT - NOMÉS LOGO + NAVEGACIÓ */
+/* Afegir al final de hero-improved.css */
+/* ============================================ */
+
+/* Ocultar títol i subtitle del header tradicional */
+header .header-content {
+    display: none !important;
+}
+
+/* Header amb fons més fort per contrast */
+header {
+    background-image: url('../assets/images/header.jpeg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    padding: 1.5rem 0 !important;
+    position: relative !important;
+}
+
+/* Overlay fosc per millorar contrast */
+header::before {
+    background: rgba(0, 0, 0, 0.5) !important; /* Més fosc per contrast */
+    z-index: 0 !important;
+}
+
+/* Logo millorat */
+.logo {
+    position: absolute !important;
+    left: 3% !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 101 !important;
+}
+
+.logo img {
+    height: 45px !important;
+    width: auto !important;
+    display: block !important;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)) !important;
+}
+
+/* Navegació millorada amb més contrast */
+nav {
+    position: relative !important;
+    top: auto !important;
+    float: right !important;
+    z-index: 100 !important;
+}
+
+.nav-content {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 2rem !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    position: relative !important;
+    z-index: 101 !important;
+}
+
+.nav-links {
+    display: flex !important;
+    gap: 2rem !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.nav-links li {
+    margin: 0 !important;
+}
+
+/* Enllaços amb molt millor contrast */
+.nav-links a {
+    text-decoration: none !important;
+    color: #ffffff !important; /* Blanc pur per màxim contrast */
+    font-weight: 600 !important; /* Més gruixut */
+    font-size: 0.95rem !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    padding: 0.5rem 0 !important;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5) !important; /* Ombra per llegibilitat */
+    letter-spacing: 0.3px !important;
+}
+
+.nav-links a:hover {
+    color: #a5b4fc !important; /* Blau clar al hover */
+    text-shadow: 0 2px 8px rgba(165, 180, 252, 0.6) !important;
+}
+
+/* Subratllat animat */
+.nav-links a::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 0 !important;
+    height: 2px !important;
+    background: #a5b4fc !important;
+    transition: width 0.3s ease !important;
+    box-shadow: 0 0 8px rgba(165, 180, 252, 0.6) !important;
+}
+
+.nav-links a:hover::after {
+    width: 100% !important;
+}
+
+/* Link actiu destacat */
+.nav-links a.active {
+    color: #a5b4fc !important;
+    border-bottom: 2px solid #a5b4fc !important;
+    padding-bottom: 0.3rem !important;
+    text-shadow: 0 2px 8px rgba(165, 180, 252, 0.8) !important;
+}
+
+/* ============================================ */
+/* MODE FOSC - HEADER */
+/* ============================================ */
+
+[data-theme="dark"] header::before,
+body.dark-mode header::before {
+    background: rgba(0, 0, 0, 0.7) !important; /* Encara més fosc en mode fosc */
+}
+
+[data-theme="dark"] .nav-links a,
+body.dark-mode .nav-links a {
+    color: #ffffff !important;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8) !important;
+}
+
+[data-theme="dark"] .nav-links a:hover,
+body.dark-mode .nav-links a:hover {
+    color: #c7d2fe !important;
+    text-shadow: 0 2px 10px rgba(199, 210, 254, 0.7) !important;
+}
+
+[data-theme="dark"] .nav-links a.active,
+body.dark-mode .nav-links a.active {
+    color: #c7d2fe !important;
+    border-bottom-color: #c7d2fe !important;
+    text-shadow: 0 2px 10px rgba(199, 210, 254, 0.9) !important;
+}
+
+/* ============================================ */
+/* RESPONSIVE */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    header {
+        padding: 1rem 0 !important;
+    }
+
+    .logo {
+        left: 2% !important;
+    }
+
+    .logo img {
+        height: 35px !important;
+    }
+
+    .nav-content {
+        padding: 0 1rem !important;
+    }
+
+    .nav-links {
+        gap: 1.2rem !important;
+    }
+
+    .nav-links a {
+        font-size: 0.85rem !important;
+        padding: 0.4rem 0 !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo img {
+        height: 30px !important;
+    }
+
+    .nav-links {
+        gap: 0.8rem !important;
+        flex-wrap: wrap !important;
+        justify-content: flex-end !important;
+    }
+
+    .nav-links a {
+        font-size: 0.8rem !important;
+    }
+}
