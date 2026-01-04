@@ -554,13 +554,17 @@ header::before {
     z-index: 0 !important;
 }
 
-/* Logo millorat */
+/* Logo + Brand millorat */
 .logo {
     position: absolute !important;
     left: 3% !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
     z-index: 101 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    text-decoration: none !important;
 }
 
 .logo img {
@@ -568,6 +572,21 @@ header::before {
     width: auto !important;
     display: block !important;
     filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)) !important;
+}
+
+/* Text "Code thinking" al costat del logo */
+.logo-text {
+    color: #ffffff !important;
+    font-size: 1.3rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.5px !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4) !important;
+    white-space: nowrap !important;
+    transition: color 0.3s ease !important;
+}
+
+.logo:hover .logo-text {
+    color: #a5b4fc !important;
 }
 
 /* Navegació millorada amb més contrast */
@@ -653,6 +672,16 @@ body.dark-mode header::before {
     background: rgba(0, 0, 0, 0.7) !important; /* Encara més fosc en mode fosc */
 }
 
+[data-theme="dark"] .logo-text,
+body.dark-mode .logo-text {
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] .logo:hover .logo-text,
+body.dark-mode .logo:hover .logo-text {
+    color: #c7d2fe !important;
+}
+
 [data-theme="dark"] .nav-links a,
 body.dark-mode .nav-links a {
     color: #ffffff !important;
@@ -683,10 +712,15 @@ body.dark-mode .nav-links a.active {
 
     .logo {
         left: 2% !important;
+        gap: 8px !important;
     }
 
     .logo img {
         height: 35px !important;
+    }
+
+    .logo-text {
+        font-size: 1.1rem !important;
     }
 
     .nav-content {
@@ -706,6 +740,10 @@ body.dark-mode .nav-links a.active {
 @media (max-width: 480px) {
     .logo img {
         height: 30px !important;
+    }
+
+    .logo-text {
+        font-size: 0.95rem !important;
     }
 
     .nav-links {
