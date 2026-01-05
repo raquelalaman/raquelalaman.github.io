@@ -924,3 +924,246 @@ body.dark-mode .project-description {
         font-size: 0.8rem !important;
     }
 }
+/* ============================================ */
+/* MENÚ HAMBURGUESA RESPONSIVE */
+/* Afegir al final de hero-improved.css */
+/* ============================================ */
+
+/* Botó hamburguesa (ocult per defecte en desktop) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    transition: all 0.3s ease;
+}
+
+.hamburger span {
+    width: 28px;
+    height: 3px;
+    background: white;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Animació del botó quan està obert */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    transform: translateX(-20px);
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(8px, -8px);
+}
+
+/* ============================================ */
+/* RESPONSIVE - Menú hamburguesa a mòbil */
+/* ============================================ */
+
+@media (max-width: 768px) {
+    /* Mostrar botó hamburguesa */
+    .hamburger {
+        display: flex !important;
+    }
+
+    /* Nav container ajustat */
+    nav {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 280px !important;
+        height: 100vh !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        padding: 80px 0 20px !important;
+        transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.3) !important;
+        z-index: 1000 !important;
+        overflow-y: auto !important;
+    }
+
+    /* Nav obert */
+    nav.active {
+        right: 0 !important;
+    }
+
+    /* Overlay fosc quan el menú està obert */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+        pointer-events: none;
+    }
+
+    body.menu-open::before {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    body.menu-open {
+        overflow: hidden;
+    }
+
+    /* Nav content ajustat */
+    .nav-content {
+        padding: 0 !important;
+        display: block !important;
+        height: 100% !important;
+    }
+
+    /* Nav links en vertical */
+    .nav-links {
+        flex-direction: column !important;
+        gap: 0 !important;
+        width: 100% !important;
+        align-items: stretch !important;
+    }
+
+    .nav-links li {
+        width: 100% !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .nav-links li:last-child {
+        border-bottom: none !important;
+    }
+
+    .nav-links a {
+        display: block !important;
+        width: 100% !important;
+        padding: 18px 30px !important;
+        font-size: 1.1rem !important;
+        text-align: left !important;
+        color: white !important;
+        font-weight: 600 !important;
+        text-shadow: none !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.15) !important;
+        padding-left: 40px !important;
+        color: white !important;
+    }
+
+    .nav-links a::after {
+        display: none !important;
+    }
+
+    .nav-links a.active {
+        background: rgba(255, 255, 255, 0.2) !important;
+        border-left: 4px solid white !important;
+        border-bottom: none !important;
+        padding-left: 36px !important;
+    }
+
+    /* Logo ajustat per no xocar amb hamburguesa */
+    .logo {
+        left: 20px !important;
+        top: 20px !important;
+        transform: none !important;
+        position: fixed !important;
+        z-index: 1001 !important;
+    }
+
+    .logo img {
+        height: 40px !important;
+    }
+
+    .logo-text {
+        font-size: 1rem !important;
+    }
+}
+
+/* ============================================ */
+/* RESPONSIVE - Mòbil petit */
+/* ============================================ */
+
+@media (max-width: 480px) {
+    .hamburger {
+        top: 15px !important;
+        right: 15px !important;
+    }
+
+    .hamburger span {
+        width: 24px !important;
+    }
+
+    nav {
+        width: 260px !important;
+    }
+
+    .nav-links a {
+        padding: 16px 25px !important;
+        font-size: 1rem !important;
+    }
+
+    .nav-links a:hover {
+        padding-left: 35px !important;
+    }
+
+    .nav-links a.active {
+        padding-left: 31px !important;
+    }
+
+    .logo {
+        left: 15px !important;
+        top: 15px !important;
+    }
+
+    .logo img {
+        height: 35px !important;
+    }
+
+    .logo-text {
+        font-size: 0.9rem !important;
+    }
+}
+
+/* ============================================ */
+/* MODE FOSC - Menú hamburguesa */
+/* ============================================ */
+
+[data-theme="dark"] .hamburger span,
+body.dark-mode .hamburger span {
+    background: white !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5) !important;
+}
+
+@media (max-width: 768px) {
+    [data-theme="dark"] nav,
+    body.dark-mode nav {
+        background: linear-gradient(135deg, #4a5dc9 0%, #5a3b7a 100%) !important;
+    }
+
+    [data-theme="dark"] .nav-links a:hover,
+    body.dark-mode .nav-links a:hover {
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    [data-theme="dark"] .nav-links a.active,
+    body.dark-mode .nav-links a.active {
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-left-color: #c7d2fe !important;
+    }
+}
