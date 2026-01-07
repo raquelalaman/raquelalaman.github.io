@@ -926,7 +926,6 @@ body.dark-mode .project-description {
 }
 /* ============================================ */
 /* MENÚ HAMBURGUESA RESPONSIVE */
-/* Afegir al final de hero-improved.css */
 /* ============================================ */
 
 /* Botó hamburguesa (ocult per defecte en desktop) */
@@ -991,6 +990,19 @@ body.dark-mode .project-description {
         box-shadow: -5px 0 20px rgba(0,0,0,0.3) !important;
         z-index: 1000 !important;
         overflow-y: auto !important;
+        backdrop-filter: none !important;
+    }
+
+    /* IMPORTANT: Forçar fons opac i sòlid */
+    nav::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        z-index: -1 !important;
     }
 
     /* Nav obert */
@@ -1037,11 +1049,13 @@ body.dark-mode .project-description {
         gap: 0 !important;
         width: 100% !important;
         align-items: stretch !important;
+        background: transparent !important;
     }
 
     .nav-links li {
         width: 100% !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+        background: transparent !important;
     }
 
     .nav-links li:last-child {
@@ -1054,16 +1068,18 @@ body.dark-mode .project-description {
         padding: 18px 30px !important;
         font-size: 1.1rem !important;
         text-align: left !important;
-        color: white !important;
+        color: #ffffff !important;
         font-weight: 600 !important;
-        text-shadow: none !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
         transition: all 0.3s ease !important;
+        background: transparent !important;
     }
 
     .nav-links a:hover {
-        background: rgba(255, 255, 255, 0.15) !important;
+        background: rgba(255, 255, 255, 0.25) !important;
         padding-left: 40px !important;
-        color: white !important;
+        color: #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
     }
 
     .nav-links a::after {
@@ -1071,10 +1087,12 @@ body.dark-mode .project-description {
     }
 
     .nav-links a.active {
-        background: rgba(255, 255, 255, 0.2) !important;
-        border-left: 4px solid white !important;
+        background: rgba(255, 255, 255, 0.3) !important;
+        border-left: 4px solid #ffffff !important;
         border-bottom: none !important;
         padding-left: 36px !important;
+        color: #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
     }
 
     /* Logo ajustat per no xocar amb hamburguesa */
@@ -1156,14 +1174,27 @@ body.dark-mode .hamburger span {
         background: linear-gradient(135deg, #4a5dc9 0%, #5a3b7a 100%) !important;
     }
 
+    [data-theme="dark"] nav::before,
+    body.dark-mode nav::before {
+        background: linear-gradient(135deg, #4a5dc9 0%, #5a3b7a 100%) !important;
+    }
+
+    [data-theme="dark"] .nav-links a,
+    body.dark-mode .nav-links a {
+        color: #ffffff !important;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4) !important;
+    }
+
     [data-theme="dark"] .nav-links a:hover,
     body.dark-mode .nav-links a:hover {
-        background: rgba(255, 255, 255, 0.1) !important;
+        background: rgba(255, 255, 255, 0.2) !important;
+        color: #ffffff !important;
     }
 
     [data-theme="dark"] .nav-links a.active,
     body.dark-mode .nav-links a.active {
-        background: rgba(255, 255, 255, 0.15) !important;
+        background: rgba(255, 255, 255, 0.25) !important;
         border-left-color: #c7d2fe !important;
+        color: #ffffff !important;
     }
 }
