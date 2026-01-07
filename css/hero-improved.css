@@ -977,24 +977,28 @@ body.dark-mode .project-description {
         display: flex !important;
     }
 
-    /* Nav container ajustat */
-    nav {
+    /* Nav container ajustat - FORÇAR TOTES LES PROPIETATS */
+    body nav,
+    header nav {
         position: fixed !important;
         top: 0 !important;
         right: -100% !important;
         width: 280px !important;
         height: 100vh !important;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        background: #667eea !important;
         padding: 80px 0 20px !important;
+        margin: 0 !important;
+        float: none !important;
         transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-        box-shadow: -5px 0 20px rgba(0,0,0,0.3) !important;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.5) !important;
         z-index: 1000 !important;
         overflow-y: auto !important;
         backdrop-filter: none !important;
     }
 
-    /* IMPORTANT: Forçar fons opac i sòlid */
-    nav::before {
+    /* DOBLE CAPA DE FONS per assegurar opacitat */
+    body nav::before,
+    header nav::before {
         content: '' !important;
         position: absolute !important;
         top: 0 !important;
@@ -1005,8 +1009,21 @@ body.dark-mode .project-description {
         z-index: -1 !important;
     }
 
+    body nav::after,
+    header nav::after {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(102, 126, 234, 0.98) !important;
+        z-index: -1 !important;
+    }
+
     /* Nav obert */
-    nav.active {
+    body nav.active,
+    header nav.active {
         right: 0 !important;
     }
 
@@ -1037,32 +1054,45 @@ body.dark-mode .project-description {
     }
 
     /* Nav content ajustat */
-    .nav-content {
+    body .nav-content,
+    header .nav-content {
         padding: 0 !important;
         display: block !important;
         height: 100% !important;
+        max-width: none !important;
+        margin: 0 !important;
+        justify-content: flex-start !important;
+        background: transparent !important;
     }
 
     /* Nav links en vertical */
-    .nav-links {
+    body .nav-links,
+    header .nav-links {
         flex-direction: column !important;
         gap: 0 !important;
         width: 100% !important;
         align-items: stretch !important;
         background: transparent !important;
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 
-    .nav-links li {
+    body .nav-links li,
+    header .nav-links li {
         width: 100% !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
         background: transparent !important;
+        margin: 0 !important;
     }
 
-    .nav-links li:last-child {
+    body .nav-links li:last-child,
+    header .nav-links li:last-child {
         border-bottom: none !important;
     }
 
-    .nav-links a {
+    body .nav-links a,
+    header .nav-links a {
         display: block !important;
         width: 100% !important;
         padding: 18px 30px !important;
@@ -1073,24 +1103,29 @@ body.dark-mode .project-description {
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
         transition: all 0.3s ease !important;
         background: transparent !important;
+        border-bottom: none !important;
     }
 
-    .nav-links a:hover {
+    body .nav-links a:hover,
+    header .nav-links a:hover {
         background: rgba(255, 255, 255, 0.25) !important;
         padding-left: 40px !important;
         color: #ffffff !important;
         text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
     }
 
-    .nav-links a::after {
+    body .nav-links a::after,
+    header .nav-links a::after {
         display: none !important;
     }
 
-    .nav-links a.active {
+    body .nav-links a.active,
+    header .nav-links a.active {
         background: rgba(255, 255, 255, 0.3) !important;
         border-left: 4px solid #ffffff !important;
         border-bottom: none !important;
         padding-left: 36px !important;
+        padding-bottom: 18px !important;
         color: #ffffff !important;
         text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5) !important;
     }
