@@ -3,95 +3,262 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code thinking</title>
-    <meta name="description" content="Code thinking">
+
+    <title>Qui soc — Raquel Alamán | Code thinking</title>
+    <meta name="description" content="Enginyera informàtica, docent en FP i investigadora. Coneix la trajectòria de Raquel Alamán: del sector TI a la docència, la recerca i la innovació en salut digital.">
+    <meta name="author" content="Raquel Alamán">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://raquelalaman.github.io/qui-soc.html">
+    <meta property="og:title" content="Qui soc — Raquel Alamán">
+    <meta property="og:description" content="Enginyera, docent i investigadora. Tecnologia aplicada, salut digital i formació del talent tècnic.">
+    <meta property="og:image" content="https://raquelalaman.github.io/assets/images/og-image.jpg">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Marked.js para procesar markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.2/marked.min.js"></script>
-    
-    <!-- Highlight.js para sintaxis de código -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
 </head>
 <body>
-    <!-- Botó Scroll to Top -->
+
+    <!-- Scroll to Top -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Tornar a dalt">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Toggle Mode Fosc -->
+    <!-- Dark mode toggle -->
     <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Canviar mode fosc/clar">
         <i class="fas fa-moon"></i>
     </button>
+
+    <!-- HEADER -->
     <header>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
         <nav>
             <div class="nav-content">
                 <ul class="nav-links">
                     <li><a href="https://raquelalaman.github.io/">Inici</a></li>
-                    <li><a href="#" class="active">Qui soc</a></li>
-                    <li><a href="projectes.html">Projectes</a></li> 
-                    <li><a href="blog.html">Blog</a></li>                    
+                    <li><a href="qui-soc.html" class="active">Qui soc</a></li>
+                    <li><a href="projectes.html">Projectes</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                     <li><a href="contacte.html">Contacte</a></li>
                 </ul>
             </div>
         </nav>
         <div class="logo">
-            <a href="https://raquelalaman.github.io/"><img src="assets/images/logo.png" alt="Logo"/></a>
+            <a href="https://raquelalaman.github.io/" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+                <img src="assets/images/logo.png" alt="Logo de Raquel Alamán">
+                <span class="logo-text">Code thinking</span>
+            </a>
         </div>
-        <div class="header-content">
-            <h1><a href="https://raquelalaman.github.io/">Code thinking</a></h1>
-            <p class="subtitle">Explorant idees i compartint coneixement</p>
-        </div>
+        <div class="header-content"></div>
     </header>
+
+    <!-- CAPÇALERA DE PÀGINA -->
+    <section class="page-header" aria-label="Qui soc">
+        <div class="page-header__inner">
+            <p class="page-header__eyebrow">Perfil professional</p>
+            <h1 class="page-header__title">Qui soc</h1>
+            <p class="page-header__lead">
+                Enginyera informàtica, docent en FP i investigadora. Quinze anys al sector TI,
+                ara al punt on tecnologia, educació i recerca es troben.
+            </p>
+        </div>
+    </section>
+
     <main>
-        <!-- Secció Qui soc -->
-        <section class="about-section" id="about">
-            <div class="about-content-full">
-                <div class="about-text">
-                    <h2>Qui soc?</h2>
-                    <p>Soc enginyera informàtica amb una trajectòria professional centrada en la intersecció entre la tecnologia i la innovació. La meva experiència abasta el desenvolupament d’aplicacions robustes, la investigació en bioinformàtica i l’anàlisi de grans volums de dades mitjançant tècniques d’intel·ligència artificial.</p>
-                    <p>Després de quinze anys en el sector de les TI, primer com a desenvolupadora d’aplicacions web i després com a project manager, vaig fer el canvi al sector educatiu. Per mi va ser un pas natural, ja que en el sector privat sempre he dut a terme moltes formacions, tant als equips com als clients.</p>
-                    <p>Com a docent en formació professional d’informàtica, la meva missió va més enllà de la simple transmissió de coneixements tècnics: es tracta d’acompanyar cada estudiant en el desenvolupament de les competències digitals que els permetran destacar en un sector en constant evolució.</p>
-                    <p>Aquesta faceta pedagògica enriqueix la meva pròpia trajectòria professional, ja que em manté al dia de les tendències emergents mentre contribueixo activament a formar el talent tecnològic del demà. Sense pretensions d’expertesa absoluta, poso al servei dels meus estudiants l’experiència acumulada i les eines pràctiques que considero essencials per navegar amb èxit en un àmbit que exigeix aprenentatge continu.</p>
-                    <p>A l’Institut Tecnològic de Barcelona imparteixo programació i coordino els cicles de desenvolupament (DAWe, DAM, DAMv), així com el programa de mobilitat Erasmus+. Aquest darrer projecte resulta especialment gratificant, ja que no només ofereix als estudiants l’oportunitat de conèixer altres cultures i metodologies de treball, sinó que els impulsa cap a l’autonomia personal i l’esperit emprenedor.</p>
-                    <p>Paral·lelament, exerceixo com a investigadora, treballant en projectes que exploren les fronteres entre la informàtica i les ciències de la vida, utilitzant algoritmes avançats per desxifrar patrons complexos en dades biològiques. La meva passió per la intel·ligència artificial m’ha portat a especialitzar-me en l’aplicació de tècniques de machine learning i deep learning per resoldre reptes reals en diversos àmbits.</p>
-                    <p>La combinació d’experiència pràctica, recerca d’avantguarda i vocació pedagògica defineix el meu perfil professional: una enginyera compromesa amb la innovació tecnològica i la transferència de coneixement.</p>
+
+        <!-- BIO + FOTO -->
+        <section class="qs-bio" id="about">
+            <div class="qs-bio__inner">
+
+                <div class="qs-bio__portrait">
+                    <img src="assets/images/coneix-me.jpg" alt="Raquel Alamán">
+                    <div class="qs-bio__portrait-caption">
+                        <p class="qs-bio__portrait-name">Raquel Alamán</p>
+                        <p class="qs-bio__portrait-role">Enginyera · Docent · Investigadora</p>
+                    </div>
+                    <div class="qs-bio__social">
+                        <a href="https://github.com/raquelalaman" target="_blank" rel="noopener" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/raquelalaman/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="mailto:ralaman@xtec.cat" aria-label="Correu electrònic">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="qs-bio__text">
+                    <p class="qs-bio__intro">
+                        Soc enginyera informàtica amb una trajectòria professional centrada en la intersecció
+                        entre la tecnologia i la innovació. La meva experiència abasta el desenvolupament
+                        d'aplicacions robustes, la investigació en bioinformàtica i l'anàlisi de grans volums
+                        de dades mitjançant tècniques d'intel·ligència artificial.
+                    </p>
+                    <p>
+                        Després de quinze anys en el sector de les TI —primer com a desenvolupadora
+                        d'aplicacions web i després com a project manager— vaig fer el canvi al sector
+                        educatiu. Va ser un pas natural: en el sector privat sempre havia dut a terme
+                        moltes formacions, tant als equips com als clients.
+                    </p>
+                    <p>
+                        Com a docent en formació professional d'informàtica, la meva missió va més enllà
+                        de la simple transmissió de coneixements tècnics: es tracta d'acompanyar cada
+                        estudiant en el desenvolupament de les competències digitals que els permetran
+                        destacar en un sector en constant evolució.
+                    </p>
+                    <p>
+                        A l'Institut Tecnològic de Barcelona imparteixo programació i coordino els cicles
+                        de desenvolupament (DAWe, DAM, DAMv), així com el programa de mobilitat Erasmus+.
+                        Aquest darrer projecte resulta especialment gratificant: no només ofereix als
+                        estudiants l'oportunitat de conèixer altres cultures i metodologies de treball,
+                        sinó que els impulsa cap a l'autonomia personal i l'esperit emprenedor.
+                    </p>
+                    <p>
+                        Paral·lelament, exerceixo com a investigadora en projectes que exploren les
+                        fronteres entre la informàtica i les ciències de la vida, utilitzant algoritmes
+                        avançats per desxifrar patrons complexos en dades biològiques. La meva passió
+                        per la intel·ligència artificial m'ha portat a especialitzar-me en l'aplicació
+                        de tècniques de machine learning i deep learning per resoldre reptes reals
+                        en diversos àmbits.
+                    </p>
+                    <p>
+                        La combinació d'experiència pràctica, recerca d'avantguarda i vocació pedagògica
+                        defineix el meu perfil: una enginyera compromesa amb la innovació tecnològica
+                        i la transferència de coneixement.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ÀMBITS -->
+        <section class="qs-areas" id="ambits">
+            <div class="qs-areas__inner">
+                <h2 class="section-title">Àmbits de treball</h2>
+                <p class="section-subtitle">On conflueixen la meva experiència i el meu interès.</p>
+                <div class="qs-areas__grid">
+
+                    <div class="qs-area-card">
+                        <div class="qs-area-card__icon" aria-hidden="true">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <h3>R+D en salut digital</h3>
+                        <p>Projectes d'investigació aplicada que combinen bioinformàtica, IA i dades clíniques per millorar diagnòstics i processos assistencials.</p>
+                    </div>
+
+                    <div class="qs-area-card">
+                        <div class="qs-area-card__icon" aria-hidden="true">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Desenvolupament d'aplicacions</h3>
+                        <p>Solucions web, mòbil i cloud amb quinze anys d'experiència: des del disseny d'arquitectura fins al lliurament a producció.</p>
+                    </div>
+
+                    <div class="qs-area-card">
+                        <div class="qs-area-card__icon" aria-hidden="true">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <h3>Docència en FP</h3>
+                        <p>Programació i coordinació dels cicles DAWe, DAM i DAMv a l'Institut Tecnològic de Barcelona. Erasmus+ i metodologies actives.</p>
+                    </div>
+
+                    <div class="qs-area-card">
+                        <div class="qs-area-card__icon" aria-hidden="true">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Intel·ligència artificial</h3>
+                        <p>Machine learning i deep learning aplicats a reptes reals: des de classificació de dades biològiques fins a eines educatives adaptatives.</p>
+                    </div>
+
                 </div>
             </div>
         </section>
+
+        <!-- TRAJECTÒRIA -->
+        <section class="qs-timeline" id="trajectoria">
+            <div class="qs-timeline__inner">
+                <h2 class="section-title">Trajectòria</h2>
+                <p class="section-subtitle">Els moments que han definit el perfil.</p>
+                <ol class="qs-timeline__list" aria-label="Cronologia professional">
+
+                    <li class="qs-timeline__item">
+                        <span class="qs-timeline__period">Actualitat</span>
+                        <div class="qs-timeline__content">
+                            <h3>Investigadora i docent</h3>
+                            <p>Coordinació dels cicles de desenvolupament a l'ITB, investigació en salut digital i col·laboració en projectes de recerca interdisciplinaris.</p>
+                        </div>
+                    </li>
+
+                    <li class="qs-timeline__item">
+                        <span class="qs-timeline__period">2010 – avui</span>
+                        <div class="qs-timeline__content">
+                            <h3>Docent en FP d'Informàtica</h3>
+                            <p>Transició al sector educatiu per compartir l'experiència acumulada al sector privat. Programació, gestió de projectes i Erasmus+.</p>
+                        </div>
+                    </li>
+
+                    <li class="qs-timeline__item">
+                        <span class="qs-timeline__period">2000 – 2010</span>
+                        <div class="qs-timeline__content">
+                            <h3>Project Manager i Desenvolupadora</h3>
+                            <p>Deu anys al sector TI: aplicacions web, gestió d'equips i formació interna. Clients en sectors sanitari, financer i industrial.</p>
+                        </div>
+                    </li>
+
+                    <li class="qs-timeline__item">
+                        <span class="qs-timeline__period">Formació</span>
+                        <div class="qs-timeline__content">
+                            <h3>Enginyeria Informàtica</h3>
+                            <p>Titulació en Enginyeria Informàtica. Formació contínua en IA, bioinformàtica i metodologies educatives actives.</p>
+                        </div>
+                    </li>
+
+                </ol>
+            </div>
+        </section>
+
     </main>
 
-   <footer>
+    <!-- FOOTER -->
+    <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://github.com/raquelalaman" title="GitHub">GH</a>
-                <a href="https://www.linkedin.com/in/raquelalaman/" title="LinkedIn">IN</a>
-                <a href="mailto:ralaman@xtec.cat" title="Email">@</a>
+                <a href="https://github.com/raquelalaman" title="GitHub de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/raquelalaman" title="LinkedIn de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:ralaman@xtec.cat" title="Email de contacte">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-            <p>&copy; 2025 Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
+            <p>&copy; <span id="current-year"></span> Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
         </div>
     </footer>
-     <!-- Scripts -->
+
+    <!-- Scripts -->
     <script src="js/dark-mode.js"></script>
     <script src="js/scroll-to-top.js"></script>
+    <script src="js/hamburger-menu.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
