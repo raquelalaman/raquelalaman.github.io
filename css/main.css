@@ -655,15 +655,17 @@ section {
    ============================================================ */
 
 .projects-section {
-    padding: 30px 0;
+    padding: 30px 2rem;
     text-align: center;
     margin-top: 0;
 }
 
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
 }
 
 .project-card {
@@ -1649,6 +1651,11 @@ footer {
         grid-template-columns: repeat(2, 1fr);
         max-width: 1000px;
     }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 760px;
+    }
 }
 
 /* Tablet */
@@ -1788,6 +1795,9 @@ footer {
     /* Blog */
     .blog-posts,
     .blog-posts-archive  { grid-template-columns: 1fr; }
+
+    .projects-section    { padding: 30px 1.5rem; }
+    .projects-grid       { grid-template-columns: 1fr; max-width: 100%; }
     .post-content        { padding: 1.5rem; }
     .post-title          { font-size: 1.2rem; }
 
