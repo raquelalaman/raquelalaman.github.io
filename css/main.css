@@ -1,10 +1,4 @@
 /* ============================================================
-   MAIN.CSS — Full d'estils unificat
-   Substitueix: css/style.css + css/hero-improved.css
-   ============================================================ */
-
-
-/* ============================================================
    1. RESET I VARIABLES
    ============================================================ */
 
@@ -1829,4 +1823,172 @@ footer {
     /* Hero buttons */
     .hero-buttons        { flex-direction: column; align-items: stretch; }
     .hero-buttons .btn   { width: 100%; text-align: center; }
+}
+
+
+/* ============================================================
+   24. HERO EDITORIAL
+   Substitueix .hero-improved per una capçalera més austera.
+   ============================================================ */
+
+.hero-editorial {
+    padding: 3.5rem 2rem 3rem;
+    border-bottom: 1px solid var(--medium-gray);
+    background: transparent;
+}
+
+.hero-editorial__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3.5rem;
+    align-items: center;
+}
+
+/* Eyebrow — etiqueta temàtica, lleugera */
+.hero-editorial__eyebrow {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 0.9rem;
+}
+
+/* Nom — protagonista tipogràfic */
+.hero-editorial__name {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.1rem;
+}
+
+/* Bio — una o dues frases, honest i específic */
+.hero-editorial__bio {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--dark-gray);
+    max-width: 520px;
+    margin-bottom: 1.8rem;
+    font-weight: 400;
+}
+
+/* CTA links — text pur amb indicador visual mínim */
+.hero-editorial__links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.hero-editorial__cta {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.hero-editorial__cta--primary {
+    color: var(--brand);
+    border-bottom: 2px solid var(--brand);
+    padding-bottom: 0.1rem;
+}
+
+.hero-editorial__cta--primary:hover {
+    color: var(--brand-dark);
+    border-color: var(--brand-dark);
+}
+
+.hero-editorial__cta--secondary {
+    color: var(--dark-gray);
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.1rem;
+}
+
+.hero-editorial__cta--secondary:hover {
+    color: var(--text-dark);
+    border-color: var(--medium-gray);
+}
+
+/* Retrat — quadrat contingut, sense ornaments */
+.hero-editorial__portrait {
+    width: 180px;
+    flex-shrink: 0;
+}
+
+.hero-editorial__portrait img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 50%;
+    display: block;
+    filter: grayscale(15%);
+    transition: filter 0.3s ease;
+    border: 3px solid var(--medium-gray);
+}
+
+.hero-editorial__portrait img:hover {
+    filter: grayscale(0%);
+}
+
+/* Mode fosc */
+[data-theme="dark"] .hero-editorial {
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .hero-editorial__name {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .hero-editorial__bio {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .hero-editorial__portrait img {
+    border-color: var(--border-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-editorial {
+        padding: 2.5rem 1.5rem 2rem;
+    }
+
+    .hero-editorial__inner {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+    }
+
+    /* La imatge va primer en mòbil */
+    .hero-editorial__portrait {
+        order: -1;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+    }
+
+    .hero-editorial__portrait img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .hero-editorial__name {
+        font-size: 1.8rem;
+    }
+
+    .hero-editorial__bio {
+        font-size: 0.95rem;
+        max-width: 100%;
+    }
+
+    .hero-editorial__links {
+        gap: 1.2rem;
+    }
 }
