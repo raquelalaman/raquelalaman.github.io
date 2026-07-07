@@ -7,86 +7,261 @@ title: Blog
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code thinking</title>
-    <meta name="description" content="Code thinking">
+
+    <title>Blog — Raquel Alamán | Code thinking</title>
+    <meta name="description" content="Reflexions sobre tecnologia, educació, IA i salut digital. Articles de Raquel Alamán sobre el que aprèn investigant i ensenyant.">
+    <meta name="author" content="Raquel Alamán">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raquelalaman.github.io/blog.html">
+    <meta property="og:title" content="Blog — Code thinking">
+    <meta property="og:description" content="Reflexions sobre tecnologia, educació, IA i salut digital.">
+    <meta property="og:image" content="https://raquelalaman.github.io/assets/images/og-image.jpg">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Marked.js para procesar markdown -->
+
+    <!-- Marked.js i Highlight.js (requerits per blog-archive.js) -->
     <script src="https://cdn.jsdelivr.net/npm/marked@9.1.2/marked.min.js"></script>
-    
-    <!-- Highlight.js para sintaxis de código -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
     <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
 </head>
 <body>
-    <!-- Botó Scroll to Top -->
+
+    <!-- Scroll to Top -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Tornar a dalt">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Toggle Mode Fosc -->
+    <!-- Dark mode toggle -->
     <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Canviar mode fosc/clar">
         <i class="fas fa-moon"></i>
     </button>
+
+    <!-- HEADER -->
     <header>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
         <nav>
             <div class="nav-content">
                 <ul class="nav-links">
                     <li><a href="https://raquelalaman.github.io/">Inici</a></li>
                     <li><a href="qui-soc.html">Qui soc</a></li>
-                    <li><a href="projectes.html">Projectes</a></li> 
-                    <li><a href="#" class="active">Blog</a></li>                    
+                    <li><a href="projectes.html">Projectes</a></li>
+                    <li><a href="blog.html" class="active">Blog</a></li>
                     <li><a href="contacte.html">Contacte</a></li>
                 </ul>
             </div>
         </nav>
         <div class="logo">
-            <a href="https://raquelalaman.github.io/"><img src="assets/images/logo.png" alt="Logo"/></a>
+            <a href="https://raquelalaman.github.io/" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+                <img src="assets/images/logo.png" alt="Logo de Raquel Alamán">
+                <span class="logo-text">Code thinking</span>
+            </a>
         </div>
-        <div class="header-content">
-            <h1><a href="https://raquelalaman.github.io/">Code thinking</a></h1>
-            <p class="subtitle">Explorant idees i compartint coneixement</p>
-        </div>
+        <div class="header-content"></div>
     </header>
+
+    <!-- CAPÇALERA DE PÀGINA -->
+    <section class="page-header" aria-label="Blog">
+        <div class="page-header__inner page-header__inner--with-filters">
+            <div class="page-header__text">
+                <p class="page-header__eyebrow">Reflexions i aprenentatges</p>
+                <h1 class="page-header__title">Blog</h1>
+                <p class="page-header__lead">
+                    El que penso mentre investigo i ensenyo: tecnologia, educació,
+                    IA i salut digital.
+                </p>
+            </div>
+
+            <!-- Filtre per categoria -->
+            <nav class="blog-filter" aria-label="Filtre per categoria" id="category-filter">
+                <button class="blog-filter__btn active" data-category="all">Tots</button>
+                <button class="blog-filter__btn" data-category="Articles">Articles</button>
+                <button class="blog-filter__btn" data-category="Educació">Educació</button>
+                <button class="blog-filter__btn" data-category="Formació">Formació</button>
+                <button class="blog-filter__btn" data-category="Miscel·lània">Miscel·lània</button>
+            </nav>
+        </div>
+    </section>
+
     <main>
-        <section class="blog-archive">
-            <h2 class="section-title">Totes les entrades</h2>
-            
+        <section class="blog-archive" aria-label="Llistat d'articles">
+
+            <!-- Comptador de resultats -->
+            <div class="blog-archive__meta" id="posts-meta" aria-live="polite"></div>
+
+            <!-- Graella de posts (generada per blog-archive.js) -->
             <div class="blog-posts-archive" id="posts-container">
-                <div class="loading">
+                <div class="loading" aria-label="Carregant articles…">
                     <div class="spinner"></div>
                 </div>
             </div>
 
-            <!-- Paginació -->
-            <div class="pagination" id="pagination">
-                <!-- Es genera dinàmicament -->
-            </div>
+            <!-- Paginació (generada per blog-archive.js) -->
+            <nav class="pagination" id="pagination" aria-label="Paginació d'articles"></nav>
+
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://github.com/raquelalaman" title="GitHub">GH</a>
-                <a href="https://www.linkedin.com/in/raquelalaman/" title="LinkedIn">IN</a>
-                <a href="mailto:ralaman@xtec.cat" title="Email">@</a>
+                <a href="https://github.com/raquelalaman" title="GitHub de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/raquelalaman" title="LinkedIn de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:ralaman@xtec.cat" title="Email de contacte">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-            <p>&copy; 2025 Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
+            <p>&copy; <span id="current-year"></span> Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
         </div>
     </footer>
-     <!-- Scripts -->
+
+    <!-- Scripts -->
     <script src="js/dark-mode.js"></script>
     <script src="js/scroll-to-top.js"></script>
+    <script src="js/hamburger-menu.js"></script>
     <script src="js/blog-archive.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Filtre per categoria — s'integra amb blog-archive.js
+        // Escolta l'event 'postsLoaded' que el JS llança quan ja té les dades,
+        // i filtra sobre allPosts sense tornar a fer fetch.
+        let activeCategory = 'all';
+
+        document.getElementById('category-filter').addEventListener('click', function(e) {
+            const btn = e.target.closest('.blog-filter__btn');
+            if (!btn) return;
+
+            // Actualitza botó actiu
+            document.querySelectorAll('.blog-filter__btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            activeCategory = btn.dataset.category;
+            filterAndRender();
+        });
+
+        // Sobreescriu renderPage per aplicar el filtre actiu
+        // S'executa després que blog-archive.js hagi carregat allPosts
+        document.addEventListener('DOMContentLoaded', () => {
+            // Espera que blog-archive.js hagi executat loadAllPosts
+            const originalRenderPage = window.renderPage;
+
+            // Patch de renderPage per intercalar el filtre
+            const observer = new MutationObserver(() => {
+                if (typeof renderPage !== 'undefined' && renderPage !== filterAndRender._patched) {
+                    const _orig = renderPage;
+                    window._origRenderPage = _orig;
+                    observer.disconnect();
+                }
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        });
+
+        function filterAndRender() {
+            if (typeof allPosts === 'undefined') return;
+
+            const filtered = activeCategory === 'all'
+                ? allPosts
+                : allPosts.filter(p => {
+                    const cats = (p.category || '').split(',').map(c => c.trim());
+                    return cats.some(c => c === activeCategory);
+                });
+
+            // Actualitza el comptador
+            const meta = document.getElementById('posts-meta');
+            if (meta) {
+                meta.textContent = filtered.length === 0
+                    ? 'Cap article en aquesta categoria.'
+                    : filtered.length === 1
+                    ? '1 article'
+                    : `${filtered.length} articles`;
+            }
+
+            // Renderitza usant la funció del blog-archive.js però amb dades filtrades
+            renderFilteredPage(filtered, 1);
+        }
+
+        function renderFilteredPage(posts, page) {
+            const POSTS_PER_PAGE = 6;
+            const container = document.getElementById('posts-container');
+            const paginationEl = document.getElementById('pagination');
+
+            const start = (page - 1) * POSTS_PER_PAGE;
+            const postsToShow = posts.slice(start, start + POSTS_PER_PAGE);
+            const totalPages = Math.ceil(posts.length / POSTS_PER_PAGE);
+
+            container.innerHTML = '';
+            postsToShow.forEach((post, index) => {
+                const article = document.createElement('article');
+                article.className = 'post-card fade-in';
+                article.style.animationDelay = `${index * 0.07}s`;
+                article.innerHTML = `
+                    <div class="post-image">
+                        <img src="${post.image}" alt="${post.title}"
+                             onerror="this.src='https://via.placeholder.com/400x250/6065FF/ffffff?text=Post'">
+                    </div>
+                    <div class="post-content">
+                        <div class="post-meta">
+                            <span class="post-tag">${post.category}</span>
+                            <span class="post-date">${formatDate(post.date)}</span>
+                        </div>
+                        <h3 class="post-title">${post.title}</h3>
+                        <p class="post-excerpt">${post.excerpt}</p>
+                        <a href="${post.url}" class="read-more">Llegeix més →</a>
+                    </div>
+                `;
+                container.appendChild(article);
+            });
+
+            // Paginació filtrada
+            if (totalPages <= 1) {
+                paginationEl.innerHTML = '';
+                return;
+            }
+            let html = '';
+            if (page > 1) html += `<button onclick="renderFilteredPage(currentFiltered,${page-1})" class="pagination-btn">← Anterior</button>`;
+            for (let i = 1; i <= totalPages; i++) {
+                html += i === page
+                    ? `<span class="pagination-current">${i}</span>`
+                    : `<button onclick="renderFilteredPage(currentFiltered,${i})" class="pagination-btn">${i}</button>`;
+            }
+            if (page < totalPages) html += `<button onclick="renderFilteredPage(currentFiltered,${page+1})" class="pagination-btn">Següent →</button>`;
+            paginationEl.innerHTML = html;
+
+            window.currentFiltered = posts;
+        }
+
+        // Mostra el comptador quan el blog-archive.js ha carregat els posts
+        // Polled cada 200ms fins que allPosts estigui disponible
+        const waitForPosts = setInterval(() => {
+            if (typeof allPosts !== 'undefined' && allPosts.length > 0) {
+                clearInterval(waitForPosts);
+                const meta = document.getElementById('posts-meta');
+                if (meta && !meta.textContent) {
+                    meta.textContent = `${allPosts.length} articles`;
+                }
+            }
+        }, 200);
+    </script>
+
 </body>
 </html>
