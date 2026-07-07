@@ -3,100 +3,303 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code thinking</title>
-    <meta name="description" content="Code thinking">
+
+    <title>Contacte — Raquel Alamán | Code thinking</title>
+    <meta name="description" content="Escriu-me per col·laboracions, preguntes sobre els projectes o simplement per presentar-te. Raquel Alamán, investigadora i docent en tecnologia.">
+    <meta name="author" content="Raquel Alamán">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raquelalaman.github.io/contacte.html">
+    <meta property="og:title" content="Contacte — Raquel Alamán">
+    <meta property="og:description" content="Escriu-me per col·laboracions, preguntes o per presentar-te.">
+    <meta property="og:image" content="https://raquelalaman.github.io/assets/images/og-image.jpg">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Marked.js para procesar markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.2/marked.min.js"></script>
-    
-    <!-- Highlight.js para sintaxis de código -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
 </head>
 <body>
-    <!-- Botó Scroll to Top -->
+
+    <!-- Scroll to Top -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Tornar a dalt">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Toggle Mode Fosc -->
+    <!-- Dark mode toggle -->
     <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Canviar mode fosc/clar">
         <i class="fas fa-moon"></i>
     </button>
+
+    <!-- HEADER -->
     <header>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
         <nav>
             <div class="nav-content">
                 <ul class="nav-links">
                     <li><a href="https://raquelalaman.github.io/">Inici</a></li>
                     <li><a href="qui-soc.html">Qui soc</a></li>
-                    <li><a href="projectes.html">Projectes</a></li> 
-                    <li><a href="blog.html">Blog</a></li>                    
-                    <li><a href="#" class="active">Contacte</a></li>
+                    <li><a href="projectes.html">Projectes</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contacte.html" class="active">Contacte</a></li>
                 </ul>
             </div>
         </nav>
         <div class="logo">
-            <a href="https://raquelalaman.github.io/"><img src="assets/images/logo.png" alt="Logo"/></a>
+            <a href="https://raquelalaman.github.io/" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+                <img src="assets/images/logo.png" alt="Logo de Raquel Alamán">
+                <span class="logo-text">Code thinking</span>
+            </a>
         </div>
-        <div class="header-content">
-            <h1><a href="https://raquelalaman.github.io/">Code thinking</a></h1>
-            <p class="subtitle">Explorant idees i compartint coneixement</p>
-        </div>
+        <div class="header-content"></div>
     </header>
+
+    <!-- CAPÇALERA DE PÀGINA -->
+    <section class="page-header" aria-label="Contacte">
+        <div class="page-header__inner">
+            <p class="page-header__eyebrow">Parlem</p>
+            <h1 class="page-header__title">Contacte</h1>
+            <p class="page-header__lead">
+                Per col·laboracions, preguntes sobre els projectes o simplement per presentar-te.
+                Responc tots els missatges.
+            </p>
+        </div>
+    </section>
+
     <main>
-        <!-- Secció Contacte -->
-        <section class="contact-section" id="contact">
-            <div class="contact-container">
-                <div class="contact-image">
-                    <img src="assets/images/contact-coffee.jpg" alt="Fem un cafè">
-                </div>
-                
-                <div class="contact-content">
-                    <div>
-                        <h2>Fem un cafè!</h2>
-                        <p>Vols saber-ne més? Envia'm un missatge!</p>
-                    </div>
-                    
-                    <div class="contact-icons">
-                        <a href="mailto:el-teu-email@exemple.com" class="contact-icon" title="Envia'm un email">
-                            <i class="fas fa-envelope"></i>
+        <section class="contact-page" id="contact">
+            <div class="contact-page__inner">
+
+                <!-- COLUMNA ESQUERRA: vies de contacte -->
+                <div class="contact-page__info">
+
+                    <div class="contact-channels">
+
+                        <a href="mailto:ralaman@xtec.cat" class="contact-channel">
+                            <div class="contact-channel__icon">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-channel__text">
+                                <span class="contact-channel__label">Correu electrònic</span>
+                                <span class="contact-channel__value">ralaman@xtec.cat</span>
+                                <span class="contact-channel__hint">La via més directa. Responc en 48h.</span>
+                            </div>
+                            <i class="fas fa-arrow-right contact-channel__arrow" aria-hidden="true"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/el-teu-perfil" target="_blank" class="contact-icon" title="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
+
+                        <a href="https://www.linkedin.com/in/raquelalaman/" target="_blank" rel="noopener noreferrer" class="contact-channel">
+                            <div class="contact-channel__icon contact-channel__icon--linkedin">
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-channel__text">
+                                <span class="contact-channel__label">LinkedIn</span>
+                                <span class="contact-channel__value">Raquel Alamán</span>
+                                <span class="contact-channel__hint">Per col·laboracions professionals.</span>
+                            </div>
+                            <i class="fas fa-arrow-right contact-channel__arrow" aria-hidden="true"></i>
                         </a>
+
+                        <a href="https://github.com/raquelalaman" target="_blank" rel="noopener noreferrer" class="contact-channel">
+                            <div class="contact-channel__icon contact-channel__icon--github">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                            </div>
+                            <div class="contact-channel__text">
+                                <span class="contact-channel__label">GitHub</span>
+                                <span class="contact-channel__value">raquelalaman</span>
+                                <span class="contact-channel__hint">Codi obert i projectes públics.</span>
+                            </div>
+                            <i class="fas fa-arrow-right contact-channel__arrow" aria-hidden="true"></i>
+                        </a>
+
                     </div>
+
+                    <!-- Imatge -->
+                    <div class="contact-page__img" aria-hidden="true">
+                        <img src="assets/images/contact-coffee.jpg" alt="">
+                    </div>
+
                 </div>
+
+                <!-- COLUMNA DRETA: formulari -->
+                <div class="contact-page__form-wrap">
+                    <h2 class="contact-page__form-title">Envia'm un missatge</h2>
+                    <p class="contact-page__form-sub">
+                        Omple el formulari i et responc el més aviat possible.
+                    </p>
+
+                    <!--
+                        Formspree gestiona l'enviament sense backend.
+                        Substitueix YOUR_FORM_ID per l'ID real de formspree.io
+                    -->
+                    <form
+                        class="contact-form"
+                        action="https://formspree.io/f/YOUR_FORM_ID"
+                        method="POST"
+                        id="contact-form"
+                        novalidate
+                    >
+                        <div class="contact-form__row">
+                            <div class="contact-form__field">
+                                <label for="cf-name">Nom <span aria-hidden="true">*</span></label>
+                                <input
+                                    type="text"
+                                    id="cf-name"
+                                    name="name"
+                                    placeholder="El teu nom"
+                                    required
+                                    autocomplete="name"
+                                >
+                            </div>
+                            <div class="contact-form__field">
+                                <label for="cf-email">Correu electrònic <span aria-hidden="true">*</span></label>
+                                <input
+                                    type="email"
+                                    id="cf-email"
+                                    name="email"
+                                    placeholder="tu@exemple.com"
+                                    required
+                                    autocomplete="email"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="contact-form__field">
+                            <label for="cf-subject">Assumpte</label>
+                            <input
+                                type="text"
+                                id="cf-subject"
+                                name="subject"
+                                placeholder="De què es tracta?"
+                            >
+                        </div>
+
+                        <div class="contact-form__field">
+                            <label for="cf-message">Missatge <span aria-hidden="true">*</span></label>
+                            <textarea
+                                id="cf-message"
+                                name="message"
+                                rows="6"
+                                placeholder="Explica'm el que vulguis…"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <!-- Honeypot anti-spam -->
+                        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+                        <div class="contact-form__footer">
+                            <p class="contact-form__privacy">
+                                Les dades s'utilitzen únicament per respondre el teu missatge,
+                                d'acord amb el RGPD.
+                            </p>
+                            <button type="submit" class="contact-form__submit" id="cf-submit">
+                                <span class="cf-submit__text">Envia el missatge</span>
+                                <i class="fas fa-paper-plane cf-submit__icon" aria-hidden="true"></i>
+                            </button>
+                        </div>
+
+                        <!-- Missatge d'estat (accessible) -->
+                        <div class="contact-form__status" id="cf-status" role="status" aria-live="polite"></div>
+
+                    </form>
+                </div>
+
             </div>
         </section>
     </main>
 
+    <!-- FOOTER -->
     <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://github.com/raquelalaman" title="GitHub">GH</a>
-                <a href="https://www.linkedin.com/in/raquelalaman/" title="LinkedIn">IN</a>
-                <a href="mailto:ralaman@xtec.cat" title="Email">@</a>
+                <a href="https://github.com/raquelalaman" title="GitHub de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/raquelalaman" title="LinkedIn de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:ralaman@xtec.cat" title="Email de contacte">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-            <p>&copy; 2025 Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
+            <p>&copy; <span id="current-year"></span> Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
         </div>
     </footer>
-     <!-- Scripts -->
+
+    <!-- Scripts -->
     <script src="js/dark-mode.js"></script>
     <script src="js/scroll-to-top.js"></script>
+    <script src="js/hamburger-menu.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Gestió del formulari amb Formspree (AJAX)
+        const form    = document.getElementById('contact-form');
+        const status  = document.getElementById('cf-status');
+        const submit  = document.getElementById('cf-submit');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validació bàsica
+            const name    = form.querySelector('#cf-name');
+            const email   = form.querySelector('#cf-email');
+            const message = form.querySelector('#cf-message');
+            let valid = true;
+
+            [name, email, message].forEach(el => {
+                el.classList.remove('error');
+                if (!el.value.trim()) {
+                    el.classList.add('error');
+                    valid = false;
+                }
+            });
+
+            if (!valid) {
+                showStatus('Omple els camps obligatoris abans d\'enviar.', 'error');
+                return;
+            }
+
+            submit.disabled = true;
+            submit.querySelector('.cf-submit__text').textContent = 'Enviant…';
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (res.ok) {
+                    showStatus('Missatge enviat! Et respondré aviat.', 'success');
+                    form.reset();
+                } else {
+                    throw new Error();
+                }
+            } catch {
+                showStatus('Hi ha hagut un error. Envia\'m un email directament a ralaman@xtec.cat', 'error');
+            } finally {
+                submit.disabled = false;
+                submit.querySelector('.cf-submit__text').textContent = 'Envia el missatge';
+            }
+        });
+
+        function showStatus(msg, type) {
+            status.textContent = msg;
+            status.className = `contact-form__status contact-form__status--${type}`;
+        }
+    </script>
+
 </body>
 </html>
-
-
-
-
-
