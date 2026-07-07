@@ -3,160 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code thinking</title>
-    <meta name="description" content="Code thinking">
+
+    <title>Projectes — Raquel Alamán | Code thinking</title>
+    <meta name="description" content="Projectes de R+D en salut digital, desenvolupament d'aplicacions i col·laboracions de Raquel Alamán: investigació, eines digitals i recerca aplicada.">
+    <meta name="author" content="Raquel Alamán">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://raquelalaman.github.io/projectes.html">
+    <meta property="og:title" content="Projectes — Raquel Alamán">
+    <meta property="og:description" content="R+D en salut digital, desenvolupament d'aplicacions i col·laboracions científiques.">
+    <meta property="og:image" content="https://raquelalaman.github.io/assets/images/og-image.jpg">
+
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/assets/images/favicon.ico">
-    
+    <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
     <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Marked.js para procesar markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.2/marked.min.js"></script>
-    
-    <!-- Highlight.js para sintaxis de código -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/styles/github-dark.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.8.0/lib/highlight.min.js"></script>
 </head>
 <body>
-    <!-- Botó Scroll to Top -->
+
+    <!-- Scroll to Top -->
     <button id="scrollToTop" class="scroll-to-top" aria-label="Tornar a dalt">
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <!-- Toggle Mode Fosc -->
+    <!-- Dark mode toggle -->
     <button id="darkModeToggle" class="dark-mode-toggle" aria-label="Canviar mode fosc/clar">
         <i class="fas fa-moon"></i>
     </button>
+
+    <!-- HEADER -->
     <header>
+        <button class="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
         <nav>
             <div class="nav-content">
                 <ul class="nav-links">
                     <li><a href="https://raquelalaman.github.io/">Inici</a></li>
                     <li><a href="qui-soc.html">Qui soc</a></li>
-                    <li><a href="#" class="active">Projectes</a></li> 
-                    <li><a href="blog.html">Blog</a></li>                    
+                    <li><a href="projectes.html" class="active">Projectes</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                     <li><a href="contacte.html">Contacte</a></li>
                 </ul>
             </div>
         </nav>
         <div class="logo">
-            <a href="https://raquelalaman.github.io/"><img src="assets/images/logo.png" alt="Logo"/></a>
+            <a href="https://raquelalaman.github.io/" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+                <img src="assets/images/logo.png" alt="Logo de Raquel Alamán">
+                <span class="logo-text">Code thinking</span>
+            </a>
         </div>
-        <div class="header-content">
-            <h1><a href="https://raquelalaman.github.io/">Code thinking</a></h1>
-            <p class="subtitle">Explorant idees i compartint coneixement</p>
-        </div>
+        <div class="header-content"></div>
     </header>
-    <main>
-       <div class="container">
-        <h2 class="reptes-section-title">Quan la tecnologia resol <span class="highlight">reptes reals</span></h2>
-        <div class="accordion-container">
-            <!-- Secció 1: R+D en Salut Digital -->
-            <div class="accordion-section rd active" data-section="rd">
-                <h2 class="accordion-header">R+D en Salut Digital</h2>
-                <div class="accordion-content">
-                    <p class="description">
-                        Investigació i desenvolupament d'aplicacions per a la gestió i anàlisi de dades en neuropediatria, neurociència i bioinformàtica amb IA i Machine Learning.
-                    </p>
-                    <div class="projects-grid">
-                        <div class="project-card">
-                            <p>Sistemes d'anàlisi automatitzats de dades clíniques per a la detecció primerenca de trastorns neurològics infantils.</p>
-                        </div>
-                        <div class="project-card">
-                            <p>Eines col·laboratives per a la recerca en neurociència amb integració de Big Data i visualització interactiva.</p>
-                        </div>
-                        <div class="project-card">
-                            <p>Desenvolupament de models d'intel·ligència artificial per predir l'evolució de patologies neurològiques.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Secció 2: Desenvolupament d'Aplicacions -->
-            <div class="accordion-section apps" data-section="apps">
-                <h2 class="accordion-header">Desenvolupament d'Aplicacions</h2>
-                <div class="accordion-content">
-                    <p class="description">
-                        Desenvolupament d'aplicacions web, multiplataforma i serious games per a la salut, l'educació i la investigació científica.
-                    </p>
-                    <div class="projects-grid">
-                        <div class="project-card">
-                            <p>Aplicacions web per a la gestió integral (UI/UX).</p>
-                        </div>
-                        <div class="project-card">
-                            <p>Jocs interactius per a l'educació i millora en salut mental infantil amb mecàniques d'aprenentatge gamificat.</p>
-                        </div>
-                        <div class="project-card">
-                            <p>Aplicacions multiplataforma (web i mòbil) per al seguiment de tractaments neurològics amb sincronització en temps real.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Secció 3: Col·laboracions -->
-            <div class="accordion-section col" data-section="col">
-                <h2 class="accordion-header">Col·laboracions</h2>
-                <div class="accordion-content">
-                    <p class="description">
-                        Participació en publicacions científiques, divulgatives i projectes col·laboratius amb institucions de recerca i mitjans especialitzats.
-                    </p>
-                    <div class="projects-grid">
-                        <div class="project-card">
-                            <p>Projectes conjunts amb serveis de neuropediatria per implementar eines digitals en la pràctica clínica.</p>
-                        </div>
-                        <div class="project-card">
-                            <p>Articles i ponències sobre la intersecció entre tecnologia, IA i salut en diferents mitjans especialitzats.</p>
-                        </div>
-                        <div class="project-card">
-                            <p>Participació en projectes europeus de recerca en salut digital i bioinformàtica.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- CAPÇALERA DE PÀGINA -->
+    <section class="page-header" aria-label="Projectes">
+        <div class="page-header__inner">
+            <p class="page-header__eyebrow">Recerca i desenvolupament</p>
+            <h1 class="page-header__title">Projectes</h1>
+            <p class="page-header__lead">
+                Tres línies de treball on conflueixen la tecnologia, la investigació i la pràctica:
+                salut digital, aplicacions i col·laboració científica.
+            </p>
         </div>
-    </div>
+    </section>
+
+    <main>
+
+        <!-- ====================== -->
+        <!-- ÀMBIT 1: R+D SALUT     -->
+        <!-- ====================== -->
+        <section class="proj-section" id="rd-salut" aria-labelledby="rd-title">
+            <div class="proj-section__inner">
+
+                <div class="proj-section__header">
+                    <div class="proj-section__label rd">
+                        <i class="fas fa-flask" aria-hidden="true"></i>
+                        Àmbit 01
+                    </div>
+                    <h2 class="proj-section__title" id="rd-title">R+D en Salut Digital</h2>
+                    <p class="proj-section__desc">
+                        Investigació i desenvolupament d'eines per a la gestió i anàlisi de dades
+                        en neuropediatria, neurociència i bioinformàtica, amb aplicació d'IA
+                        i Machine Learning.
+                    </p>
+                </div>
+
+                <div class="proj-cards">
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/rd_salut.png" alt="Anàlisi de dades clíniques">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">IA · Neurologia</span>
+                            <h3>Detecció primerenca de trastorns neurològics</h3>
+                            <p>Sistemes d'anàlisi automatitzat de dades clíniques per identificar patrons associats a trastorns neurològics infantils en fase inicial.</p>
+                        </div>
+                    </article>
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/neuroeducacio.jpg" alt="Neurociència i Big Data">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">Big Data · Visualització</span>
+                            <h3>Eines col·laboratives per a neurociència</h3>
+                            <p>Plataforma de recerca distribuïda amb integració de Big Data i visualització interactiva per a equips multidisciplinaris.</p>
+                        </div>
+                    </article>
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/ethical.jpg" alt="Models predictius IA">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">ML · Predicció</span>
+                            <h3>Models predictius per a patologies neurològiques</h3>
+                            <p>Aplicació de tècniques de machine learning i deep learning per modelar l'evolució de patologies neurològiques a partir de dades longitudinals.</p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================== -->
+        <!-- ÀMBIT 2: APPS             -->
+        <!-- ========================== -->
+        <section class="proj-section proj-section--alt" id="apps" aria-labelledby="apps-title">
+            <div class="proj-section__inner">
+
+                <div class="proj-section__header">
+                    <div class="proj-section__label apps">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        Àmbit 02
+                    </div>
+                    <h2 class="proj-section__title" id="apps-title">Desenvolupament d'Aplicacions</h2>
+                    <p class="proj-section__desc">
+                        Aplicacions web, multiplataforma i serious games per a la salut,
+                        l'educació i la investigació científica. Del disseny UI/UX
+                        fins al desplegament en producció.
+                    </p>
+                </div>
+
+                <div class="proj-cards">
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/desenvolupament_apps.png" alt="Aplicacions web UI/UX">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">Web · UI/UX</span>
+                            <h3>Aplicacions web per a gestió integral</h3>
+                            <p>Disseny i desenvolupament d'aplicacions web orientades a la gestió de processos complexos, amb èmfasi en experiència d'usuari i accessibilitat.</p>
+                        </div>
+                    </article>
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/innovaabp.png" alt="Serious games educació">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">Gamificació · Salut mental</span>
+                            <h3>Serious games per a salut i educació</h3>
+                            <p>Jocs interactius amb mecàniques d'aprenentatge gamificat per millorar la salut mental infantil i reforçar competències en contextos educatius.</p>
+                        </div>
+                    </article>
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/ra_result.png" alt="App multiplataforma tractaments">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">Mòbil · Temps real</span>
+                            <h3>Seguiment de tractaments neurològics</h3>
+                            <p>Aplicació multiplataforma (web i mòbil) per al registre i seguiment de tractaments amb sincronització en temps real entre pacient i equip clínic.</p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================== -->
+        <!-- ÀMBIT 3: COL·LABORACIONS  -->
+        <!-- ========================== -->
+        <section class="proj-section" id="collaboracions" aria-labelledby="col-title">
+            <div class="proj-section__inner">
+
+                <div class="proj-section__header">
+                    <div class="proj-section__label col">
+                        <i class="fas fa-handshake" aria-hidden="true"></i>
+                        Àmbit 03
+                    </div>
+                    <h2 class="proj-section__title" id="col-title">Col·laboracions</h2>
+                    <p class="proj-section__desc">
+                        Participació en publicacions científiques, ponències i projectes
+                        col·laboratius amb institucions de recerca, hospitals i
+                        mitjans especialitzats.
+                    </p>
+                </div>
+
+                <div class="proj-cards">
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/col_laboracions.png" alt="Col·laboració amb serveis de neuropediatria">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">Clínica · Implementació</span>
+                            <h3>Eines digitals en pràctica clínica</h3>
+                            <p>Projectes conjunts amb serveis de neuropediatria per implementar i avaluar eines digitals en entorns assistencials reals.</p>
+                        </div>
+                    </article>
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/utw2024.png" alt="Ponències i publicacions">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">Divulgació · Ponències</span>
+                            <h3>Publicacions i comunicació científica</h3>
+                            <p>Articles i ponències sobre la intersecció entre tecnologia, IA i salut en revistes, congressos i mitjans especialitzats de referència.</p>
+                        </div>
+                    </article>
+
+                    <article class="proj-card">
+                        <div class="proj-card__img">
+                            <img src="assets/images/journey.jpg" alt="Projectes europeus recerca">
+                        </div>
+                        <div class="proj-card__body">
+                            <span class="proj-card__tag">Europa · Recerca</span>
+                            <h3>Projectes europeus de recerca</h3>
+                            <p>Participació en consorcis europeus de recerca en salut digital i bioinformàtica, amb transferència de resultats a la pràctica clínica.</p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
     </main>
-   <footer>
+
+    <!-- FOOTER -->
+    <footer>
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://github.com/raquelalaman" title="GitHub">GH</a>
-                <a href="https://www.linkedin.com/in/raquelalaman/" title="LinkedIn">IN</a>
-                <a href="mailto:ralaman@xtec.cat" title="Email">@</a>
+                <a href="https://github.com/raquelalaman" title="GitHub de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/raquelalaman" title="LinkedIn de Raquel Alamán" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:ralaman@xtec.cat" title="Email de contacte">
+                    <i class="fas fa-envelope"></i>
+                </a>
             </div>
-            <p>&copy; 2025 Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
+            <p>&copy; <span id="current-year"></span> Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
         </div>
     </footer>
+
     <!-- Scripts -->
-     <script>
-        // Funcionalitat de l'acordió
-        const sections = document.querySelectorAll('.accordion-section');
-
-        sections.forEach(section => {
-            section.addEventListener('click', function() {
-                // Si la secció ja està activa, no fer res
-                if (this.classList.contains('active')) {
-                    return;
-                }
-
-                // Eliminar la classe active de totes les seccions
-                sections.forEach(s => s.classList.remove('active'));
-
-                // Afegir la classe active a la secció clicada
-                this.classList.add('active');
-            });
-        });
-    </script>   
     <script src="js/dark-mode.js"></script>
     <script src="js/scroll-to-top.js"></script>
+    <script src="js/hamburger-menu.js"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+
 </body>
 </html>
-
-
-
-
