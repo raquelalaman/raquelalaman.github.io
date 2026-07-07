@@ -2941,3 +2941,120 @@ footer {
         aspect-ratio: 3 / 2;
     }
 }
+
+
+/* ============================================================
+   30. BLOG — capçalera amb filtre i arxiu
+   ============================================================ */
+
+/* Variant de page-header amb filtre integrat */
+.page-header__inner--with-filters {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.page-header__text {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Filtre per categoria */
+.blog-filter {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-shrink: 0;
+    padding-bottom: 0.15rem; /* aliniament visual amb el lead */
+}
+
+.blog-filter__btn {
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--dark-gray);
+    background: transparent;
+    border: 1px solid var(--medium-gray);
+    border-radius: 20px;
+    padding: 0.3rem 0.85rem;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+}
+
+.blog-filter__btn:hover {
+    border-color: var(--brand);
+    color: var(--brand);
+}
+
+.blog-filter__btn.active {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--white);
+}
+
+/* Meta (comptador de resultats) */
+.blog-archive__meta {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem 0;
+    font-size: 0.82rem;
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+/* Ajustos a blog-archive per alinear-la al max-width de la resta */
+.blog-archive {
+    padding: 0 0 4rem;
+}
+
+.blog-posts-archive {
+    padding: 1rem 2rem 0;
+    max-width: calc(1100px + 4rem);
+    margin: 0 auto;
+}
+
+/* Mode fosc */
+[data-theme="dark"] .blog-filter__btn {
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .blog-filter__btn:hover {
+    color: var(--brand-light);
+    border-color: var(--brand-light);
+}
+
+[data-theme="dark"] .blog-filter__btn.active {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--white);
+}
+
+[data-theme="dark"] .blog-archive__meta {
+    color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .page-header__inner--with-filters {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+    }
+
+    .blog-filter {
+        width: 100%;
+    }
+
+    .blog-archive__meta {
+        padding: 1rem 1.5rem 0;
+    }
+
+    .blog-posts-archive {
+        padding: 1rem 1.5rem 0;
+    }
+}
