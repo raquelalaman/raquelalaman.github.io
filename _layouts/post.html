@@ -150,7 +150,7 @@
             <div class="post-article__tags">
                 <div class="post-article__tags-inner">
                     {% for tag in page.tags %}
-                    <span class="post-tag-pill">{{ tag }}</span>
+                    <span class="post-tag-pill">{{ tag | remove: "," | strip }}</span>
                     {% endfor %}
                 </div>
             </div>
