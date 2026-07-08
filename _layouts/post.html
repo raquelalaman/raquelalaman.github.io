@@ -79,7 +79,6 @@
                 <span class="logo-text">Code thinking</span>
             </a>
         </div>
-        <div class="header-content"></div>
     </header>
 
     <main>
@@ -150,8 +149,7 @@
             {% if page.tags %}
             <div class="post-article__tags">
                 <div class="post-article__tags-inner">
-                    {% assign tag_list = page.tags | split: ", " %}
-                    {% for tag in tag_list %}
+                    {% for tag in page.tags %}
                     <span class="post-tag-pill">{{ tag }}</span>
                     {% endfor %}
                 </div>
