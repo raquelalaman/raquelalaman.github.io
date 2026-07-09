@@ -28,7 +28,33 @@
     <link rel="apple-touch-icon" href="{{ '/assets/images/apple-touch-icon.png' | relative_url }}">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ '/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="{{ '/css/main.css' | absolute_url }}">
+    <!-- Fallback inline: header i footer sempre funcionen -->
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:Inter,sans-serif;line-height:1.6;color:#1e293b;background:#f5f7fa}
+        header{background-image:url('/assets/images/header.jpeg');background-size:cover;background-position:center;color:#fff;padding:1.5rem 0;position:relative;overflow:hidden}
+        header::before{content:'';position:absolute;inset:0;background:rgba(0,0,0,.5);z-index:0}
+        .nav-content{max-width:1200px;margin:0 auto;padding:0 2rem;display:flex;justify-content:flex-end;align-items:center;position:relative;z-index:101}
+        .nav-links{display:flex;gap:2rem;list-style:none}
+        .nav-links a{color:#fff;text-decoration:none;font-weight:600;font-size:.95rem}
+        .nav-links a:hover,.nav-links a.active{color:#a5b4fc}
+        .logo{position:absolute;left:3%;top:50%;transform:translateY(-50%);z-index:101;display:flex;align-items:center;gap:12px;text-decoration:none}
+        .logo img{height:45px;width:auto}
+        .logo-text{color:#fff;font-size:1.3rem;font-weight:700}
+        .hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:10px;position:fixed;top:20px;right:20px;z-index:10001}
+        .hamburger span{width:28px;height:3px;background:#fff;border-radius:3px}
+        footer{background:#1e293b;color:#fff;text-align:center;padding:3rem 0;margin-top:4rem}
+        .footer-content{max-width:1200px;margin:0 auto;padding:0 2rem}
+        .social-links{display:flex;justify-content:center;gap:1rem;margin-bottom:1rem}
+        .social-links a{background:#6065FF;color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none}
+        .social-links a:hover{background:#3F43A9}
+        main{max-width:1200px;margin:0 auto;padding:0 2rem}
+        @media(max-width:768px){.nav-content{display:none}.hamburger{display:flex}.logo{position:fixed;left:20px;top:20px;transform:none}}
+    </style>
+    <!-- Fallback: si main.css no existeix al repo, afegir style.css -->
+    <!-- <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}"> -->
+    <!-- <link rel="stylesheet" href="{{ '/css/hero-improved.css' | relative_url }}"> -->
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -149,8 +175,12 @@
             {% if page.tags %}
             <div class="post-article__tags">
                 <div class="post-article__tags-inner">
-                    {% for tag in page.tags %}
-                    <span class="post-tag-pill">{{ tag | remove: "," | strip }}</span>
+                    {% assign tag_list = page.tags | split: "," %}
+                    {% for tag in tag_list %}
+                    {% assign clean_tag = tag | strip | remove: '"' %}
+                    {% if clean_tag != "" %}
+                    <span class="post-tag-pill">{{ clean_tag }}</span>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
@@ -259,7 +289,7 @@
                     <i class="fas fa-envelope"></i>
                 </a>
             </div>
-            <p>&copy; <span id="current-year"></span> Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
+            <p>&copy; <span id="current-year">{{ "now" | date: "%Y" }}</span> Code thinking, de Raquel Alamán. Created with ❤ using GitHub Pages and GenAI.</p>
         </div>
     </footer>
 
@@ -268,7 +298,9 @@
     <script src="{{ '/js/scroll-to-top.js' | relative_url }}"></script>
     <script src="{{ '/js/hamburger-menu.js' | relative_url }}"></script>
     <script>
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // L'any ja ve del servidor via Liquid com a fallback
+        const yearEl = document.getElementById('current-year');
+        if (yearEl && !yearEl.textContent) yearEl.textContent = new Date().getFullYear();
 
         document.addEventListener('DOMContentLoaded', () => {
 
