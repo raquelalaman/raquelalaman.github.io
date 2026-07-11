@@ -1,10 +1,4 @@
 /* ============================================================
-   MAIN.CSS — Full d'estils unificat
-   Substitueix: css/style.css + css/hero-improved.css
-   ============================================================ */
-
-
-/* ============================================================
    1. RESET I VARIABLES
    ============================================================ */
 
@@ -1466,7 +1460,10 @@ footer {
     color: var(--white);
     text-align: center;
     padding: 3rem 0;
-    margin-top: 4rem;
+    margin-top: 0;
+    clear: both;
+    position: relative;
+    z-index: 1;
 }
 
 .footer-content {
@@ -3517,24 +3514,8 @@ footer {
    ============================================================ */
 
 .post-cover {
-    width: 100%;
-    max-width: 780px;
-    margin: 1.5rem auto 0;
-    padding: 0 2rem;
-    overflow: hidden;
+    display: none;
 }
-
-.post-cover img {
-    width: 100%;
-    height: auto;
-    max-height: 220px;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    border-radius: 10px;
-    border: 1px solid var(--medium-gray);
-}
-
 
 /* ============================================================
    34. POST — capçalera
