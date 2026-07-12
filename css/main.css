@@ -3517,6 +3517,17 @@ footer {
     display: none;
 }
 
+/* Primera imatge del contingut = imatge de portada repetida al markdown: s'amaga */
+.post-article__content > p:first-child > img:only-child,
+.post-article__content > p:first-of-type > img:only-child {
+    display: none;
+}
+/* Si la primera imatge va seguida d'un peu de foto (Font: ...) també s'amaga */
+.post-article__content > p:first-child > img:only-child + br,
+.post-article__content > p:nth-child(-n+2):has(> img:only-child) {
+    display: none;
+}
+
 /* ============================================================
    34. POST — capçalera
    ============================================================ */
