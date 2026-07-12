@@ -151,12 +151,8 @@
             {% if page.tags %}
             <div class="post-article__tags">
                 <div class="post-article__tags-inner">
-                    {% assign tag_list = page.tags | split: "," %}
-                    {% for tag in tag_list %}
-                    {% assign clean_tag = tag | strip | remove: '"' %}
-                    {% if clean_tag != "" %}
-                    <span class="post-tag-pill">{{ clean_tag }}</span>
-                    {% endif %}
+                    {% for tag in page.tags %}
+                    <span class="post-tag-pill">{{ tag | remove: "," | strip }}</span>
                     {% endfor %}
                 </div>
             </div>
@@ -167,14 +163,6 @@
                 <div class="post-article__share-inner">
                     <span class="post-share__label">Comparteix</span>
                     <div class="post-share__links">
-                        <a
-                            href="https://twitter.com/intent/tweet?text={{ page.title | uri_escape }}&url={{ page.url | absolute_url | uri_escape }}"
-                            target="_blank" rel="noopener noreferrer"
-                            class="post-share__btn post-share__btn--twitter"
-                            aria-label="Comparteix a Twitter"
-                        >
-                            <i class="fab fa-x-twitter" aria-hidden="true"></i>
-                        </a>
                         <a
                             href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | uri_escape }}&title={{ page.title | uri_escape }}"
                             target="_blank" rel="noopener noreferrer"
