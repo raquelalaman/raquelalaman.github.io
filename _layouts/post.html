@@ -86,76 +86,92 @@
     <main>
         <article class="post-article" itemscope itemtype="https://schema.org/BlogPosting">
 
-            <!-- COS: contingut + taula de continguts -->
+            <!-- COS: contingut + sidebar -->
             <div class="post-article__body">
-
-                <!-- Taula de continguts (desktop) -->
-                <aside class="post-toc" id="post-toc" aria-label="Taula de continguts">
-                    <p class="post-toc__title">Contingut</p>
-                    <nav id="toc-nav"></nav>
-                </aside>
 
                 <!-- Contingut markdown -->
                 <div class="post-article__content post-content-markdown" itemprop="articleBody" id="post-content">
                     {{ content }}
                 </div>
 
-            </div>
+                <!-- SIDEBAR: data, TOC, tags, compartir, autora -->
+                <aside class="post-sidebar" id="post-toc" aria-label="Informació del post">
 
-            <!-- TAGS -->
-            {% if page.tags %}
-            <div class="post-article__tags">
-                <div class="post-article__tags-inner">
-                    {% for tag in page.tags %}
-                    <span class="post-tag-pill">{{ tag | remove: "," | strip }}</span>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            <!-- COMPARTIR -->
-            <div class="post-article__share">
-                <div class="post-article__share-inner">
-                    <span class="post-share__label">Comparteix</span>
-                    <div class="post-share__links">
-                        <a
-                            href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | uri_escape }}&title={{ page.title | uri_escape }}"
-                            target="_blank" rel="noopener noreferrer"
-                            class="post-share__btn post-share__btn--linkedin"
-                            aria-label="Comparteix a LinkedIn"
-                        >
-                            <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                        </a>
-                        <button
-                            class="post-share__btn post-share__btn--copy"
-                            id="copy-link"
-                            aria-label="Copia l'enllaç"
-                        >
-                            <i class="fas fa-link" aria-hidden="true"></i>
-                        </button>
+                    <!-- Data -->
+                    <div class="post-sidebar__block">
+                        <p class="post-sidebar__label">Publicat</p>
+                        <time
+                            class="post-article__date post-sidebar__date"
+                            datetime="{{ page.date | date_to_xmlschema }}"
+                            itemprop="datePublished"
+                            data-date="{{ page.date | date: '%Y-%m-%d' }}"
+                        ></time>
+                        {% if page.author %}
+                        <p class="post-sidebar__author" itemprop="author">{{ page.author }}</p>
+                        {% endif %}
                     </div>
-                </div>
-            </div>
 
-            <!-- AUTORA -->
-            <div class="post-article__author-card">
-                <div class="post-article__author-inner">
-                    <img
-                        src="{{ '/assets/images/coneix-me.jpg' | relative_url }}"
-                        alt="Raquel Alamán"
-                        class="post-author-card__avatar"
-                    >
-                    <div class="post-author-card__text">
-                        <p class="post-author-card__name">Raquel Alamán</p>
-                        <p class="post-author-card__bio">
-                            Investigadora i docent en tecnologia aplicada. Escric sobre el que aprenc
-                            a la intersecció entre IA, salut digital i educació.
-                        </p>
-                        <a href="{{ '/qui-soc.html' | relative_url }}" class="post-author-card__link">
-                            Coneix-me millor →
-                        </a>
+                    <!-- Taula de continguts -->
+                    <div class="post-sidebar__block post-sidebar__toc">
+                        <p class="post-toc__title">Contingut</p>
+                        <nav id="toc-nav"></nav>
                     </div>
-                </div>
+
+                    <!-- Tags -->
+                    {% if page.tags %}
+                    <div class="post-sidebar__block">
+                        <p class="post-sidebar__label">Etiquetes</p>
+                        <div class="post-sidebar__tags">
+                            {% for tag in page.tags %}
+                            <span class="post-tag-pill">{{ tag | remove: "," | strip }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- Compartir -->
+                    <div class="post-sidebar__block">
+                        <p class="post-sidebar__label">Comparteix</p>
+                        <div class="post-share__links">
+                            <a
+                                href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | uri_escape }}&title={{ page.title | uri_escape }}"
+                                target="_blank" rel="noopener noreferrer"
+                                class="post-share__btn post-share__btn--linkedin"
+                                aria-label="Comparteix a LinkedIn"
+                            >
+                                <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                            </a>
+                            <button
+                                class="post-share__btn post-share__btn--copy"
+                                id="copy-link"
+                                aria-label="Copia l'enllaç"
+                            >
+                                <i class="fas fa-link" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Autora -->
+                    <div class="post-sidebar__block post-sidebar__author">
+                        <img
+                            src="{{ '/assets/images/coneix-me.jpg' | relative_url }}"
+                            alt="Raquel Alamán"
+                            class="post-author-card__avatar"
+                        >
+                        <div class="post-author-card__text">
+                            <p class="post-author-card__name">Raquel Alamán</p>
+                            <p class="post-author-card__bio">
+                                Investigadora i docent en tecnologia aplicada. Escric sobre el que aprenc
+                                a la intersecció entre IA, salut digital i educació.
+                            </p>
+                            <a href="{{ '/qui-soc.html' | relative_url }}" class="post-author-card__link">
+                                Coneix-me millor →
+                            </a>
+                        </div>
+                    </div>
+
+                </aside>
+
             </div>
 
             <!-- NAVEGACIÓ ENTRE POSTS -->
