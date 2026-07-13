@@ -3517,17 +3517,6 @@ footer {
     display: none;
 }
 
-/* Primera imatge del contingut = imatge de portada repetida al markdown: s'amaga */
-.post-article__content > p:first-child > img:only-child,
-.post-article__content > p:first-of-type > img:only-child {
-    display: none;
-}
-/* Si la primera imatge va seguida d'un peu de foto (Font: ...) també s'amaga */
-.post-article__content > p:first-child > img:only-child + br,
-.post-article__content > p:nth-child(-n+2):has(> img:only-child) {
-    display: none;
-}
-
 /* ============================================================
    34. POST — capçalera
    ============================================================ */
@@ -3608,7 +3597,7 @@ footer {
 
 .post-article__body {
     display: grid;
-    grid-template-columns: 1fr 220px;
+    grid-template-columns: 1fr 240px;
     gap: 0;
     max-width: 1100px;
     margin: 0 auto;
@@ -3619,7 +3608,7 @@ footer {
 /* Contingut principal */
 .post-article__content {
     padding: 2.5rem 3rem 2.5rem 0;
-    min-width: 0; /* evita overflow en grids */
+    min-width: 0;
     border-right: 1px solid var(--border-color);
 }
 
@@ -3746,39 +3735,125 @@ footer {
 }
 
 
-/* ── Taula de continguts ── */
-.post-toc {
+/* ── Sidebar dreta: data, TOC, tags, compartir, autora ── */
+.post-sidebar {
     padding: 2.5rem 0 2.5rem 2rem;
     position: sticky;
     top: 2rem;
     max-height: calc(100vh - 4rem);
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
 }
 
-.post-toc__title {
-    font-size: 0.72rem;
+.post-sidebar__block {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.post-sidebar__block:first-child {
+    padding-top: 0;
+}
+
+.post-sidebar__block:last-child {
+    border-bottom: none;
+}
+
+.post-sidebar__label {
+    font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--dark-gray);
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-sidebar__date {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-bottom: 0.2rem;
+}
+
+.post-sidebar__author {
+    font-size: 0.82rem;
+    color: var(--dark-gray);
+    font-style: italic;
+}
+
+.post-sidebar__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.1rem;
+}
+
+/* Autora al sidebar */
+.post-sidebar__author.post-sidebar__block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.post-sidebar__author .post-author-card__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 2px solid var(--medium-gray);
+    display: block;
+}
+
+.post-sidebar__author .post-author-card__name {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-top: 0.25rem;
+}
+
+.post-sidebar__author .post-author-card__bio {
+    font-size: 0.78rem;
+    line-height: 1.55;
+    color: var(--dark-gray);
+    margin-top: 0.2rem;
+}
+
+.post-sidebar__author .post-author-card__link {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--brand);
+    text-decoration: none;
+    margin-top: 0.15rem;
+    display: inline-block;
+}
+
+/* TOC dins sidebar */
+.post-toc__title {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--dark-gray);
+    margin-bottom: 0.6rem;
 }
 
 .toc-link {
     display: block;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     line-height: 1.4;
     color: var(--dark-gray);
     text-decoration: none;
-    padding: 0.3rem 0;
+    padding: 0.25rem 0 0.25rem 0.65rem;
     border-left: 2px solid transparent;
-    padding-left: 0.65rem;
     transition: color 0.15s, border-color 0.15s;
 }
 
 .toc-link--h3 {
     padding-left: 1.35rem;
-    font-size: 0.78rem;
+    font-size: 0.75rem;
 }
 
 .toc-link:hover {
@@ -4024,6 +4099,28 @@ footer {
     border-right-color: var(--border-color);
 }
 
+[data-theme="dark"] .post-sidebar {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .post-sidebar__block {
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .post-sidebar__date,
+[data-theme="dark"] .post-sidebar__author .post-author-card__name {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .post-sidebar__label,
+[data-theme="dark"] .post-sidebar__author .post-author-card__bio {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .post-sidebar__author .post-author-card__avatar {
+    border-color: var(--border-color);
+}
+
 [data-theme="dark"] .post-article__content p,
 [data-theme="dark"] .post-article__content li {
     color: #cbd5e1;
@@ -4123,8 +4220,16 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .post-toc {
-        display: none; /* s'amaga en tablet/mòbil */
+    .post-sidebar {
+        position: static;
+        max-height: none;
+        overflow-y: visible;
+        padding: 0 0 2rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .post-sidebar__toc {
+        display: none; /* TOC s'amaga en mòbil */
     }
 
     .post-article__content {
