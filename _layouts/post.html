@@ -86,51 +86,6 @@
     <main>
         <article class="post-article" itemscope itemtype="https://schema.org/BlogPosting">
 
-            <!-- IMATGE DE PORTADA -->
-            {% if page.image %}
-            <div class="post-cover" aria-hidden="true">
-                <img
-                    src="{{ page.image | relative_url }}"
-                    alt="{{ page.title }}"
-                    itemprop="image"
-                    loading="eager"
-                >
-            </div>
-            {% endif %}
-
-            <!-- CAPÇALERA DEL POST -->
-            <header class="post-article__header">
-                <div class="post-article__header-inner">
-
-                    <div class="post-article__meta">
-                        <a href="{{ '/blog.html' | relative_url }}" class="post-article__back">
-                            <i class="fas fa-arrow-left" aria-hidden="true"></i> Blog
-                        </a>
-                        <span class="post-article__category" itemprop="articleSection">
-                            {{ page.category | default: page.tags[0] | default: 'General' }}
-                        </span>
-                    </div>
-
-                    <h1 class="post-article__title" itemprop="headline">{{ page.title }}</h1>
-
-                    <div class="post-article__byline">
-                        <time
-                            class="post-article__date"
-                            datetime="{{ page.date | date_to_xmlschema }}"
-                            itemprop="datePublished"
-                            data-date="{{ page.date | date: '%Y-%m-%d' }}"
-                        ></time>
-                        <span class="post-article__sep" aria-hidden="true">·</span>
-                        <span class="post-article__reading-time" id="reading-time"></span>
-                        {% if page.author %}
-                        <span class="post-article__sep" aria-hidden="true">·</span>
-                        <span class="post-article__author" itemprop="author">{{ page.author }}</span>
-                        {% endif %}
-                    </div>
-
-                </div>
-            </header>
-
             <!-- COS: contingut + taula de continguts -->
             <div class="post-article__body">
 
