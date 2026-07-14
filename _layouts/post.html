@@ -95,33 +95,33 @@
                 </div>
 
                 <!-- SIDEBAR: data, TOC, tags, compartir, autora -->
-                <aside class="post-sidebar" id="post-toc" aria-label="Informació del post">
+                <aside class="post-toc" id="post-toc" aria-label="Informació del post">
 
                     <!-- Data -->
-                    <div class="post-sidebar__block">
-                        <p class="post-sidebar__label">Publicat</p>
+                    <div class="post-toc__block">
+                        <p class="post-toc__label">Publicat</p>
                         <time
-                            class="post-article__date post-sidebar__date"
+                            class="post-article__date post-toc__date"
                             datetime="{{ page.date | date_to_xmlschema }}"
                             itemprop="datePublished"
                             data-date="{{ page.date | date: '%Y-%m-%d' }}"
                         ></time>
                         {% if page.author %}
-                        <p class="post-sidebar__author" itemprop="author">{{ page.author }}</p>
+                        <p class="post-toc__author-name" itemprop="author">{{ page.author }}</p>
                         {% endif %}
                     </div>
 
                     <!-- Taula de continguts -->
-                    <div class="post-sidebar__block post-sidebar__toc">
+                    <div class="post-toc__block">
                         <p class="post-toc__title">Contingut</p>
                         <nav id="toc-nav"></nav>
                     </div>
 
                     <!-- Tags -->
                     {% if page.tags %}
-                    <div class="post-sidebar__block">
-                        <p class="post-sidebar__label">Etiquetes</p>
-                        <div class="post-sidebar__tags">
+                    <div class="post-toc__block">
+                        <p class="post-toc__label">Etiquetes</p>
+                        <div class="post-toc__tags">
                             {% for tag in page.tags %}
                             <span class="post-tag-pill">{{ tag | remove: "," | strip }}</span>
                             {% endfor %}
@@ -130,8 +130,8 @@
                     {% endif %}
 
                     <!-- Compartir -->
-                    <div class="post-sidebar__block">
-                        <p class="post-sidebar__label">Comparteix</p>
+                    <div class="post-toc__block">
+                        <p class="post-toc__label">Comparteix</p>
                         <div class="post-share__links">
                             <a
                                 href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | uri_escape }}&title={{ page.title | uri_escape }}"
@@ -152,7 +152,7 @@
                     </div>
 
                     <!-- Autora -->
-                    <div class="post-sidebar__block post-sidebar__author">
+                    <div class="post-toc__block post-toc__author">
                         <img
                             src="{{ '/assets/images/coneix-me.jpg' | relative_url }}"
                             alt="Raquel Alamán"
