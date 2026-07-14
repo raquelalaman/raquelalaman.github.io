@@ -3736,7 +3736,7 @@ footer {
 
 
 /* ── Sidebar dreta: data, TOC, tags, compartir, autora ── */
-.post-sidebar {
+.post-toc {
     padding: 2.5rem 0 2.5rem 2rem;
     position: sticky;
     top: 2rem;
@@ -3747,20 +3747,20 @@ footer {
     gap: 0;
 }
 
-.post-sidebar__block {
+.post-toc__block {
     padding: 1.25rem 0;
     border-bottom: 1px solid var(--border-color);
 }
 
-.post-sidebar__block:first-child {
+.post-toc__block:first-child {
     padding-top: 0;
 }
 
-.post-sidebar__block:last-child {
+.post-toc__block:last-child {
     border-bottom: none;
 }
 
-.post-sidebar__label {
+.post-toc__label {
     font-size: 0.68rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -3769,7 +3769,7 @@ footer {
     margin-bottom: 0.5rem;
 }
 
-.post-sidebar__date {
+.post-toc__date {
     display: block;
     font-size: 0.88rem;
     font-weight: 500;
@@ -3777,13 +3777,13 @@ footer {
     margin-bottom: 0.2rem;
 }
 
-.post-sidebar__author {
+.post-toc__author-name {
     font-size: 0.82rem;
     color: var(--dark-gray);
     font-style: italic;
 }
 
-.post-sidebar__tags {
+.post-toc__tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.35rem;
@@ -3791,13 +3791,13 @@ footer {
 }
 
 /* Autora al sidebar */
-.post-sidebar__author.post-sidebar__block {
+.post-toc__author {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
 }
 
-.post-sidebar__author .post-author-card__avatar {
+.post-toc__author .post-author-card__avatar {
     width: 52px;
     height: 52px;
     border-radius: 50%;
@@ -3807,21 +3807,21 @@ footer {
     display: block;
 }
 
-.post-sidebar__author .post-author-card__name {
+.post-toc__author .post-author-card__name {
     font-size: 0.88rem;
     font-weight: 700;
     color: var(--text-dark);
     margin-top: 0.25rem;
 }
 
-.post-sidebar__author .post-author-card__bio {
+.post-toc__author .post-author-card__bio {
     font-size: 0.78rem;
     line-height: 1.55;
     color: var(--dark-gray);
     margin-top: 0.2rem;
 }
 
-.post-sidebar__author .post-author-card__link {
+.post-toc__author .post-author-card__link {
     font-size: 0.78rem;
     font-weight: 600;
     color: var(--brand);
@@ -4099,25 +4099,25 @@ footer {
     border-right-color: var(--border-color);
 }
 
-[data-theme="dark"] .post-sidebar {
+[data-theme="dark"] .post-toc {
     border-color: var(--border-color);
 }
 
-[data-theme="dark"] .post-sidebar__block {
+[data-theme="dark"] .post-toc__block {
     border-bottom-color: var(--border-color);
 }
 
-[data-theme="dark"] .post-sidebar__date,
-[data-theme="dark"] .post-sidebar__author .post-author-card__name {
+[data-theme="dark"] .post-toc__date,
+[data-theme="dark"] .post-toc__author .post-author-card__name {
     color: var(--text-primary);
 }
 
-[data-theme="dark"] .post-sidebar__label,
-[data-theme="dark"] .post-sidebar__author .post-author-card__bio {
+[data-theme="dark"] .post-toc__label,
+[data-theme="dark"] .post-toc__author .post-author-card__bio {
     color: var(--text-secondary);
 }
 
-[data-theme="dark"] .post-sidebar__author .post-author-card__avatar {
+[data-theme="dark"] .post-toc__author .post-author-card__avatar {
     border-color: var(--border-color);
 }
 
@@ -4220,7 +4220,7 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .post-sidebar {
+    .post-toc {
         position: static;
         max-height: none;
         overflow-y: visible;
@@ -4228,7 +4228,7 @@ footer {
         border-top: 1px solid var(--border-color);
     }
 
-    .post-sidebar__toc {
+    .post-toc__inner {
         display: none; /* TOC s'amaga en mòbil */
     }
 
