@@ -4045,24 +4045,29 @@ footer {
 
 .post-article__nav-center {
     max-width: 780px;
-    margin: 0 auto;
-    padding: 0.5rem 2rem 2rem;
+    margin: 0.5rem auto 0;
+    padding: 1.5rem 2rem 2rem;
+    border-top: 1px solid var(--border-color);
     text-align: center;
 }
 
 .post-nav-all {
     font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--dark-gray);
+    font-weight: 600;
+    color: var(--brand);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    transition: color 0.2s;
+    gap: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    border: 2px solid var(--brand);
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
 .post-nav-all:hover {
-    color: var(--brand);
+    background: var(--brand);
+    color: var(--white);
 }
 
 
@@ -4084,8 +4089,7 @@ footer {
 [data-theme="dark"] .post-article__byline,
 [data-theme="dark"] .post-toc__title,
 [data-theme="dark"] .post-share__label,
-[data-theme="dark"] .post-author-card__bio,
-[data-theme="dark"] .post-nav-all {
+[data-theme="dark"] .post-author-card__bio {
     color: var(--text-secondary);
 }
 
