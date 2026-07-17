@@ -112,7 +112,7 @@
                     </div>
 
                     <!-- Taula de continguts -->
-                    <div class="post-toc__block">
+                    <div class="post-toc__block" id="toc-block">
                         <p class="post-toc__title">Contingut</p>
                         <nav id="toc-nav"></nav>
                     </div>
@@ -267,8 +267,8 @@
                 ? [...content.querySelectorAll('h2, h3')]
                 : [];
 
-            const tocNav  = document.getElementById('toc-nav');
-            const tocWrap = document.getElementById('post-toc');
+            const tocNav   = document.getElementById('toc-nav');
+            const tocBlock = document.getElementById('toc-block');
 
             if (headings.length >= 2 && tocNav) {
                 headings.forEach((h, i) => {
@@ -283,8 +283,9 @@
                     });
                     tocNav.appendChild(a);
                 });
-            } else if (tocWrap) {
-                tocWrap.style.display = 'none';
+            } else if (tocBlock) {
+                // Només amaguem el bloc de la taula de continguts, no tot l'aside
+                tocBlock.style.display = 'none';
             }
 
             // ── Ressaltat actiu a la TOC mentre es fa scroll ──
