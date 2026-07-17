@@ -3740,8 +3740,6 @@ footer {
     padding: 2.5rem 0 2.5rem 2rem;
     position: sticky;
     top: 2rem;
-    max-height: calc(100vh - 4rem);
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 0;
