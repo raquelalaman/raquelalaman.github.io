@@ -106,9 +106,7 @@
                             itemprop="datePublished"
                             data-date="{{ page.date | date: '%Y-%m-%d' }}"
                         ></time>
-                        {% if page.author %}
-                        <p class="post-toc__author-name" itemprop="author">{{ page.author }}</p>
-                        {% endif %}
+                        {% if page.author %}<meta itemprop="author" content="{{ page.author }}">{% endif %}
                     </div>
 
                     <!-- Taula de continguts -->
